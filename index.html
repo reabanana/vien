@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vivien Andrei D. Maravilla | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== THEMES (edit colors here) ===== */
+:root,[data-theme="red"]{--bg:#35171F;--card:rgba(247,242,236,.07);--tx:#F7F2EC;--mu:#CDB8B8;--ac:#8C3949;--hi:#E0A0AC;--on:#F7F2EC;--wv:#702632}
+[data-theme="pink"]{--bg:#FBEFF1;--card:rgba(255,255,255,.7);--tx:#3A2429;--mu:#6E4E56;--ac:#A8556A;--hi:#8E3F55;--on:#fff;--wv:#D9A3B0}
+[data-theme="mono"]{--bg:#191719;--card:rgba(255,255,255,.07);--tx:#F2F2F2;--mu:#A8A8A8;--ac:#E8E8E8;--hi:#fff;--on:#191719;--wv:#555}
+[data-theme="elegance"]{--bg:#2A0F18;--card:rgba(213,173,107,.08);--tx:#F7F2EC;--mu:#CDBBA8;--ac:#D5AD6B;--hi:#D5AD6B;--on:#2A0F18;--wv:#702632}
+[data-theme="midnight"]{--bg:#0E1B33;--card:rgba(143,180,232,.08);--tx:#EAF0FA;--mu:#9FB0CC;--ac:#2B4C85;--hi:#8FB4E8;--on:#fff;--wv:#2B4C85}
+[data-theme="sage"]{--bg:#EEF1E8;--card:rgba(255,255,255,.7);--tx:#26332A;--mu:#55645A;--ac:#4F6F55;--hi:#3F5E45;--on:#fff;--wv:#9DB5A0}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--tx);font:400 clamp(.72rem,1.3vh + .28rem,.92rem)/1.45 Inter,system-ui,sans-serif;transition:background .5s,color .5s}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.bg i{position:absolute;border-radius:50%;filter:blur(80px);opacity:.28;background:var(--ac);animation:drift 22s ease-in-out infinite alternate}
+.bg i:nth-child(1){width:42vw;height:42vw;left:-10vw;top:-12vw}
+.bg i:nth-child(2){width:34vw;height:34vw;right:-8vw;bottom:-10vw;background:var(--hi);opacity:.16;animation-delay:-8s}
+.bg i:nth-child(3){width:20vw;height:20vw;left:45vw;top:30vh;opacity:.12;animation-delay:-14s}
+@keyframes drift{to{transform:translate(6vw,5vh) scale(1.15)}}
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:20;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(12px,3vw,40px)}
+.logo{font:600 1.5rem "Cormorant Garamond",serif;letter-spacing:.12em;padding:2px 10px;border:1.5px solid var(--hi);color:var(--hi);border-radius:2px 14px 2px 14px}
+.links{display:flex;gap:clamp(2px,1.2vw,18px)}
+.links button{padding:6px 10px;border-bottom:2px solid transparent;color:var(--mu);transition:.25s}
+.links button:hover{color:var(--tx);transform:translateY(-2px)}
+.links button.on{color:var(--tx);border-color:var(--hi)}
+.tools{display:flex;gap:6px;position:relative}
+.ib{width:34px;height:34px;border-radius:50%;border:1px solid var(--mu);display:grid;place-items:center;transition:.25s}
+.ib:hover{background:var(--ac);color:var(--on);transform:rotate(25deg)}
+#pan{position:absolute;right:0;top:42px;background:var(--bg);border:1px solid var(--mu);border-radius:12px;padding:12px;width:210px;display:none;box-shadow:0 12px 30px #0006}
+#pan.open{display:block}
+#pan p{font-size:.75rem;color:var(--mu);margin-bottom:8px}
+.sw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sw button{height:34px;border-radius:8px;border:2px solid transparent;outline:1px solid var(--mu)}
+.sw button.sel{border-color:var(--tx);outline-color:var(--tx)}
+.rs{margin-top:10px;width:100%;padding:6px;border:1px solid var(--mu);border-radius:8px}
+/* slides */
+main{position:fixed;inset:0;z-index:1}
+.slide{position:absolute;inset:0;padding:64px clamp(14px,4vw,64px) 58px;opacity:0;visibility:hidden;transform:translateX(40px) scale(.985);transition:opacity .7s,transform .7s,visibility .7s}
+.slide.on{opacity:1;visibility:visible;transform:none}
+.slide.before{transform:translateX(-40px) scale(.985)}
+.on .rv{animation:up .7s both;animation-delay:calc(var(--i)*70ms + 150ms)}
+@keyframes up{from{opacity:0;transform:translateY(14px)}}
+.card{background:var(--card);border:1px solid color-mix(in srgb,var(--mu) 30%,transparent);border-radius:14px;padding:clamp(8px,1.4vh,16px) clamp(10px,1.2vw,16px);backdrop-filter:blur(6px);min-height:0}
+.card h3{font-size:1.25em;color:var(--hi);margin-bottom:4px}
+.eyebrow{letter-spacing:.25em;text-transform:uppercase;font-size:.75em;color:var(--hi)}
+.btn{display:inline-block;background:var(--ac);color:var(--on);padding:11px 26px;border-radius:40px;font-weight:500;transition:.25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px #0004}.btn:active{transform:scale(.97)}
+/* home */
+#s0{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:3vw}#s0>div:first-child{padding-left:clamp(0px,6.5vw,96px)}
+#s0 h1{font-size:clamp(2.4rem,8vh + 1.8vw,5.2rem);line-height:1.02;margin:12px 0 18px}
+#s0 .deg{color:var(--mu);margin-bottom:6px}
+#s0 .tag{font:italic 500 clamp(1.2rem,3vh + .4rem,1.9rem) "Cormorant Garamond",serif;color:var(--hi);margin:6px 0 28px}
+.portrait{justify-self:center;height:min(78vh,660px);aspect-ratio:3/4;border-radius:200px 200px 16px 16px;overflow:hidden;border:2px solid var(--hi);box-shadow:0 24px 60px #0005}
+.portrait img,.ph img{width:100%;height:100%;object-fit:cover;display:block}
+/* about */
+#s1{display:grid;grid-template-columns:25% 1fr;gap:clamp(10px,1.6vw,22px);padding-top:58px;padding-bottom:52px;font-size:clamp(.78rem,1.5vh,.95rem);line-height:1.45}
+.ph{border-radius:14px;overflow:hidden;border:1px solid var(--hi);box-shadow:14px 14px 0 -2px color-mix(in srgb,var(--ac) 55%,transparent),0 14px 36px #0005;min-height:0;margin:0 14px 14px 0}
+.ph img{object-position:62% 25%}
+.rt{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:auto minmax(auto,1.35fr) minmax(auto,1fr) auto;gap:clamp(8px,1.3vh,14px);min-height:0}
+.info{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:6px 14px;align-content:center}
+.info div{min-width:0}.info small{display:block;font-size:.78em;letter-spacing:.1em;text-transform:uppercase;color:var(--hi)}
+.info .nm{grid-column:span 2;align-self:end;font:600 1.7em "Cormorant Garamond",serif;line-height:1.1}
+#s1 .st{grid-column:1/-1;display:flex;flex-direction:column;justify-content:center;padding:clamp(12px,2.2vh,22px) clamp(16px,1.8vw,26px)}.st .tx{columns:2;column-gap:40px;line-height:1.6}.st p{margin:0 0 .7em;break-inside:avoid-column}.st p:last-child{margin:0}
+.card h3{font-size:1.5em;margin-bottom:5px}#s1 .card{min-height:auto}#s1 ul{padding:0}#s1 .rt{overflow:visible}.pers,.goals{display:flex;flex-direction:column}.pers ul,.goals ul{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}.pers li,.goals li{margin:0}
+.pers li,.goals li{list-style:none;margin-bottom:.35em}.pers b{color:var(--hi);font-weight:500}
+.goals li::before{content:"–  ";color:var(--hi)}
+.hobs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.hobs div{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 2px;border-radius:10px;background:var(--card);border:1px solid color-mix(in srgb,var(--hi) 40%,transparent);transition:.25s}
+.hobs div:hover{transform:translateY(-3px)}.hobs span{font-size:1.25em}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chips span{padding:2px 10px;border-radius:20px;border:1px solid var(--hi);font-size:.9em}
+/* education */
+#s2{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:clamp(8px,1.6vh,16px)}
+#s2 .card{overflow:hidden}
+.tl{position:relative;padding-left:18px;border-left:2px solid var(--hi);margin-left:4px}
+.tl div{position:relative;margin-bottom:clamp(6px,1.4vh,14px)}
+.tl div::before{content:"";position:absolute;left:-25px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--hi)}
+.tl small,.ach small{color:var(--mu);display:block}.tl b{font-weight:600}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ach{padding:8px 10px;border-radius:10px;background:var(--card);border-left:3px solid var(--hi);transition:.25s}
+.ach:hover{transform:translateY(-3px)}
+.sk h4{font-size:.8em;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin:6px 0 4px}
+/* people */
+#s3{display:flex;flex-direction:column;gap:1.2vh}
+#s3 h1{font-size:clamp(1.5rem,4vh + .5rem,2.4rem)}
+.gal{flex:1;min-height:0;display:flex;flex-direction:column}
+.gh{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.gh h3{font-size:1.3em;color:var(--hi)}
+.gh button{width:28px;height:28px;border-radius:50%;border:1px solid var(--mu);margin-left:4px}
+.gh button:hover{background:var(--ac);color:var(--on)}
+.gr{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.fig{min-width:0;min-height:0;display:flex;flex-direction:column;cursor:zoom-in}
+.fig .im{aspect-ratio:16/9;max-height:100%;width:100%;overflow:hidden;border-radius:10px;border:1px solid color-mix(in srgb,var(--mu) 40%,transparent);transition:.3s}
+.fig .im img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.fig:hover .im{transform:translateY(-3px);box-shadow:0 10px 24px #0005}.fig:hover img{transform:scale(1.05)}
+.fig p{font-size:.8em;color:var(--mu);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* footer nav */
+.foot{position:fixed;bottom:0;left:0;right:0;z-index:20;height:50px;display:flex;align-items:center;justify-content:center;gap:16px}
+.foot .ib:hover{transform:scale(1.1)}
+.cnt{font:600 1rem "Cormorant Garamond",serif;letter-spacing:.2em;min-width:60px;text-align:center}
+/* wave */
+.w{position:fixed;left:0;right:0;top:0;height:200vh;z-index:50;pointer-events:none;transform:translateY(100vh);display:none}
+.w .cr{height:110px;background:var(--wv);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 110'%3E%3Cpath d='M0 60Q75 10 150 60T300 60T450 60T600 60V110H0Z'/%3E%3C/svg%3E") repeat-x 0 0/600px 110px;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 110'%3E%3Cpath d='M0 60Q75 10 150 60T300 60T450 60T600 60V110H0Z'/%3E%3C/svg%3E") repeat-x 0 0/600px 110px;animation:sw 2s linear infinite}
+.w .bd{height:100%;background:var(--wv);margin-top:-1px}
+.w.l2{opacity:.55}.w.l2 .cr{animation-direction:reverse;animation-duration:3s}
+@keyframes sw{to{-webkit-mask-position:600px 0;mask-position:600px 0}}
+/* lightbox */
+#lb{position:fixed;inset:0;z-index:60;background:#000d;display:none;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:20px}
+#lb.open{display:flex}
+#lb img{max-width:90vw;max-height:78vh;aspect-ratio:16/9;object-fit:contain;border-radius:8px;animation:up .35s}
+#lb p{color:#fff}#lb .ib{color:#fff;border-color:#fff8;position:absolute}
+.stars{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.stars b{position:absolute;display:block;opacity:.5;animation:tw var(--d,4s) ease-in-out var(--l,0s) infinite}
+.stars b.g{filter:drop-shadow(0 0 4px color-mix(in srgb,var(--hi) 80%,transparent))}
+.stars i{display:block;width:100%;height:100%;background:color-mix(in srgb,var(--tx) 82%,var(--hi));clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+#s0:not(.on) .stars b{animation-play-state:paused}
+#s0>.portrait,#s0>div:not(.stars){position:relative;z-index:1}
+@keyframes tw{0%,100%{opacity:.12;transform:scale(.7) rotate(var(--r,0deg))}50%{opacity:var(--pk,1);transform:scale(1.2) rotate(var(--r,0deg))}}
+@media(max-width:900px){
+ #s0{grid-template-columns:1fr;justify-items:center;text-align:center;gap:1vh}.portrait{height:36vh;order:-1}
+ #s1{grid-template-columns:1fr}.ph{height:30vh;margin:0}.rt{grid-template-columns:1fr 1fr}.info{grid-template-columns:1fr 1fr}.st .tx{columns:1}
+ #s2{grid-template-columns:1fr 1fr}#s2 .card:first-child{grid-column:1/-1}
+ .gr{grid-template-columns:repeat(2,1fr)}.links button{padding:6px 5px;font-size:.82em}.logo{display:none}
+ .slide{overflow:auto}}
+@media(max-height:800px) and (min-width:901px){#s1{padding-top:56px;padding-bottom:50px}#s1 .card{padding:7px 12px}#s1 .st{padding:12px 18px}#s1 .rt{gap:7px}.card h3{font-size:1.35em;margin-bottom:2px}#s1{overflow-y:auto}}
+@media(max-height:740px) and (min-width:901px){#s1{grid-template-columns:22% 1fr;padding-top:54px;padding-bottom:46px}#s1 .card{padding:6px 12px}#s1 .st{padding:10px 16px}#s1 .rt{gap:6px}.card h3{font-size:1.3em;margin-bottom:1px}.hobs div{padding:3px 2px}.st .tx{column-gap:24px}.st p{margin-bottom:.3em}#s1 .ph{margin-bottom:10px}}
+@media(max-height:725px) and (min-width:901px){#s1{font-size:.76rem}}
+@media(max-height:680px) and (min-width:901px){#s1{font-size:.72rem;line-height:1.38}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
+<nav>
+ <div class="logo">VAM</div>
+ <div class="links" id="links"></div>
+ <div class="tools">
+  <button class="ib" id="snd" aria-label="Toggle wave sound" title="Wave sound">♪</button>
+  <button class="ib" id="gear" aria-label="Theme settings" title="Themes">⚙</button>
+  <div id="pan"><p>Choose a theme</p><div class="sw" id="sw"></div><button class="rs" id="rs">Reset to Classic Red</button></div>
+ </div>
+</nav>
+<main id="main"></main>
+<div class="foot">
+ <button class="ib" id="prev" aria-label="Previous page">←</button>
+ <div class="cnt" id="cnt">01 / 04</div>
+ <button class="ib" id="next" aria-label="Next page">→</button>
+</div>
+<div class="w" id="w1"><div class="cr"></div><div class="bd"></div></div>
+<div class="w l2" id="w2"><div class="cr"></div><div class="bd"></div></div>
+<div id="lb"><button class="ib" id="lx" style="top:16px;right:16px" aria-label="Close">✕</button><button class="ib" id="lp" style="left:16px;top:50%">←</button><button class="ib" id="ln" style="right:16px;top:50%">→</button><img id="li" alt=""><p id="lc"></p></div>
+
+<script>
+/* ===================== EDIT YOUR CONTENT HERE ===================== */
+const SITE = {
+  name: "Vivien Andrei D. Maravilla",
+  course: "Bachelor of Science in Computer Science",
+  school: "University of the Cordilleras",
+  tagline: "Learning, exploring, and creating possibilities.",
+  portrait: "images/me.jpg",      // Home page formal portrait
+  aboutPhoto: "images/about.jpg", // About Me photo
+  info: [["Birthday","July 26, 2008"],["Age","18"],["Hometown","Rodriguez, Rizal, Philippines"],["University","University of the Cordilleras"],["Course","BS Computer Science"],["Year Level","First Year College"]],
+  story: [ // each line is one paragraph
+    "Hi, I’m Vivien, a first-year Computer Science student who is eager to learn, explore, and grow through new experiences. Although I am still discovering my direction in technology, I approach challenges with curiosity, determination, and an open mind. I believe in continuous learning and am always willing to step outside my comfort zone to develop new skills.",
+    "I am currently building my programming foundations in Python and Java, continuously improving through practice and hands-on experience. I understand that I still have much to learn, but I am committed to strengthening my technical abilities along the way.",
+    "Beyond academics, I enjoy spending quality time with my family through surfing, swimming, and traveling. During my personal time, I love baking, embroidery, painting, and playing online games. These interests allow me to express my creativity, relax, and explore different experiences.",
+    "I aspire to become an adaptable, responsible, and well-rounded individual who sees challenges as opportunities for growth. I am determined to make the most of every experience and continuously improve both personally and professionally."
+  ],
+  traits: [["Adaptability","I adjust to unfamiliar environments and embrace new experiences."],["Under Pressure","I stay productive with demanding situations and deadlines."],["Composure","I try to stay calm and think clearly when things get complicated."],["Curiosity","I’m eager to explore new ideas and build new abilities."],["Problem-Solving","I approach challenges with an open mind and look for solutions."]],
+  hobbies: [["🧁","Baking"],["🏊","Swimming"],["🏄","Surfing"],["🚶","Walking"]],
+  goals: ["Complete my Computer Science degree","Keep developing technical and professional skills","Create meaningful, useful projects","Become financially capable of supporting my family","Grow into a capable, independent, well-rounded person"],
+  education: [["Elementary","Kasiglahan Village Elementary School","Grades 1–4"],["","Kasiglahan Village Elementary School Unit 1","Grades 5–6"],["Junior High School","Kasiglahan Village National High School",""],["Senior High School","Sta. Fe National High School",""],["College","University of the Cordilleras","BS Computer Science"]],
+  achievements: [["With High Honors",""],["Academic Excellence Award",""],["Journalist of the Year","2nd Place, Collaborative Desktop Publishing, Division Schools Press Conference"],["Leadership Awardee",""],["Senior Patrol Leader","Student Supreme Learner Government Officer"],["Girl Scout of the Year","Division-level participant"],["2nd Place in Chess","District Meet"]],
+  skills: { "Personal & Professional":["Problem-Solving","Adaptability","Working Under Pressure","Willingness to Learn"], "Communication & Leadership":["Public Speaking","Communication"], "Technical & Computer":["Beginner: learning programming fundamentals"] },
+  family:  [{src:"images/family1.jpg",cap:"Family photo caption"},{src:"images/family2.jpg",cap:"Family photo caption"},{src:"images/family3.jpg",cap:"Family photo caption"},{src:"images/family4.jpg",cap:"Family photo caption"}],
+  friends: [{src:"images/friends1.jpg",cap:"Friends photo caption"},{src:"images/friends2.jpg",cap:"Friends photo caption"},{src:"images/friends3.jpg",cap:"Friends photo caption"},{src:"images/friends4.jpg",cap:"Friends photo caption"}]
+};
+const THEMES = { red:["Classic Red","#702632"], pink:["Soft Pink","#D9A3B0"], mono:["Monochrome","#555"], elegance:["Burgundy Elegance","#D5AD6B"], midnight:["Midnight Blue","#2B4C85"], sage:["Sage Green","#7F9A82"] };
+const PAGES = ["Home","About Me","Education","My People"];
+/* ================================================================== */
+
+const $ = s => document.querySelector(s), esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const PH = "data:image/svg+xml," + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 90'><rect width='160' height='90' fill='#8885'/><text x='80' y='50' font-family='sans-serif' font-size='9' fill='#fffc' text-anchor='middle'>Add photo</text></svg>");
+const img = (src, alt) => `<img src="${esc(src)}" alt="${esc(alt)}" onerror="this.onerror=null;this.src=PH">`;
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---- build slides ---- */
+const S = SITE;
+$("#main").innerHTML = `
+<section class="slide" id="s0">
+ <div><div class="eyebrow rv">Portfolio</div><h1 class="rv">${esc(S.name)}</h1>
+ <div class="tag rv">${esc(S.tagline)}</div><button class="btn rv" id="explore">Explore my portfolio →</button></div>
+ <div class="portrait rv">${img(S.portrait, "Portrait of " + S.name)}</div>
+ <div class="stars" id="stars" aria-hidden="true"></div>
+</section>
+<section class="slide" id="s1">
+ <div class="ph rv">${img(S.aboutPhoto, "Photo of " + S.name)}</div>
+ <div class="rt">
+  <div class="card info rv"><div class="nm">${esc(S.name)}</div>${S.info.map(i => `<div><small>${esc(i[0])}</small>${esc(i[1])}</div>`).join("")}</div>
+  <div class="card st rv"><h3>About Me</h3><div class="tx">${S.story.map(p => `<p>${esc(p)}</p>`).join("")}</div></div>
+  <div class="card pers rv"><h3>Personality &amp; Strengths</h3><ul>${S.traits.map(t => `<li><b>${esc(t[0])}:</b> ${esc(t[1])}</li>`).join("")}</ul></div>
+  <div class="card goals rv"><h3>My Goals</h3><ul>${S.goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div>
+  <div class="card rv"><h3>Hobbies &amp; Interests</h3><div class="hobs">${S.hobbies.map(h => `<div><span>${h[0]}</span>${esc(h[1])}</div>`).join("")}</div></div>
+  <div class="card rv"><h3>My Skills</h3><div class="chips">${Object.values(S.skills).flat().slice(0, 6).map(k => `<span>${esc(k)}</span>`).join("")}</div></div>
+ </div>
+</section>
+<section class="slide" id="s2">
+ <div class="card rv"><h3>Education</h3><div class="tl">${S.education.map(e => `<div>${e[0] ? `<small>${esc(e[0])}</small>` : ""}<b>${esc(e[1])}</b>${e[2] ? `<small>${esc(e[2])}</small>` : ""}</div>`).join("")}</div></div>
+ <div class="card rv"><h3>Achievements &amp; Recognition</h3><div class="ag">${S.achievements.map(a => `<div class="ach"><b>${esc(a[0])}</b>${a[1] ? `<small>${esc(a[1])}</small>` : ""}</div>`).join("")}</div></div>
+ <div class="card sk rv"><h3>Skills</h3>${Object.entries(S.skills).map(([k, v]) => `<h4>${esc(k)}</h4><div class="chips">${v.map(x => `<span>${esc(x)}</span>`).join("")}</div>`).join("")}</div>
+</section>
+<section class="slide" id="s3">
+ <div class="rv"><div class="eyebrow">My People</div><h1>Beyond the Resume</h1></div>
+ <div class="gal rv" id="g-family"></div><div class="gal rv" id="g-friends"></div>
+</section>`;
+document.querySelectorAll(".slide").forEach(s => s.querySelectorAll(".rv").forEach((e, i) => e.style.setProperty("--i", i)));
+
+/* ---- twinkling stars (Home page only). Stars never land on the text or button ---- */
+function drawStars() {
+  const box = $("#stars"), root = $("#s0"), W = root.clientWidth, H = root.clientHeight, o = root.getBoundingClientRect(), pad = 22;
+  box.innerHTML = "";
+  const keep = [];
+  root.querySelectorAll(".eyebrow,h1,.tag,#explore").forEach(el => {
+    let r; if (el.id === "explore") r = el.getBoundingClientRect(); else { const g = document.createRange(); g.selectNodeContents(el); r = g.getBoundingClientRect(); }
+    keep.push([r.left - o.left - pad, r.top - o.top - pad, r.right - o.left + pad, r.bottom - o.top + pad]);
+  });
+  const pr = root.querySelector(".portrait").getBoundingClientRect(); keep.push([pr.left - o.left, pr.top - o.top, pr.right - o.left, pr.bottom - o.top]);
+  const free = (x, y, z) => !keep.some(k => x + z > k[0] && x < k[2] && y + z > k[1] && y < k[3]);
+  const add = (x, y, z, cls, pk) => {
+    if (!free(x, y, z)) return;
+    const b = document.createElement("b");
+    b.style.cssText = `left:${x}px;top:${y}px;width:${z}px;height:${z}px;--pk:${pk};--r:${Math.round(Math.random() * 30 - 15)}deg;--d:${(4.2 + Math.random()).toFixed(1)}s;--l:-${(Math.random() * 6).toFixed(1)}s`;
+    if (cls) b.className = cls; b.appendChild(document.createElement("i")); box.appendChild(b);
+  };
+  const cols = 17, rows = 9, top = H * .1, span = H * .8;
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    if (Math.random() < .2) continue;
+    const big = Math.random() < .08, z = big ? 12 + Math.random() * 4 : 5 + Math.random() * 5;
+    add((c + .15 + Math.random() * .7) / cols * W, top + (r + .15 + Math.random() * .7) / rows * span, z, big ? "g" : "", 1);
+  }
+  for (let i = 0; i < 140; i++) add(Math.random() * W, top + Math.random() * span, 3 + Math.random() * 2.5, "", .5); // extra faint stars
+}
+let stT; addEventListener("resize", () => { clearTimeout(stT); stT = setTimeout(drawStars, 200); });
+
+/* ---- galleries (3 at a time, 2 on small screens) ---- */
+const off = {family: 0, friends: 0}, per = () => innerWidth <= 900 ? 2 : 3;
+function gal(key, title) {
+  const list = S[key], n = per(), o = off[key], el = $("#g-" + key);
+  el.innerHTML = `<div class="gh"><h3>${title}</h3><div><button data-d="-1" aria-label="Previous photos">←</button><button data-d="1" aria-label="Next photos">→</button></div></div>
+  <div class="gr">${list.slice(o, o + n).map((p, i) => `<div class="fig" data-k="${key}" data-i="${o + i}" tabindex="0"><div class="im">${img(p.src, p.cap)}</div><p>${esc(p.cap)}</p></div>`).join("")}</div>`;
+  el.querySelectorAll(".gh button").forEach(b => b.onclick = () => { off[key] = Math.max(0, Math.min(Math.max(0, list.length - n), off[key] + +b.dataset.d)); gal(key, title); });
+  el.querySelectorAll(".fig").forEach(f => { f.onclick = () => openLb(key, +f.dataset.i); f.onkeydown = e => e.key === "Enter" && f.click(); });
+}
+const drawGals = () => { gal("family", "Family"); gal("friends", "Friends"); };
+drawGals(); addEventListener("resize", drawGals);
+
+/* ---- lightbox ---- */
+let lk = "", li = 0;
+function showLb() { const p = S[lk][li]; $("#li").src = p.src; $("#li").onerror = function () { this.onerror = null; this.src = PH; }; $("#lc").textContent = p.cap; }
+function openLb(k, i) { lk = k; li = i; showLb(); $("#lb").classList.add("open"); }
+const stepLb = d => { li = (li + d + S[lk].length) % S[lk].length; showLb(); };
+$("#lx").onclick = () => $("#lb").classList.remove("open");
+$("#lp").onclick = () => stepLb(-1); $("#ln").onclick = () => stepLb(1);
+$("#lb").onclick = e => e.target.id === "lb" && $("#lb").classList.remove("open");
+
+/* ---- navigation ---- */
+let cur = 0, busy = false;
+const slides = [...document.querySelectorAll(".slide")];
+$("#links").innerHTML = PAGES.map((p, i) => `<button data-p="${i}">${p}</button>`).join("");
+function paint() {
+  slides.forEach((s, i) => { s.classList.toggle("on", i === cur); s.classList.toggle("before", i < cur); });
+  document.querySelectorAll(".links button").forEach((b, i) => b.classList.toggle("on", i === cur));
+  $("#cnt").textContent = String(cur + 1).padStart(2, "0") + " / 04";
+}
+function go(n) {
+  if (busy || n === cur || n < 0 || n > 3) return;
+  if (cur === 0 && n === 1 && !reduced) return wave(n);
+  cur = n; paint();
+}
+document.querySelectorAll(".links button").forEach(b => b.onclick = () => go(+b.dataset.p));
+$("#prev").onclick = () => go(cur - 1); $("#next").onclick = () => go(cur + 1);
+$("#explore").onclick = () => go(1);
+addEventListener("keydown", e => {
+  if ($("#lb").classList.contains("open")) { if (e.key === "Escape") $("#lx").click(); if (e.key === "ArrowLeft") stepLb(-1); if (e.key === "ArrowRight") stepLb(1); return; }
+  if (e.key === "ArrowLeft") go(cur - 1); if (e.key === "ArrowRight") go(cur + 1);
+  if (e.key === "Escape") $("#pan").classList.remove("open");
+});
+
+/* ---- ocean wave transition + sound ---- */
+let soundOn = true; try { soundOn = localStorage.getItem("vam-sound") !== "off"; } catch (e) {}
+const setSnd = () => { $("#snd").style.opacity = soundOn ? 1 : .4; $("#snd").setAttribute("aria-pressed", soundOn); };
+$("#snd").onclick = () => { soundOn = !soundOn; try { localStorage.setItem("vam-sound", soundOn ? "on" : "off"); } catch (e) {} setSnd(); };
+setSnd();
+function whoosh() {
+  try {
+    const A = new (window.AudioContext || window.webkitAudioContext)(), len = A.sampleRate * 2.4, buf = A.createBuffer(1, len, A.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    const src = A.createBufferSource(); src.buffer = buf;
+    const f = A.createBiquadFilter(); f.type = "lowpass"; f.frequency.setValueAtTime(300, A.currentTime); f.frequency.linearRampToValueAtTime(1100, A.currentTime + 1.1); f.frequency.linearRampToValueAtTime(300, A.currentTime + 2.4);
+    const g = A.createGain(); g.gain.setValueAtTime(0, A.currentTime); g.gain.linearRampToValueAtTime(.07, A.currentTime + 1.1); g.gain.linearRampToValueAtTime(0, A.currentTime + 2.4);
+    src.connect(f); f.connect(g); g.connect(A.destination); src.start(); src.onended = () => A.close();
+  } catch (e) {}
+}
+function wave(n) {
+  busy = true; if (soundOn) whoosh();
+  const mv = [{transform: "translateY(100vh)"}, {transform: "translateY(-100vh)", offset: .5}, {transform: "translateY(-200vh)"}];
+  const run = (el, delay) => { el.style.display = "block"; return el.animate(mv, {duration: 2400, delay, easing: "ease-in-out", fill: "both"}); };
+  const a = run($("#w2"), 0), b = run($("#w1"), 180);
+  setTimeout(() => { cur = n; paint(); }, 1300);
+  b.onfinish = () => { a.cancel(); b.cancel(); $("#w1").style.display = $("#w2").style.display = "none"; busy = false; };
+}
+
+/* ---- themes ---- */
+const sw = $("#sw");
+sw.innerHTML = Object.entries(THEMES).map(([k, [n, c]]) => `<button data-t="${k}" title="${n}" aria-label="${n}" style="background:${c}"></button>`).join("");
+function theme(k) {
+  document.documentElement.dataset.theme = k;
+  sw.querySelectorAll("button").forEach(b => b.classList.toggle("sel", b.dataset.t === k));
+  try { localStorage.setItem("vam-theme", k); } catch (e) {}
+}
+sw.onclick = e => e.target.dataset.t && theme(e.target.dataset.t);
+$("#rs").onclick = () => theme("red");
+$("#gear").onclick = e => { e.stopPropagation(); $("#pan").classList.toggle("open"); };
+document.addEventListener("click", e => { if (!e.target.closest("#pan")) $("#pan").classList.remove("open"); });
+let t0 = "red"; try { t0 = localStorage.getItem("vam-theme") || "red"; } catch (e) {}
+theme(THEMES[t0] ? t0 : "red");
+paint();
+drawStars(); if (document.fonts) document.fonts.ready.then(drawStars);
+</script>
+</body>
+</html>
