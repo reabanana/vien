@@ -126,6 +126,17 @@ main{position:fixed;inset:0;z-index:1}
 #s0:not(.on) .stars b{animation-play-state:paused}
 #s0>.portrait,#s0>div:not(.stars){position:relative;z-index:1}
 @keyframes tw{0%,100%{opacity:.12;transform:scale(.7) rotate(var(--r,0deg))}50%{opacity:var(--pk,1);transform:scale(1.2) rotate(var(--r,0deg))}}
+/* about (short version) */
+#s1{grid-template-columns:minmax(0,34%) 1fr;gap:clamp(16px,3vw,48px);padding-left:clamp(14px,6vw,96px);padding-right:clamp(14px,6vw,96px)}
+.abwrap{align-self:center;display:flex;flex-direction:column;gap:clamp(10px,1.8vh,18px)}
+.abt{padding:clamp(12px,2.2vh,22px) clamp(16px,2.2vw,32px)}
+.abt h2{font-size:clamp(1.8rem,5vh + .4rem,2.8rem);line-height:1.08;margin-top:4px}
+.abt .sum{margin-top:clamp(6px,1.2vh,12px);color:var(--mu);line-height:1.55}
+.ab{padding:clamp(6px,1.2vh,14px) clamp(16px,2.2vw,32px)}
+.ab .row:first-child{border-top:0}
+.ab .row{display:grid;grid-template-columns:clamp(90px,10vw,120px) 1fr;gap:10px;align-items:center;padding:clamp(5px,1.1vh,10px) 0;border-top:1px solid color-mix(in srgb,var(--mu) 25%,transparent)}
+.ab .row small{font-size:.78em;letter-spacing:.14em;text-transform:uppercase;color:var(--hi)}
+.ab .chips span{font-size:.92em}
 @media(max-width:900px){
  #s0{grid-template-columns:1fr;justify-items:center;text-align:center;gap:1vh}.portrait{height:36vh;order:-1}
  #s1{grid-template-columns:1fr}.ph{height:30vh;margin:0}.rt{grid-template-columns:1fr 1fr}.info{grid-template-columns:1fr 1fr}.st .tx{columns:1}
@@ -169,7 +180,8 @@ const SITE = {
   tagline: "Learning, exploring, and creating possibilities.",
   portrait: "images/me.jpg",      // Home page formal portrait
   aboutPhoto: "images/about.jpg", // About Me photo
-  info: [["Birthday","July 26, 2008"],["Age","18"],["Hometown","Rodriguez, Rizal, Philippines"],["University","University of the Cordilleras"],["Course","BS Computer Science"],["Year Level","First Year College"]],
+  info: [["Birthday","July 26, 2008"],["Age","18"],["Location","Rodriguez, Rizal, Philippines"],["College","University of the Cordilleras"],["Program","BS Computer Science"],["Year","First Year"]],
+  summary: "First-year Computer Science student who is curious, determined, and eager to learn. I’m building my foundations in Python and Java. Outside class, I love baking, embroidery, painting, online games, and surfing, swimming, and traveling with my family. I aspire to become an adaptable, well-rounded person who sees challenges as chances to grow.",
   story: [ // each line is one paragraph
     "Hi, I’m Vivien, a first-year Computer Science student who is eager to learn, explore, and grow through new experiences. Although I am still discovering my direction in technology, I approach challenges with curiosity, determination, and an open mind. I believe in continuous learning and am always willing to step outside my comfort zone to develop new skills.",
     "I am currently building my programming foundations in Python and Java, continuously improving through practice and hands-on experience. I understand that I still have much to learn, but I am committed to strengthening my technical abilities along the way.",
@@ -205,13 +217,13 @@ $("#main").innerHTML = `
 </section>
 <section class="slide" id="s1">
  <div class="ph rv">${img(S.aboutPhoto, "Photo of " + S.name)}</div>
- <div class="rt">
-  <div class="card info rv"><div class="nm">${esc(S.name)}</div>${S.info.map(i => `<div><small>${esc(i[0])}</small>${esc(i[1])}</div>`).join("")}</div>
-  <div class="card st rv"><h3>About Me</h3><div class="tx">${S.story.map(p => `<p>${esc(p)}</p>`).join("")}</div></div>
-  <div class="card pers rv"><h3>Personality &amp; Strengths</h3><ul>${S.traits.map(t => `<li><b>${esc(t[0])}:</b> ${esc(t[1])}</li>`).join("")}</ul></div>
-  <div class="card goals rv"><h3>My Goals</h3><ul>${S.goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div>
-  <div class="card rv"><h3>Hobbies &amp; Interests</h3><div class="hobs">${S.hobbies.map(h => `<div><span>${h[0]}</span>${esc(h[1])}</div>`).join("")}</div></div>
-  <div class="card rv"><h3>My Skills</h3><div class="chips">${Object.values(S.skills).flat().slice(0, 6).map(k => `<span>${esc(k)}</span>`).join("")}</div></div>
+ <div class="abwrap">
+  <div class="card abt rv"><div class="eyebrow">About Me</div><h2>${esc(S.name)}</h2><p class="sum">${esc(S.summary)}</p></div>
+  <div class="card ab rv">
+   ${S.info.map(i => `<div class="row"><small>${esc(i[0])}</small><span>${esc(i[1])}</span></div>`).join("")}
+   <div class="row"><small>Hobbies</small><div class="chips">${S.hobbies.map(h => `<span>${h[0]} ${esc(h[1])}</span>`).join("")}</div></div>
+   <div class="row"><small>Skills</small><div class="chips">${Object.values(S.skills).flat().filter(k => !/^Beginner/.test(k)).map(k => `<span>${esc(k)}</span>`).join("")}</div></div>
+  </div>
  </div>
 </section>
 <section class="slide" id="s2">
