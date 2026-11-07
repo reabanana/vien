@@ -123,17 +123,44 @@ main{position:fixed;inset:0;z-index:1}
 .stars b{position:absolute;display:block;opacity:.5;animation:tw var(--d,4s) ease-in-out var(--l,0s) infinite}
 .stars b.g{filter:drop-shadow(0 0 4px color-mix(in srgb,var(--hi) 80%,transparent))}
 .stars i{display:block;width:100%;height:100%;background:color-mix(in srgb,var(--tx) 82%,var(--hi));clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
-#s0:not(.on) .stars b{animation-play-state:paused}
+#s0:not(.on) .stars b,#s1:not(.on) .stars b{animation-play-state:paused}
+#s1 .stars{z-index:-1;bottom:auto}
 #s0>.portrait,#s0>div:not(.stars){position:relative;z-index:1}
 @keyframes tw{0%,100%{opacity:.12;transform:scale(.7) rotate(var(--r,0deg))}50%{opacity:var(--pk,1);transform:scale(1.2) rotate(var(--r,0deg))}}
 /* about (short version) */
 #s1{grid-template-columns:minmax(0,34%) 1fr;gap:clamp(16px,3vw,48px);padding-left:clamp(14px,6vw,96px);padding-right:clamp(14px,6vw,96px)}
-.abwrap{align-self:center;display:flex;flex-direction:column;gap:clamp(10px,1.8vh,18px)}
+.abwrap{margin:0;display:flex;flex-direction:column;gap:clamp(10px,1.8vh,18px)}
 .abt{padding:clamp(12px,2.2vh,22px) clamp(16px,2.2vw,32px)}
 .abt h2{font-size:clamp(1.8rem,5vh + .4rem,2.8rem);line-height:1.08;margin-top:4px}
-.abt .sum{margin-top:clamp(6px,1.2vh,12px);color:var(--mu);line-height:1.55}
-.ab{padding:clamp(6px,1.2vh,14px) clamp(16px,2.2vw,32px)}
+.abt .sum{color:var(--mu);line-height:1.55}
+.ab{padding:clamp(10px,1.6vh,18px) clamp(16px,2.2vw,32px)}
 .ab .row:first-child{border-top:0}
+/* expandable cards: title only, details slide open on hover / focus / tap */
+.xp{cursor:pointer;transition:box-shadow .4s,border-color .4s,background .4s}
+.xp .hd{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.xp .hd::after{content:"▾";color:var(--hi);font-size:1.1em;transition:transform .5s}
+.xp .hd h2,.xp .hd h3{margin-bottom:0}
+.xp .bd{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .55s cubic-bezier(.4,0,.2,1),opacity .4s ease}
+.xp .in{overflow:hidden;min-height:0}
+.xp .pad{padding-top:clamp(6px,1.2vh,12px)}
+.xp.open,.xp:focus-visible{border-color:var(--hi);box-shadow:0 14px 34px #0004}
+.xp.open .bd,.xp:focus-visible .bd{grid-template-rows:1fr;opacity:1}
+.xp.open .hd::after,.xp:focus-visible .hd::after{transform:rotate(180deg)}
+@media(hover:hover){
+ .xp:hover{border-color:var(--hi);box-shadow:0 14px 34px #0004;background:color-mix(in srgb,var(--card) 100%,var(--hi) 6%)}
+ .xp:hover .bd{grid-template-rows:1fr;opacity:1}
+ .xp:hover .hd::after{transform:rotate(180deg)}}
+.duo{align-items:start}
+.ab .row:first-child{border-top:0}
+#s1{overflow-y:auto}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.8vh,18px)}
+.duo .card{padding:clamp(8px,1.4vh,14px) clamp(14px,1.6vw,22px)}
+.duo h3{font-size:1.25em;margin-bottom:6px}
+.duo ul{padding:0;list-style:none}
+.duo li{margin-bottom:.4em;line-height:1.4}.duo li:last-child{margin:0}
+.duo b{color:var(--hi);font-weight:500}
+.duo .gl li::before{content:"–  ";color:var(--hi)}
+@media(max-width:600px){.duo{grid-template-columns:1fr}}
 .ab .row{display:grid;grid-template-columns:clamp(90px,10vw,120px) 1fr;gap:10px;align-items:center;padding:clamp(5px,1.1vh,10px) 0;border-top:1px solid color-mix(in srgb,var(--mu) 25%,transparent)}
 .ab .row small{font-size:.78em;letter-spacing:.14em;text-transform:uppercase;color:var(--hi)}
 .ab .chips span{font-size:.92em}
@@ -182,6 +209,8 @@ const SITE = {
   aboutPhoto: "images/about.jpg", // About Me photo
   info: [["Birthday","July 26, 2008"],["Age","18"],["Location","Rodriguez, Rizal, Philippines"],["College","University of the Cordilleras"],["Program","BS Computer Science"],["Year","First Year"]],
   summary: "First-year Computer Science student who is curious, determined, and eager to learn. I’m building my foundations in Python and Java. Outside class, I love baking, embroidery, painting, online games, and surfing, swimming, and traveling with my family. I aspire to become an adaptable, well-rounded person who sees challenges as chances to grow.",
+  strengthsShort: [["Adaptable","adjusts quickly to new environments and experiences."],["Calm under pressure","stays productive and clear-headed when things get complicated."],["Curious problem-solver","explores new ideas and looks for solutions with an open mind."]],
+  goalsShort: ["Finish my Computer Science degree","Build useful projects and keep sharpening my skills","Support my family and grow into a capable, well-rounded person"],
   story: [ // each line is one paragraph
     "Hi, I’m Vivien, a first-year Computer Science student who is eager to learn, explore, and grow through new experiences. Although I am still discovering my direction in technology, I approach challenges with curiosity, determination, and an open mind. I believe in continuous learning and am always willing to step outside my comfort zone to develop new skills.",
     "I am currently building my programming foundations in Python and Java, continuously improving through practice and hands-on experience. I understand that I still have much to learn, but I am committed to strengthening my technical abilities along the way.",
@@ -216,6 +245,7 @@ $("#main").innerHTML = `
  <div class="stars" id="stars" aria-hidden="true"></div>
 </section>
 <section class="slide" id="s1">
+ <div class="stars" id="stars1" aria-hidden="true"></div>
  <div class="ph rv">${img(S.aboutPhoto, "Photo of " + S.name)}</div>
  <div class="abwrap">
   <div class="card abt rv"><div class="eyebrow">About Me</div><h2>${esc(S.name)}</h2><p class="sum">${esc(S.summary)}</p></div>
@@ -223,6 +253,10 @@ $("#main").innerHTML = `
    ${S.info.map(i => `<div class="row"><small>${esc(i[0])}</small><span>${esc(i[1])}</span></div>`).join("")}
    <div class="row"><small>Hobbies</small><div class="chips">${S.hobbies.map(h => `<span>${h[0]} ${esc(h[1])}</span>`).join("")}</div></div>
    <div class="row"><small>Skills</small><div class="chips">${Object.values(S.skills).flat().filter(k => !/^Beginner/.test(k)).map(k => `<span>${esc(k)}</span>`).join("")}</div></div>
+  </div>
+  <div class="duo">
+   <div class="card xp rv" tabindex="0"><div class="hd"><h3>Personality &amp; Strengths</h3></div><div class="bd"><div class="in"><div class="pad"><ul>${S.strengthsShort.map(t => `<li><b>${esc(t[0])}:</b> ${esc(t[1])}</li>`).join("")}</ul></div></div></div></div>
+   <div class="card xp rv" tabindex="0"><div class="hd"><h3>My Goals</h3></div><div class="bd"><div class="in"><div class="pad"><ul class="gl">${S.goalsShort.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div></div></div></div>
   </div>
  </div>
 </section>
@@ -237,16 +271,14 @@ $("#main").innerHTML = `
 </section>`;
 document.querySelectorAll(".slide").forEach(s => s.querySelectorAll(".rv").forEach((e, i) => e.style.setProperty("--i", i)));
 
-/* ---- twinkling stars (Home page only). Stars never land on the text or button ---- */
-function drawStars() {
-  const box = $("#stars"), root = $("#s0"), W = root.clientWidth, H = root.clientHeight, o = root.getBoundingClientRect(), pad = 22;
+
+/* ---- expandable cards: tap to toggle on touch screens (hover handles desktop) ---- */
+if (matchMedia("(hover: none)").matches) document.querySelectorAll(".xp").forEach(c => c.addEventListener("click", () => c.classList.toggle("open")));
+document.querySelectorAll(".xp").forEach(c => c.addEventListener("keydown", e => { if (e.key === " ") { e.preventDefault(); c.classList.toggle("open"); } }));
+
+/* ---- twinkling stars (Home + About Me). Stars never land on text, buttons, photos or cards ---- */
+function starfield(box, W, H, keep) {
   box.innerHTML = "";
-  const keep = [];
-  root.querySelectorAll(".eyebrow,h1,.tag,#explore").forEach(el => {
-    let r; if (el.id === "explore") r = el.getBoundingClientRect(); else { const g = document.createRange(); g.selectNodeContents(el); r = g.getBoundingClientRect(); }
-    keep.push([r.left - o.left - pad, r.top - o.top - pad, r.right - o.left + pad, r.bottom - o.top + pad]);
-  });
-  const pr = root.querySelector(".portrait").getBoundingClientRect(); keep.push([pr.left - o.left, pr.top - o.top, pr.right - o.left, pr.bottom - o.top]);
   const free = (x, y, z) => !keep.some(k => x + z > k[0] && x < k[2] && y + z > k[1] && y < k[3]);
   const add = (x, y, z, cls, pk) => {
     if (!free(x, y, z)) return;
@@ -261,6 +293,21 @@ function drawStars() {
     add((c + .15 + Math.random() * .7) / cols * W, top + (r + .15 + Math.random() * .7) / rows * span, z, big ? "g" : "", 1);
   }
   for (let i = 0; i < 140; i++) add(Math.random() * W, top + Math.random() * span, 3 + Math.random() * 2.5, "", .5); // extra faint stars
+}
+function drawStars() {
+  /* Home */
+  const root = $("#s0"), o = root.getBoundingClientRect(), pad = 22, keep = [];
+  root.querySelectorAll(".eyebrow,h1,.tag,#explore").forEach(el => {
+    let r; if (el.id === "explore") r = el.getBoundingClientRect(); else { const g = document.createRange(); g.selectNodeContents(el); r = g.getBoundingClientRect(); }
+    keep.push([r.left - o.left - pad, r.top - o.top - pad, r.right - o.left + pad, r.bottom - o.top + pad]);
+  });
+  const pr = root.querySelector(".portrait").getBoundingClientRect(); keep.push([pr.left - o.left, pr.top - o.top, pr.right - o.left, pr.bottom - o.top]);
+  starfield($("#stars"), root.clientWidth, root.clientHeight, keep);
+  /* About Me (offset-based so the slide's hidden-state transform doesn't skew positions) */
+  const r1 = $("#s1"), H1 = r1.scrollHeight, keep1 = [];
+  r1.querySelectorAll(".ph,.abwrap .card").forEach(el => keep1.push([el.offsetLeft - 8, el.offsetTop - 8, el.offsetLeft + el.offsetWidth + 8, el.offsetTop + el.offsetHeight + 8]));
+  $("#stars1").style.height = H1 + "px";
+  starfield($("#stars1"), r1.clientWidth, H1, keep1);
 }
 let stT; addEventListener("resize", () => { clearTimeout(stT); stT = setTimeout(drawStars, 200); });
 
