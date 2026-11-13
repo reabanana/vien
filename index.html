@@ -221,14 +221,14 @@ const SITE = {
   personal: [["Name","Vivien"],["Birthday","July 26, 2008"],["Age","18"],["Gender","Female"],["Status","Single"],["Weight","45 kg"],["Height","160 cm"],["Location","Rodriguez, Rizal, Philippines"],["College","University of the Cordilleras"],["Program","BS Computer Science"],["Year Level","First Year"],["Gmail","lalalovienna@gmail.com"]],
   education: [ // one entry per stage, in timeline order
     { stage:"Elementary", school:"Kasiglahan Village Elementary School Unit-1", years:"2014–2020",
-      logo:"images/schools/kasiglahan-elementary.jpg",
+      logo:"images/schools/kasiglahan-elementary.jpg", bg:"images/schools/bg-elementary.jpg", // bg = school photo behind the box
       photos:["images/timeline/elementary.jpg"] },
     { stage:"Junior High School", school:"Kasiglahan Village National High School", years:"2020–2024",
-      logo:"images/schools/kasiglahan-national-high-school.jpg",
+      logo:"images/schools/kasiglahan-national-high-school.jpg", bg:"images/schools/bg-junior-high.jpg", // bg = school photo behind the box
       honors:[["Grade 8","Achiever"],["Grade 9","With Honors"],["Grade 10","With Honors"]],
       photos:["images/timeline/grade-8.jpg","images/timeline/grade-9.jpg","images/timeline/grade-10.jpg"] },
     { stage:"Senior High School", school:"Sta. Fe National High School", years:"2024–2026", big:true,
-      logo:"images/schools/sta-fe-national-high-school.jpg",
+      logo:"images/schools/sta-fe-national-high-school.jpg", bg:"images/schools/bg-senior-high.jpg", // bg = school photo behind the box
       strand:"General Academic Strand (GAS)",
       honors:[["Grade 11","With High Honors"],["Grade 12","With High Honors"]],
       awards:[["AY 2024–2025 Division Schools Press Conference (DSPC)","3rd Place, Collaborative Desktop Publishing (Filipino)"],
@@ -237,11 +237,28 @@ const SITE = {
               ["Girl Scout of the Year","Division-level participant"],
               ["Municipal Academic Excellence Award",""],
               ["Leadership Awardee",""]],
-      photos:["images/timeline/grade-11.jpg","images/timeline/grade-12.jpg","images/awards/dspc-2024.jpg","images/awards/dspc-2025.jpg","images/awards/chess-district-2025.jpg","images/awards/girl-scout-of-the-year.jpg","images/awards/gsp-camp-2025.jpg","images/awards/song-and-yell-2025.jpg","images/awards/leadership-2025.jpg","images/awards/all-medals.jpg","images/awards/all-certificates.jpg"] },
+      photos:["images/timeline/grade-11.jpg","images/timeline/grade-12.jpg"] },
     { stage:"College", school:"University of the Cordilleras", years:"2026–Present", current:true,
-      logo:"images/schools/university-of-the-cordilleras.jpg",
+      logo:"images/schools/university-of-the-cordilleras.jpg", bg:"images/schools/bg-college.jpg", // bg = school photo behind the box
       program:"Bachelor of Science in Computer Science", level:"First Year",
       photos:["images/timeline/college.jpg"] }],
+  awardPhotos: [ // the moving "Awards & Medals" row at the top of Achievements
+    "images/awards/dspc-2024.jpg",
+    "images/awards/dspc-2025.jpg",
+    "images/awards/chess-district-2025.jpg",
+    "images/awards/girl-scout-of-the-year.jpg",
+    "images/awards/gsp-camp-2025.jpg",
+    "images/awards/song-and-yell-2025.jpg",
+    "images/awards/leadership-2025.jpg",
+    "images/awards/all-medals.jpg",
+    "images/awards/all-certificates.jpg",
+  ],
+  highlights: [ // bottom-left panel on Achievements: chess and Girl Scout recognitions (photo, title, detail)
+    {img:"images/awards/chess-district-2025.jpg",   title:"Chess · 2nd Place",              sub:"2025 District Meet"},
+    {img:"images/awards/girl-scout-of-the-year.jpg", title:"Girl Scout of the Year",          sub:"Division-level participant"},
+    {img:"images/awards/gsp-camp-2025.jpg",          title:"Siargao Division GSP Camp 2025",  sub:"Certificate of Participation · Oct 17–19, 2025"},
+    {img:"images/awards/song-and-yell-2025.jpg",     title:"Song & Yell Contest · 1st Place", sub:"Sta. Fe NHS team · GSP Camp 2025"}
+  ],
   recognition: [["Journalist of the Year","2nd Place, Collaborative Desktop Publishing, Division Schools Press Conference"],["Senior Patrol Leader","Student Supreme Learner Government Officer"]],
   skills: { "Personal & Professional":["Problem-Solving","Adaptability","Working Under Pressure","Willingness to Learn"], "Communication & Leadership":["Public Speaking","Communication"], "Technical & Computer":["Beginner: learning programming fundamentals"] },
   family:  [{src:"images/family1.jpg",cap:"Family photo caption"},{src:"images/family2.jpg",cap:"Family photo caption"},{src:"images/family3.jpg",cap:"Family photo caption"},{src:"images/family4.jpg",cap:"Family photo caption"}],
@@ -275,19 +292,18 @@ $("#main").innerHTML = `
 </section>
 <section class="slide" id="s2">
  <div class="ph3 rv"><span class="tag3">03 · Achievements</span><h2>My Academic Journey</h2><p>Where I studied, what I’ve earned, and what I can do.</p></div>
+ <div class="awrow rv" aria-label="Awards and medals"><span class="awlbl">Awards &amp; Medals</span><div class="awwin"><div class="awtrack">${(S.awardPhotos || []).map((src, i) => `<img src="${esc(src)}" alt="Award or medal photo" data-i="${i}" tabindex="0" role="button" loading="eager" onerror="this.remove()">`).join("")}</div></div></div>
  <div class="stages rv">${S.education.map(e => {
-   const pics = (e.photos || []).map(src => `<img src="${esc(src)}" alt="${esc(e.stage)} photo" loading="lazy" onerror="this.remove()">`).join("");
    const li = (arr, f) => arr && arr.length ? arr.map(f).join("") : "";
-   return `<div class="stg${e.big ? " big" : ""}${e.current ? " cur" : ""}"><div class="stc">
-    <div class="sth"><div class="logo-s">${img(e.logo, e.school + " logo")}</div><div class="edt"><small>${esc(e.stage)}</small><b>${esc(e.school)}</b><span class="yrs">${esc(e.years)}</span>${e.current ? '<span class="stt">In Progress</span>' : ""}</div>${e.big ? `<div class="pics">${pics}</div>` : ""}</div>
+   return `<div class="stg${e.big ? " big" : ""}${e.current ? " cur" : ""}"><div class="stc${e.bg ? " has-bg" : ""}"${e.bg ? ` style="--stg-bg:url('${esc(e.bg)}')"` : ""}>
+    <div class="sth"><div class="logo-s">${img(e.logo, e.school + " logo")}</div><div class="edt"><small>${esc(e.stage)}</small><b>${esc(e.school)}</b><span class="yrs">${esc(e.years)}</span>${e.current ? '<span class="stt">In Progress</span>' : ""}</div></div>
     ${e.strand ? `<div class="kv"><small>Strand</small><span>${esc(e.strand)}</span></div>` : ""}
     ${e.program ? `<div class="kv"><small>Program</small><span>${esc(e.program)}</span></div><div class="kv"><small>Year Level</small><span>${esc(e.level)}</span></div>` : ""}
     ${e.honors ? `<div><div class="lbl">Year-Level Honors</div><ul class="lst hon">${li(e.honors, h => `<li><span class="g">${esc(h[0])}</span><span>${esc(h[1])}</span></li>`)}</ul></div>` : ""}
     ${e.awards ? `<div><div class="lbl">Additional Awards &amp; Recognitions</div><ul class="lst aw">${li(e.awards, a => `<li><b>${esc(a[0])}</b>${a[1] ? ` <span>— ${esc(a[1])}</span>` : ""}</li>`)}</ul></div>` : ""}
-    ${e.big ? "" : `<div class="pics">${pics}</div>`}
    </div></div>`; }).join("")}</div>
  <div class="btm rv">
-  <div class="pnl"><div class="sh"><span class="t">Skills</span><i></i></div><div class="sg">${Object.entries(S.skills).map(([k, v]) => `<div><h4>${esc(k)}</h4><div class="chips">${v.map(x => `<span>${esc(x)}</span>`).join("")}</div></div>`).join("")}</div></div>
+  <div class="pnl"><div class="sh"><span class="t">Chess &amp; Girl Scout Recognitions</span><i></i></div><div class="hl">${(S.highlights || []).map((h, i) => `<figure class="hlc" data-i="${i}" tabindex="0" role="button" aria-label="Open photo: ${esc(h.title)}"><img src="${esc(h.img)}" alt="${esc(h.title)}" loading="eager" onerror="this.style.visibility='hidden'"><figcaption><b>${esc(h.title)}</b><small>${esc(h.sub)}</small></figcaption></figure>`).join("")}</div></div>
   <div class="pnl"><div class="sh"><span class="t">More Recognition</span><i></i></div><ul class="rc">${S.recognition.map(r => `<li><div><b>${esc(r[0])}</b><small>${esc(r[1])}</small></div></li>`).join("")}</ul></div>
  </div>
 </section>
@@ -353,6 +369,20 @@ const stepLb = d => { li = (li + d + S[lk].length) % S[lk].length; showLb(); };
 $("#lx").onclick = () => $("#lb").classList.remove("open");
 $("#lp").onclick = () => stepLb(-1); $("#ln").onclick = () => stepLb(1);
 $("#lb").onclick = e => e.target.id === "lb" && $("#lb").classList.remove("open");
+/* Awards & Medals row: click (or Enter) on any photo, including the looping copies, opens it big */
+const AWCAP = { "dspc-2024":"DSPC 2024 · 3rd Place, Collaborative Desktop Publishing (Filipino)", "dspc-2025":"DSPC 2025 · 2nd Place, Collaborative Desktop Publishing (Filipino)",
+  "chess-district-2025":"2025 District Meet · 2nd Place, Chess", "girl-scout-of-the-year":"Girl Scout of the Year", "gsp-camp-2025":"Siargao Division GSP Camp 2025",
+  "song-and-yell-2025":"Song & Yell Contest 2025 · 1st Place", "leadership-2025":"Leadership Award", "all-medals":"Medals", "all-certificates":"Certificates" };
+S.awardLb = (S.awardPhotos || []).map(src => ({ src, cap: AWCAP[src.split("/").pop().replace(/\.\w+$/, "")] || "Awards & Medals" }));
+S.hlLb = (S.highlights || []).map(h => ({ src: h.img, cap: h.title + (h.sub ? " · " + h.sub : "") }));
+document.addEventListener("click", e => {
+  if (window.__awDragged) return; /* a drag on the awards row is not a click */
+  const im = e.target.closest(".awtrack img"); if (im) return openLb("awardLb", +im.dataset.i);
+  const hc = e.target.closest(".hlc"); if (hc) openLb("hlLb", +hc.dataset.i);
+});
+document.addEventListener("keydown", e => { if (e.key !== "Enter" || !e.target.closest) return;
+  const im = e.target.closest(".awtrack img"); if (im) return openLb("awardLb", +im.dataset.i);
+  const hc = e.target.closest(".hlc"); if (hc) openLb("hlLb", +hc.dataset.i); });
 
 /* ---- navigation ---- */
 let cur = 0, busy = false;
@@ -448,8 +478,81 @@ drawStars(); if (document.fonts) document.fonts.ready.then(drawStars);
 @keyframes picsSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.stg.big .sth .pics .ptrack{animation:none}}
 @media(max-width:900px){.stg.big .sth .pics{flex-basis:100%;max-width:100%;margin-top:8px}}
+/* Awards & Medals: its own row above the timeline, moving on its own */
+.awrow{display:flex;align-items:center;gap:12px;flex:none;margin:2px 0 clamp(8px,1.4vh,14px);padding:6px 10px;border:1px solid color-mix(in srgb,var(--hi) 35%,transparent);border-radius:12px;background:color-mix(in srgb,var(--bg) 55%,transparent)}
+.awlbl{flex:none;width:58px;font:600 9px/1.35 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--hi)}
+.awwin{flex:1;min-width:0;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none;height:clamp(64px,11vh,110px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.awtrack{display:flex;height:100%;width:max-content;will-change:transform}
+.awtrack img{height:100%;width:auto;flex:none;object-fit:cover;border-radius:8px;box-shadow:0 6px 16px #0005;margin-right:10px;cursor:zoom-in;transition:transform .25s,filter .25s}
+.awtrack img:hover,.awtrack img:focus-visible{transform:scale(.94);filter:brightness(1.12);outline:none}
+/* chess & Girl Scout recognitions: four photo cards in the bottom-left panel (replaces Skills) */
+.hl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,.9vw,12px)}
+.hlc{margin:0;display:flex;gap:9px;align-items:center;min-width:0;padding:6px;border-radius:10px;background:color-mix(in srgb,var(--bg) 35%,transparent);border:1px solid color-mix(in srgb,var(--hi) 25%,transparent)}
+.hlc{cursor:zoom-in;transition:transform .25s,border-color .25s,background .25s}
+.hlc:hover,.hlc:focus-visible{transform:translateY(-2px);border-color:color-mix(in srgb,var(--hi) 60%,transparent);background:color-mix(in srgb,var(--bg) 20%,transparent);outline:none}
+.hlc img{transition:transform .25s}.hlc:hover img{transform:scale(1.06)}
+.hlc img{flex:none;width:clamp(48px,4.6vw,72px);aspect-ratio:1;object-fit:cover;border-radius:7px;box-shadow:0 4px 10px #0004}
+.hlc figcaption{min-width:0;display:grid;gap:2px}
+.hlc b{font-size:.84em;line-height:1.25}
+.hlc small{font-size:.72em;line-height:1.3;color:var(--mu)}
+@media(max-width:1100px){.hl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* each school's photo behind its box; a veil in the current theme colour keeps the text readable */
+.stc.has-bg{background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 40%,transparent) 0%,color-mix(in srgb,var(--bg) 62%,transparent) 35%,color-mix(in srgb,var(--bg) 78%,transparent) 65%,color-mix(in srgb,var(--bg) 88%,transparent) 100%),var(--stg-bg) center 35%/cover no-repeat}
+.stc.has-bg small,.stc.has-bg b,.stc.has-bg span,.stc.has-bg .lbl,.stc.has-bg li{text-shadow:0 0 2px var(--bg),0 0 6px var(--bg),0 1px 10px var(--bg)}
+@media(min-width:901px){#s2{grid-template-rows:auto auto minmax(0,1fr) auto!important}.awrow{margin:0}}
+@media(max-height:760px) and (min-width:901px){.awwin{height:clamp(50px,8.5vh,72px)}.awrow{padding:4px 8px}}
+@media(min-width:901px){.awwin{height:clamp(46px,7.5vh,90px)}.stg:not(.big) .pics img{--pic:clamp(40px,8vh,96px)}}
+@media(max-height:760px) and (min-width:901px){.awwin{height:clamp(40px,6.6vh,56px)!important}.awrow{padding:3px 8px!important}.awlbl{font-size:8px}}
+.awwin.dragging,.awwin.dragging img{cursor:grabbing}
+/* bigger moving award photos (about 1.5x) */
+.awwin{height:clamp(90px,16vh,160px)}
+@media(min-width:901px){.awwin{height:clamp(64px,11.5vh,135px)!important}}
+@media(max-height:760px) and (min-width:901px){.awwin{height:clamp(54px,9.5vh,80px)!important}}
 </style>
 <script>
+/* timeline cards: if a card's content is taller than its box, shrink its text a little (never below 72%) */
+(function(){
+ function fitCards(){if(innerWidth<=900)return;document.querySelectorAll('#s2 .stg .stc').forEach(function(c){c.style.fontSize='';var f=1;
+  while(c.scrollHeight>c.clientHeight+1&&f>0.72){f-=0.03;c.style.fontSize=f+'em'}})}
+ var t;function soon(){clearTimeout(t);t=setTimeout(fitCards,80)}
+ addEventListener('load',function(){setTimeout(fitCards,350)});addEventListener('resize',soon);
+ document.addEventListener('click',function(){setTimeout(fitCards,700)});document.addEventListener('keydown',function(){setTimeout(fitCards,700)});
+ window._fitCards=fitCards;
+})();
+/* awards row: an endless, gap-free loop. Waits for every photo to load, measures one full set,
+   repeats the set until it covers the window twice, then slides by exactly one set width forever */
+(function(){
+ var tr,orig=[],setW=0,x=0,last=0,speed=45;
+ function ready(img){return img.complete?Promise.resolve():new Promise(function(r){img.onload=img.onerror=r})}
+ function layout(){if(!tr)return;
+  [].slice.call(tr.querySelectorAll('img[aria-hidden]')).forEach(function(c){c.remove()});
+  setW=tr.scrollWidth;if(!setW)return;var win=tr.parentNode.clientWidth,n=Math.ceil(win/setW)+1;
+  for(var k=0;k<n;k++)orig.forEach(function(i){var c=i.cloneNode(true);c.alt='';c.setAttribute('aria-hidden','true');tr.appendChild(c)});
+  x=x%setW}
+ var held=0,hold=false,drag=null,over=false;
+ function wrap(){x=((x%setW)+setW)%setW}
+ function pause(){held=performance.now()+1800} /* auto flow resumes 1.8s after she stops scrolling */
+ function step(t){if(last&&setW){if(!hold&&!over&&t>held)x+=(t-last)/1000*speed;wrap();tr.style.transform='translate3d('+(-x)+'px,0,0)'}last=t;requestAnimationFrame(step)}
+ function controls(){var win=tr.parentNode;
+  win.addEventListener('wheel',function(e){var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(!d)return;
+   e.preventDefault();e.stopPropagation();x+=d*(e.deltaMode===1?30:1);wrap();pause()},{passive:false});
+  win.addEventListener('pointerdown',function(e){if(e.button)return;drag={sx:e.clientX,x0:x,moved:false,id:e.pointerId};hold=true});
+  addEventListener('pointermove',function(e){if(!drag)return;var dx=e.clientX-drag.sx;if(Math.abs(dx)>5&&!drag.moved){drag.moved=true;win.setPointerCapture&&win.setPointerCapture(drag.id);win.classList.add('dragging')}
+   if(drag.moved){x=drag.x0-dx;wrap()}});
+  function end(){if(!drag)return;window.__awDragged=drag.moved;setTimeout(function(){window.__awDragged=false},50);drag=null;hold=false;win.classList.remove('dragging');pause()}
+  addEventListener('pointerup',end);addEventListener('pointercancel',end);
+  /* cursor on the Awards & Medals box = stopped; cursor leaves = moves again right away */
+  var box=win.closest('.awrow')||win;
+  box.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')over=true});
+  box.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){over=false;held=0}});win.addEventListener('dragstart',function(e){e.preventDefault()})}
+ function start(){tr=document.querySelector('.awtrack');if(!tr)return;
+  Promise.all([].slice.call(tr.querySelectorAll('img')).map(ready)).then(function(){
+   orig=[].slice.call(tr.querySelectorAll('img')).filter(function(i){return i.isConnected});layout();controls();
+   if(matchMedia('(prefers-reduced-motion: reduce)').matches)speed=0;requestAnimationFrame(step)})}
+ var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(layout,150)});
+ document.addEventListener('visibilitychange',function(){last=0});
+ if(document.readyState==='complete')start();else addEventListener('load',start);
+})();
 /* build the sliding strip once the photos have loaded (missing ones remove themselves first) */
 (function(){
  function build(){document.querySelectorAll('.stg.big .sth .pics').forEach(function(box){
