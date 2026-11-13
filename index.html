@@ -62,34 +62,73 @@ main{position:fixed;inset:0;z-index:1}
 #s0 .tag{font:italic 500 clamp(1.2rem,3vh + .4rem,1.9rem) "Cormorant Garamond",serif;color:var(--hi);margin:6px 0 28px}
 .portrait{justify-self:center;height:min(78vh,660px);aspect-ratio:3/4;border-radius:200px 200px 16px 16px;overflow:hidden;border:2px solid var(--hi);box-shadow:0 24px 60px #0005}
 .portrait img,.ph img{width:100%;height:100%;object-fit:cover;display:block}
-/* about */
-#s1{display:grid;grid-template-columns:25% 1fr;gap:clamp(10px,1.6vw,22px);padding-top:58px;padding-bottom:52px;font-size:clamp(.78rem,1.5vh,.95rem);line-height:1.45}
+/* personal information */
+#s1{display:grid;grid-template-columns:minmax(0,30%) minmax(0,1fr);gap:clamp(16px,3vw,48px);padding:64px clamp(14px,6vw,96px) 58px;font-size:clamp(.8rem,1.15vh + .42rem,1rem);line-height:1.5;align-items:stretch}
 .ph{border-radius:14px;overflow:hidden;border:1px solid var(--hi);box-shadow:14px 14px 0 -2px color-mix(in srgb,var(--ac) 55%,transparent),0 14px 36px #0005;min-height:0;margin:0 14px 14px 0}
 .ph img{object-position:62% 25%}
-.rt{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:auto minmax(auto,1.35fr) minmax(auto,1fr) auto;gap:clamp(8px,1.3vh,14px);min-height:0}
-.info{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:6px 14px;align-content:center}
-.info div{min-width:0}.info small{display:block;font-size:.78em;letter-spacing:.1em;text-transform:uppercase;color:var(--hi)}
-.info .nm{grid-column:span 2;align-self:end;font:600 1.7em "Cormorant Garamond",serif;line-height:1.1}
-#s1 .st{grid-column:1/-1;display:flex;flex-direction:column;justify-content:center;padding:clamp(12px,2.2vh,22px) clamp(16px,1.8vw,26px)}.st .tx{columns:2;column-gap:40px;line-height:1.6}.st p{margin:0 0 .7em;break-inside:avoid-column}.st p:last-child{margin:0}
-.card h3{font-size:1.5em;margin-bottom:5px}#s1 .card{min-height:auto}#s1 ul{padding:0}#s1 .rt{overflow:visible}.pers,.goals{display:flex;flex-direction:column}.pers ul,.goals ul{flex:1;display:flex;flex-direction:column;justify-content:space-evenly}.pers li,.goals li{margin:0}
-.pers li,.goals li{list-style:none;margin-bottom:.35em}.pers b{color:var(--hi);font-weight:500}
-.goals li::before{content:"–  ";color:var(--hi)}
-.hobs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.hobs div{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 2px;border-radius:10px;background:var(--card);border:1px solid color-mix(in srgb,var(--hi) 40%,transparent);transition:.25s}
-.hobs div:hover{transform:translateY(-3px)}.hobs span{font-size:1.25em}
+.pi{display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,2.4vh,24px);min-height:0;min-width:0}
+.pi .card{padding:clamp(14px,2.6vh,28px) clamp(18px,2.2vw,32px)}
+.intro h2{font-size:clamp(1.9rem,4.6vh + .5rem,2.8rem);line-height:1.08;margin:0 0 clamp(8px,1.6vh,14px)}
+.intro p{font-size:1.14em;line-height:1.7}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2.2vh,22px) clamp(14px,2vw,28px)}
+.facts div{min-width:0}
+.facts small{display:block;font-size:.72em;letter-spacing:.14em;text-transform:uppercase;color:var(--hi);margin-bottom:2px}
+.facts span{display:block;font-weight:500;font-size:1.04em;line-height:1.35;overflow-wrap:anywhere}
+.facts a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--hi)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{padding:3px 11px;border-radius:20px;border:1px solid var(--hi);font-size:.92em}
+/* achievements page: academic journey. Everything visible at once, nothing hidden or clickable */
+#s2{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;row-gap:clamp(8px,1.5vh,12px);padding:64px clamp(14px,5vw,80px) 58px;font-size:clamp(.8rem,1.1vh + .42rem,1rem);line-height:1.45}
+.ph3{display:flex;align-items:center;gap:clamp(12px,1.6vw,22px)}
+.tag3{border-left:3px solid var(--hi);padding:2px 0 2px 10px;font-size:.74em;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--hi);white-space:nowrap}
+.ph3 h2{font-size:clamp(1.5rem,3.6vh + .4rem,2.2rem);line-height:1.1;margin:0}
+.ph3 p{margin:0 0 0 auto;color:var(--mu);text-align:right;max-width:46ch}
+.sh{display:flex;align-items:center;gap:10px;flex:none;margin-bottom:clamp(5px,1vh,8px)}
+.sh .n{background:var(--hi);color:var(--on);padding:1px 7px;border-radius:3px;font-size:.74em;font-weight:700;letter-spacing:.08em}
+.sh .t{font-size:.78em;font-weight:600;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.sh i{flex:1;height:1px;background:color-mix(in srgb,var(--mu) 45%,transparent)}
+/* education timeline: four stages, Senior High gets the most room */
+.stages{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1.9fr) minmax(0,1.1fr);gap:clamp(8px,1vw,14px);min-height:0}
+.stages::before{content:"";position:absolute;left:6px;right:0;top:6px;height:2px;background:linear-gradient(90deg,var(--hi),color-mix(in srgb,var(--hi) 30%,transparent))}
+.stg{position:relative;display:flex;flex-direction:column;min-height:0;min-width:0;padding-top:22px}
+.stg::before{content:"";position:absolute;left:0;top:0;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--hi);z-index:1}
+.stg.cur::before{background:var(--hi);box-shadow:0 0 0 4px color-mix(in srgb,var(--hi) 28%,transparent)}
+.stc{flex:1;min-height:0;display:flex;flex-direction:column;gap:clamp(5px,1vh,9px);padding:clamp(8px,1.4vh,14px) clamp(10px,1vw,14px);border-radius:12px;background:var(--card);border:1px solid color-mix(in srgb,var(--mu) 30%,transparent);backdrop-filter:blur(6px)}
+.stg.big .stc{border-color:color-mix(in srgb,var(--hi) 55%,transparent);box-shadow:0 12px 32px #0004}
+.stg.cur .stc{border-color:var(--hi);box-shadow:0 0 0 1px color-mix(in srgb,var(--hi) 40%,transparent),0 10px 28px #0004}
+.sth{display:flex;align-items:center;gap:clamp(8px,.9vw,12px)}
+.logo-s{flex:none;width:clamp(42px,8vh,60px);aspect-ratio:1;border-radius:10px;overflow:hidden;background:#fff;border:1px solid color-mix(in srgb,var(--hi) 55%,transparent)}
+.logo-s img{width:100%;height:100%;object-fit:contain;display:block}
+.edt{min-width:0;flex:1}
+.edt small{display:block;font-size:.72em;letter-spacing:.14em;text-transform:uppercase;color:var(--hi);margin-bottom:1px}
+.edt b{display:block;font-weight:600;font-size:1.02em;line-height:1.25}
+.yrs{display:inline-block;margin-top:3px;font-size:.88em;font-weight:600;color:var(--mu);font-variant-numeric:tabular-nums}
+.stt{display:inline-block;margin-left:8px;font-size:.62em;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:1px 7px;border-radius:3px;background:var(--hi);color:var(--on);vertical-align:1px}
+.kv small{display:block;font-size:.68em;letter-spacing:.14em;text-transform:uppercase;color:var(--hi)}
+.kv span{display:block;font-weight:500;line-height:1.3}
+.lbl{font-size:.68em;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--hi);margin:0 0 3px}
+.lst{list-style:none;margin:0;padding:0;display:grid;gap:3px;font-size:.92em;line-height:1.35}
+.hon li{display:grid;grid-template-columns:4.4em 1fr;gap:6px}
+.hon .g{color:var(--hi);font-weight:600}
+.aw li{position:relative;padding-left:13px}
+.aw li::before{content:"◆";position:absolute;left:0;top:.2em;font-size:.55em;color:var(--hi)}
+.aw b{font-weight:600}
+.aw span{color:var(--mu)}
+.pics{margin-top:auto;display:flex;gap:6px;align-items:flex-end;min-width:0}
+.pics img{flex:0 1 auto;min-width:0;max-width:100%;height:var(--pic,clamp(56px,13vh,110px));object-fit:contain;object-position:left bottom;border-radius:6px}
+.sth .pics{margin:0 0 0 auto;--pic:clamp(38px,7vh,54px)}
+/* bottom strip: skills + extra recognition */
+.btm{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:clamp(8px,1vw,14px)}
+.pnl{padding:clamp(6px,1.1vh,10px) clamp(10px,1vw,14px) clamp(8px,1.2vh,12px);border-radius:12px;background:var(--card);border:1px solid color-mix(in srgb,var(--mu) 30%,transparent)}
+.sg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,1vw,14px)}
+.sg h4{font-size:.68em;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin:0 0 4px}
 .chips{display:flex;flex-wrap:wrap;gap:5px}
-.chips span{padding:2px 10px;border-radius:20px;border:1px solid var(--hi);font-size:.9em}
-/* education */
-#s2{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:clamp(8px,1.6vh,16px)}
-#s2 .card{overflow:hidden}
-.tl{position:relative;padding-left:18px;border-left:2px solid var(--hi);margin-left:4px}
-.tl div{position:relative;margin-bottom:clamp(6px,1.4vh,14px)}
-.tl div::before{content:"";position:absolute;left:-25px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--hi)}
-.tl small,.ach small{color:var(--mu);display:block}.tl b{font-weight:600}
-.ag{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ach{padding:8px 10px;border-radius:10px;background:var(--card);border-left:3px solid var(--hi);transition:.25s}
-.ach:hover{transform:translateY(-3px)}
-.sk h4{font-size:.8em;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin:6px 0 4px}
+.chips span{padding:2px 9px;border-radius:14px;border:1px solid var(--hi);font-size:.84em}
+.rc{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.rc li{display:flex;gap:9px;align-items:flex-start;line-height:1.3}
+.rc li::before{content:"★";flex:none;color:var(--hi);font-size:.9em;line-height:1.45}
+.rc b{font-weight:600}
+.rc small{display:block;color:var(--mu);font-size:.84em;line-height:1.3}
 /* people */
 #s3{display:flex;flex-direction:column;gap:1.2vh}
 #s3 h1{font-size:clamp(1.5rem,4vh + .5rem,2.4rem)}
@@ -108,12 +147,19 @@ main{position:fixed;inset:0;z-index:1}
 .foot{position:fixed;bottom:0;left:0;right:0;z-index:20;height:50px;display:flex;align-items:center;justify-content:center;gap:16px}
 .foot .ib:hover{transform:scale(1.1)}
 .cnt{font:600 1rem "Cormorant Garamond",serif;letter-spacing:.2em;min-width:60px;text-align:center}
-/* wave */
-.w{position:fixed;left:0;right:0;top:0;height:200vh;z-index:50;pointer-events:none;transform:translateY(100vh);display:none}
-.w .cr{height:110px;background:var(--wv);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 110'%3E%3Cpath d='M0 60Q75 10 150 60T300 60T450 60T600 60V110H0Z'/%3E%3C/svg%3E") repeat-x 0 0/600px 110px;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 110'%3E%3Cpath d='M0 60Q75 10 150 60T300 60T450 60T600 60V110H0Z'/%3E%3C/svg%3E") repeat-x 0 0/600px 110px;animation:sw 2s linear infinite}
-.w .bd{height:100%;background:var(--wv);margin-top:-1px}
-.w.l2{opacity:.55}.w.l2 .cr{animation-direction:reverse;animation-duration:3s}
-@keyframes sw{to{-webkit-mask-position:600px 0;mask-position:600px 0}}
+/* wave: 3 layered ocean swells, each a wavy leading crest + body + wavy trailing edge (inline SVG, no masks) */
+main.nt .slide{transition:none!important}
+.w{position:fixed;left:0;right:0;top:0;z-index:50;pointer-events:none;display:none;will-change:transform;--c:var(--wv)}
+.w .cr,.w .tr{height:110px;overflow:hidden}
+.w .tr{transform:scaleY(-1)}
+.w svg{display:block;height:110px;animation:sw var(--sp,1.6s) linear infinite;will-change:transform}
+.w .tr svg{animation-direction:reverse}
+.w .bd{background:var(--c);margin:-1px 0}
+.w path{fill:var(--c)}
+#w3{--c:color-mix(in srgb,var(--wv) 55%,var(--hi));--sz:760px;--sp:2.1s;opacity:.6}
+#w2{--c:color-mix(in srgb,var(--wv) 75%,var(--ac));--sz:520px;--sp:1.4s;opacity:.85}
+#w1{--c:var(--wv);--sz:640px;--sp:1.8s}
+@keyframes sw{to{transform:translateX(calc(var(--sz,600px) * -1))}}
 /* lightbox */
 #lb{position:fixed;inset:0;z-index:60;background:#000d;display:none;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:20px}
 #lb.open{display:flex}
@@ -127,53 +173,16 @@ main{position:fixed;inset:0;z-index:1}
 #s1 .stars{z-index:-1;bottom:auto}
 #s0>.portrait,#s0>div:not(.stars){position:relative;z-index:1}
 @keyframes tw{0%,100%{opacity:.12;transform:scale(.7) rotate(var(--r,0deg))}50%{opacity:var(--pk,1);transform:scale(1.2) rotate(var(--r,0deg))}}
-/* about (short version) */
-#s1{grid-template-columns:minmax(0,34%) 1fr;gap:clamp(16px,3vw,48px);padding-left:clamp(14px,6vw,96px);padding-right:clamp(14px,6vw,96px)}
-.abwrap{margin:0;display:flex;flex-direction:column;gap:clamp(10px,1.8vh,18px)}
-.abt{padding:clamp(12px,2.2vh,22px) clamp(16px,2.2vw,32px)}
-.abt h2{font-size:clamp(1.8rem,5vh + .4rem,2.8rem);line-height:1.08;margin-top:4px}
-.abt .sum{color:var(--mu);line-height:1.55}
-.ab{padding:clamp(10px,1.6vh,18px) clamp(16px,2.2vw,32px)}
-.ab .row:first-child{border-top:0}
-/* expandable cards: title only, details slide open on hover / focus / tap */
-.xp{cursor:pointer;transition:box-shadow .4s,border-color .4s,background .4s}
-.xp .hd{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.xp .hd::after{content:"▾";color:var(--hi);font-size:1.1em;transition:transform .5s}
-.xp .hd h2,.xp .hd h3{margin-bottom:0}
-.xp .bd{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .55s cubic-bezier(.4,0,.2,1),opacity .4s ease}
-.xp .in{overflow:hidden;min-height:0}
-.xp .pad{padding-top:clamp(6px,1.2vh,12px)}
-.xp.open,.xp:focus-visible{border-color:var(--hi);box-shadow:0 14px 34px #0004}
-.xp.open .bd,.xp:focus-visible .bd{grid-template-rows:1fr;opacity:1}
-.xp.open .hd::after,.xp:focus-visible .hd::after{transform:rotate(180deg)}
-@media(hover:hover){
- .xp:hover{border-color:var(--hi);box-shadow:0 14px 34px #0004;background:color-mix(in srgb,var(--card) 100%,var(--hi) 6%)}
- .xp:hover .bd{grid-template-rows:1fr;opacity:1}
- .xp:hover .hd::after{transform:rotate(180deg)}}
-.duo{align-items:start}
-.ab .row:first-child{border-top:0}
-#s1{overflow-y:auto}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.8vh,18px)}
-.duo .card{padding:clamp(8px,1.4vh,14px) clamp(14px,1.6vw,22px)}
-.duo h3{font-size:1.25em;margin-bottom:6px}
-.duo ul{padding:0;list-style:none}
-.duo li{margin-bottom:.4em;line-height:1.4}.duo li:last-child{margin:0}
-.duo b{color:var(--hi);font-weight:500}
-.duo .gl li::before{content:"–  ";color:var(--hi)}
-@media(max-width:600px){.duo{grid-template-columns:1fr}}
-.ab .row{display:grid;grid-template-columns:clamp(90px,10vw,120px) 1fr;gap:10px;align-items:center;padding:clamp(5px,1.1vh,10px) 0;border-top:1px solid color-mix(in srgb,var(--mu) 25%,transparent)}
-.ab .row small{font-size:.78em;letter-spacing:.14em;text-transform:uppercase;color:var(--hi)}
-.ab .chips span{font-size:.92em}
 @media(max-width:900px){
  #s0{grid-template-columns:1fr;justify-items:center;text-align:center;gap:1vh}.portrait{height:36vh;order:-1}
- #s1{grid-template-columns:1fr}.ph{height:30vh;margin:0}.rt{grid-template-columns:1fr 1fr}.info{grid-template-columns:1fr 1fr}.st .tx{columns:1}
- #s2{grid-template-columns:1fr 1fr}#s2 .card:first-child{grid-column:1/-1}
- .gr{grid-template-columns:repeat(2,1fr)}.links button{padding:6px 5px;font-size:.82em}.logo{display:none}
+ #s1{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:start;padding:64px 16px 58px}.pi{justify-content:flex-start}.pi .card,#s2 .card{flex-shrink:0}.ph{height:34vh;margin:0 0 12px}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #s2{display:flex;flex-direction:column;gap:14px;padding:64px 16px 58px}.ph3{flex-wrap:wrap}.ph3 p{display:none}.stages,.btm,.ph3{flex:none}.stages{grid-template-columns:1fr;gap:14px;min-height:auto}.stages::before{display:none}.stg{padding-top:0}.stg::before{display:none}.logo-s{width:56px}.btm{grid-template-columns:1fr}.sg{grid-template-columns:1fr}.pics img{--pic:90px}
+ .gr{grid-template-columns:repeat(2,1fr)}.links button{padding:6px 5px;font-size:.78em}.logo{display:none}
  .slide{overflow:auto}}
-@media(max-height:800px) and (min-width:901px){#s1{padding-top:56px;padding-bottom:50px}#s1 .card{padding:7px 12px}#s1 .st{padding:12px 18px}#s1 .rt{gap:7px}.card h3{font-size:1.35em;margin-bottom:2px}#s1{overflow-y:auto}}
-@media(max-height:740px) and (min-width:901px){#s1{grid-template-columns:22% 1fr;padding-top:54px;padding-bottom:46px}#s1 .card{padding:6px 12px}#s1 .st{padding:10px 16px}#s1 .rt{gap:6px}.card h3{font-size:1.3em;margin-bottom:1px}.hobs div{padding:3px 2px}.st .tx{column-gap:24px}.st p{margin-bottom:.3em}#s1 .ph{margin-bottom:10px}}
-@media(max-height:725px) and (min-width:901px){#s1{font-size:.76rem}}
-@media(max-height:680px) and (min-width:901px){#s1{font-size:.72rem;line-height:1.38}}
+@media(max-width:1100px) and (min-width:901px){#s2{display:flex;flex-direction:column;gap:12px;font-size:.76rem;overflow-y:auto}.stages,.btm,.ph3{flex:none}.stages{grid-template-columns:repeat(2,minmax(0,1fr));min-height:auto;align-items:stretch}.stg.big{grid-column:1/-1}.stages::before,.stg::before{display:none}.stg{padding-top:0}.ph3 p{display:none}.btm{grid-template-columns:1fr}}
+@media(max-width:560px){.links button{font-size:.7em;padding:6px 3px}}
+@media(max-height:760px) and (min-width:901px){#s1{padding-top:56px;padding-bottom:50px}#s2{padding-top:56px;padding-bottom:50px}.pi .card{padding:12px 20px}}
+@media(max-height:680px) and (min-width:901px){#s1,#s2{font-size:.76rem;line-height:1.4}.intro p{line-height:1.55}.pi{gap:10px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
 </style>
 </head>
@@ -194,8 +203,9 @@ main{position:fixed;inset:0;z-index:1}
  <div class="cnt" id="cnt">01 / 04</div>
  <button class="ib" id="next" aria-label="Next page">→</button>
 </div>
-<div class="w" id="w1"><div class="cr"></div><div class="bd"></div></div>
-<div class="w l2" id="w2"><div class="cr"></div><div class="bd"></div></div>
+<div class="w" id="w3"><div class="cr"></div><div class="bd"></div><div class="tr"></div></div>
+<div class="w" id="w2"><div class="cr"></div><div class="bd"></div><div class="tr"></div></div>
+<div class="w" id="w1"><div class="cr"></div><div class="bd"></div><div class="tr"></div></div>
 <div id="lb"><button class="ib" id="lx" style="top:16px;right:16px" aria-label="Close">✕</button><button class="ib" id="lp" style="left:16px;top:50%">←</button><button class="ib" id="ln" style="right:16px;top:50%">→</button><img id="li" alt=""><p id="lc"></p></div>
 
 <script>
@@ -206,28 +216,39 @@ const SITE = {
   school: "University of the Cordilleras",
   tagline: "Learning, exploring, and creating possibilities.",
   portrait: "images/me.jpg",      // Home page formal portrait
-  aboutPhoto: "images/about.jpg", // About Me photo
-  info: [["Birthday","July 26, 2008"],["Age","18"],["Location","Rodriguez, Rizal, Philippines"],["College","University of the Cordilleras"],["Program","BS Computer Science"],["Year","First Year"]],
-  summary: "First-year Computer Science student who is curious, determined, and eager to learn. I’m building my foundations in Python and Java. Outside class, I love baking, embroidery, painting, online games, and surfing, swimming, and traveling with my family. I aspire to become an adaptable, well-rounded person who sees challenges as chances to grow.",
-  strengthsShort: [["Adaptable","adjusts quickly to new environments and experiences."],["Calm under pressure","stays productive and clear-headed when things get complicated."],["Curious problem-solver","explores new ideas and looks for solutions with an open mind."]],
-  goalsShort: ["Finish my Computer Science degree","Build useful projects and keep sharpening my skills","Support my family and grow into a capable, well-rounded person"],
-  story: [ // each line is one paragraph
-    "Hi, I’m Vivien, a first-year Computer Science student who is eager to learn, explore, and grow through new experiences. Although I am still discovering my direction in technology, I approach challenges with curiosity, determination, and an open mind. I believe in continuous learning and am always willing to step outside my comfort zone to develop new skills.",
-    "I am currently building my programming foundations in Python and Java, continuously improving through practice and hands-on experience. I understand that I still have much to learn, but I am committed to strengthening my technical abilities along the way.",
-    "Beyond academics, I enjoy spending quality time with my family through surfing, swimming, and traveling. During my personal time, I love baking, embroidery, painting, and playing online games. These interests allow me to express my creativity, relax, and explore different experiences.",
-    "I aspire to become an adaptable, responsible, and well-rounded individual who sees challenges as opportunities for growth. I am determined to make the most of every experience and continuously improve both personally and professionally."
-  ],
-  traits: [["Adaptability","I adjust to unfamiliar environments and embrace new experiences."],["Under Pressure","I stay productive with demanding situations and deadlines."],["Composure","I try to stay calm and think clearly when things get complicated."],["Curiosity","I’m eager to explore new ideas and build new abilities."],["Problem-Solving","I approach challenges with an open mind and look for solutions."]],
-  hobbies: [["🧁","Baking"],["🏊","Swimming"],["🏄","Surfing"],["🚶","Walking"]],
-  goals: ["Complete my Computer Science degree","Keep developing technical and professional skills","Create meaningful, useful projects","Become financially capable of supporting my family","Grow into a capable, independent, well-rounded person"],
-  education: [["Elementary","Kasiglahan Village Elementary School","Grades 1–4"],["","Kasiglahan Village Elementary School Unit 1","Grades 5–6"],["Junior High School","Kasiglahan Village National High School",""],["Senior High School","Sta. Fe National High School",""],["College","University of the Cordilleras","BS Computer Science"]],
-  achievements: [["With High Honors",""],["Academic Excellence Award",""],["Journalist of the Year","2nd Place, Collaborative Desktop Publishing, Division Schools Press Conference"],["Leadership Awardee",""],["Senior Patrol Leader","Student Supreme Learner Government Officer"],["Girl Scout of the Year","Division-level participant"],["2nd Place in Chess","District Meet"]],
+  aboutPhoto: "images/about.jpg", // Personal Information photo
+  intro: "First-year Computer Science student who is curious, determined, and eager to learn. I’m building my foundations in Python and Java. Outside class, I love baking, embroidery, painting, online games, and surfing, swimming, and traveling with my family. I aspire to become an adaptable, well-rounded person who sees challenges as chances to grow.",
+  personal: [["Name","Vivien"],["Birthday","July 26, 2008"],["Age","18"],["Gender","Female"],["Status","Single"],["Weight","45 kg"],["Height","160 cm"],["Location","Rodriguez, Rizal, Philippines"],["College","University of the Cordilleras"],["Program","BS Computer Science"],["Year Level","First Year"],["Gmail","lalalovienna@gmail.com"]],
+  education: [ // one entry per stage, in timeline order
+    { stage:"Elementary", school:"Kasiglahan Village Elementary School Unit-1", years:"2014–2020",
+      logo:"images/schools/kasiglahan-elementary.jpg",
+      photos:["images/timeline/elementary.jpg"] },
+    { stage:"Junior High School", school:"Kasiglahan Village National High School", years:"2020–2024",
+      logo:"images/schools/kasiglahan-national-high-school.jpg",
+      honors:[["Grade 8","Achiever"],["Grade 9","With Honors"],["Grade 10","With Honors"]],
+      photos:["images/timeline/grade-8.jpg","images/timeline/grade-9.jpg","images/timeline/grade-10.jpg"] },
+    { stage:"Senior High School", school:"Sta. Fe National High School", years:"2024–2026", big:true,
+      logo:"images/schools/sta-fe-national-high-school.jpg",
+      strand:"General Academic Strand (GAS)",
+      honors:[["Grade 11","With High Honors"],["Grade 12","With High Honors"]],
+      awards:[["AY 2024–2025 Division Schools Press Conference (DSPC)","3rd Place, Collaborative Desktop Publishing (Filipino)"],
+              ["AY 2025–2026 Division Schools Press Conference (DSPC)","2nd Place, Collaborative Desktop Publishing (Filipino)"],
+              ["2025 District Meet","2nd Place, Chess"],
+              ["Girl Scout of the Year","Division-level participant"],
+              ["Municipal Academic Excellence Award",""],
+              ["Leadership Awardee",""]],
+      photos:["images/timeline/grade-11.jpg","images/timeline/grade-12.jpg"] },
+    { stage:"College", school:"University of the Cordilleras", years:"2026–Present", current:true,
+      logo:"images/schools/university-of-the-cordilleras.jpg",
+      program:"Bachelor of Science in Computer Science", level:"First Year",
+      photos:["images/timeline/college.jpg"] }],
+  recognition: [["Journalist of the Year","2nd Place, Collaborative Desktop Publishing, Division Schools Press Conference"],["Senior Patrol Leader","Student Supreme Learner Government Officer"]],
   skills: { "Personal & Professional":["Problem-Solving","Adaptability","Working Under Pressure","Willingness to Learn"], "Communication & Leadership":["Public Speaking","Communication"], "Technical & Computer":["Beginner: learning programming fundamentals"] },
   family:  [{src:"images/family1.jpg",cap:"Family photo caption"},{src:"images/family2.jpg",cap:"Family photo caption"},{src:"images/family3.jpg",cap:"Family photo caption"},{src:"images/family4.jpg",cap:"Family photo caption"}],
   friends: [{src:"images/friends1.jpg",cap:"Friends photo caption"},{src:"images/friends2.jpg",cap:"Friends photo caption"},{src:"images/friends3.jpg",cap:"Friends photo caption"},{src:"images/friends4.jpg",cap:"Friends photo caption"}]
 };
 const THEMES = { red:["Classic Red","#702632"], pink:["Soft Pink","#D9A3B0"], mono:["Monochrome","#555"], elegance:["Burgundy Elegance","#D5AD6B"], midnight:["Midnight Blue","#2B4C85"], sage:["Sage Green","#7F9A82"] };
-const PAGES = ["Home","About Me","Education","My People"];
+const PAGES = ["Home","Personal Information","Achievements","Family and Friends"];
 /* ================================================================== */
 
 const $ = s => document.querySelector(s), esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -247,36 +268,37 @@ $("#main").innerHTML = `
 <section class="slide" id="s1">
  <div class="stars" id="stars1" aria-hidden="true"></div>
  <div class="ph rv">${img(S.aboutPhoto, "Photo of " + S.name)}</div>
- <div class="abwrap">
-  <div class="card abt rv"><div class="eyebrow">About Me</div><h2>${esc(S.name)}</h2><p class="sum">${esc(S.summary)}</p></div>
-  <div class="card ab rv">
-   ${S.info.map(i => `<div class="row"><small>${esc(i[0])}</small><span>${esc(i[1])}</span></div>`).join("")}
-   <div class="row"><small>Hobbies</small><div class="chips">${S.hobbies.map(h => `<span>${h[0]} ${esc(h[1])}</span>`).join("")}</div></div>
-   <div class="row"><small>Skills</small><div class="chips">${Object.values(S.skills).flat().filter(k => !/^Beginner/.test(k)).map(k => `<span>${esc(k)}</span>`).join("")}</div></div>
-  </div>
-  <div class="duo">
-   <div class="card xp rv" tabindex="0"><div class="hd"><h3>Personality &amp; Strengths</h3></div><div class="bd"><div class="in"><div class="pad"><ul>${S.strengthsShort.map(t => `<li><b>${esc(t[0])}:</b> ${esc(t[1])}</li>`).join("")}</ul></div></div></div></div>
-   <div class="card xp rv" tabindex="0"><div class="hd"><h3>My Goals</h3></div><div class="bd"><div class="in"><div class="pad"><ul class="gl">${S.goalsShort.map(g => `<li>${esc(g)}</li>`).join("")}</ul></div></div></div></div>
-  </div>
+ <div class="pi">
+  <div class="card intro rv"><h2>Personal Information</h2><p>${esc(S.intro)}</p></div>
+  <div class="card facts rv">${S.personal.map(([k, v]) => `<div><small>${esc(k)}</small><span>${k === "Gmail" ? `<a href="mailto:${esc(v)}">${esc(v)}</a>` : esc(v)}</span></div>`).join("")}</div>
  </div>
 </section>
 <section class="slide" id="s2">
- <div class="card rv"><h3>Education</h3><div class="tl">${S.education.map(e => `<div>${e[0] ? `<small>${esc(e[0])}</small>` : ""}<b>${esc(e[1])}</b>${e[2] ? `<small>${esc(e[2])}</small>` : ""}</div>`).join("")}</div></div>
- <div class="card rv"><h3>Achievements &amp; Recognition</h3><div class="ag">${S.achievements.map(a => `<div class="ach"><b>${esc(a[0])}</b>${a[1] ? `<small>${esc(a[1])}</small>` : ""}</div>`).join("")}</div></div>
- <div class="card sk rv"><h3>Skills</h3>${Object.entries(S.skills).map(([k, v]) => `<h4>${esc(k)}</h4><div class="chips">${v.map(x => `<span>${esc(x)}</span>`).join("")}</div>`).join("")}</div>
+ <div class="ph3 rv"><span class="tag3">03 · Achievements</span><h2>My Academic Journey</h2><p>Where I studied, what I’ve earned, and what I can do.</p></div>
+ <div class="stages rv">${S.education.map(e => {
+   const pics = (e.photos || []).map(src => `<img src="${esc(src)}" alt="${esc(e.stage)} photo" loading="lazy" onerror="this.remove()">`).join("");
+   const li = (arr, f) => arr && arr.length ? arr.map(f).join("") : "";
+   return `<div class="stg${e.big ? " big" : ""}${e.current ? " cur" : ""}"><div class="stc">
+    <div class="sth"><div class="logo-s">${img(e.logo, e.school + " logo")}</div><div class="edt"><small>${esc(e.stage)}</small><b>${esc(e.school)}</b><span class="yrs">${esc(e.years)}</span>${e.current ? '<span class="stt">In Progress</span>' : ""}</div>${e.big ? `<div class="pics">${pics}</div>` : ""}</div>
+    ${e.strand ? `<div class="kv"><small>Strand</small><span>${esc(e.strand)}</span></div>` : ""}
+    ${e.program ? `<div class="kv"><small>Program</small><span>${esc(e.program)}</span></div><div class="kv"><small>Year Level</small><span>${esc(e.level)}</span></div>` : ""}
+    ${e.honors ? `<div><div class="lbl">Year-Level Honors</div><ul class="lst hon">${li(e.honors, h => `<li><span class="g">${esc(h[0])}</span><span>${esc(h[1])}</span></li>`)}</ul></div>` : ""}
+    ${e.awards ? `<div><div class="lbl">Additional Awards &amp; Recognitions</div><ul class="lst aw">${li(e.awards, a => `<li><b>${esc(a[0])}</b>${a[1] ? ` <span>— ${esc(a[1])}</span>` : ""}</li>`)}</ul></div>` : ""}
+    ${e.big ? "" : `<div class="pics">${pics}</div>`}
+   </div></div>`; }).join("")}</div>
+ <div class="btm rv">
+  <div class="pnl"><div class="sh"><span class="t">Skills</span><i></i></div><div class="sg">${Object.entries(S.skills).map(([k, v]) => `<div><h4>${esc(k)}</h4><div class="chips">${v.map(x => `<span>${esc(x)}</span>`).join("")}</div></div>`).join("")}</div></div>
+  <div class="pnl"><div class="sh"><span class="t">More Recognition</span><i></i></div><ul class="rc">${S.recognition.map(r => `<li><div><b>${esc(r[0])}</b><small>${esc(r[1])}</small></div></li>`).join("")}</ul></div>
+ </div>
 </section>
 <section class="slide" id="s3">
- <div class="rv"><div class="eyebrow">My People</div><h1>Beyond the Resume</h1></div>
+ <div class="rv"><div class="eyebrow">Beyond the Resume</div><h1>Family and Friends</h1></div>
  <div class="gal rv" id="g-family"></div><div class="gal rv" id="g-friends"></div>
 </section>`;
 document.querySelectorAll(".slide").forEach(s => s.querySelectorAll(".rv").forEach((e, i) => e.style.setProperty("--i", i)));
 
 
-/* ---- expandable cards: tap to toggle on touch screens (hover handles desktop) ---- */
-if (matchMedia("(hover: none)").matches) document.querySelectorAll(".xp").forEach(c => c.addEventListener("click", () => c.classList.toggle("open")));
-document.querySelectorAll(".xp").forEach(c => c.addEventListener("keydown", e => { if (e.key === " ") { e.preventDefault(); c.classList.toggle("open"); } }));
-
-/* ---- twinkling stars (Home + About Me). Stars never land on text, buttons, photos or cards ---- */
+/* ---- twinkling stars (Home + Personal Information). Stars never land on text, buttons, photos or cards ---- */
 function starfield(box, W, H, keep) {
   box.innerHTML = "";
   const free = (x, y, z) => !keep.some(k => x + z > k[0] && x < k[2] && y + z > k[1] && y < k[3]);
@@ -305,7 +327,7 @@ function drawStars() {
   starfield($("#stars"), root.clientWidth, root.clientHeight, keep);
   /* About Me (offset-based so the slide's hidden-state transform doesn't skew positions) */
   const r1 = $("#s1"), H1 = r1.scrollHeight, keep1 = [];
-  r1.querySelectorAll(".ph,.abwrap .card").forEach(el => keep1.push([el.offsetLeft - 8, el.offsetTop - 8, el.offsetLeft + el.offsetWidth + 8, el.offsetTop + el.offsetHeight + 8]));
+  r1.querySelectorAll(".ph,.pi .card").forEach(el => keep1.push([el.offsetLeft - 8, el.offsetTop - 8, el.offsetLeft + el.offsetWidth + 8, el.offsetTop + el.offsetHeight + 8]));
   $("#stars1").style.height = H1 + "px";
   starfield($("#stars1"), r1.clientWidth, H1, keep1);
 }
@@ -343,8 +365,8 @@ function paint() {
 }
 function go(n) {
   if (busy || n === cur || n < 0 || n > 3) return;
-  if (cur === 0 && n === 1 && !reduced) return wave(n);
-  cur = n; paint();
+  if (reduced) { cur = n; paint(); return; }
+  wave(n); // every page change (forward, backward, nav bar, arrows, keyboard) uses the wave
 }
 document.querySelectorAll(".links button").forEach(b => b.onclick = () => go(+b.dataset.p));
 $("#prev").onclick = () => go(cur - 1); $("#next").onclick = () => go(cur + 1);
@@ -362,21 +384,41 @@ $("#snd").onclick = () => { soundOn = !soundOn; try { localStorage.setItem("vam-
 setSnd();
 function whoosh() {
   try {
-    const A = new (window.AudioContext || window.webkitAudioContext)(), len = A.sampleRate * 2.4, buf = A.createBuffer(1, len, A.sampleRate), d = buf.getChannelData(0);
+    const A = new (window.AudioContext || window.webkitAudioContext)(), T = 1.7, len = A.sampleRate * T, buf = A.createBuffer(1, len, A.sampleRate), d = buf.getChannelData(0);
     for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
     const src = A.createBufferSource(); src.buffer = buf;
-    const f = A.createBiquadFilter(); f.type = "lowpass"; f.frequency.setValueAtTime(300, A.currentTime); f.frequency.linearRampToValueAtTime(1100, A.currentTime + 1.1); f.frequency.linearRampToValueAtTime(300, A.currentTime + 2.4);
-    const g = A.createGain(); g.gain.setValueAtTime(0, A.currentTime); g.gain.linearRampToValueAtTime(.07, A.currentTime + 1.1); g.gain.linearRampToValueAtTime(0, A.currentTime + 2.4);
+    const f = A.createBiquadFilter(); f.type = "lowpass"; f.frequency.setValueAtTime(300, A.currentTime); f.frequency.linearRampToValueAtTime(1100, A.currentTime + T / 2); f.frequency.linearRampToValueAtTime(300, A.currentTime + T);
+    const g = A.createGain(); g.gain.setValueAtTime(0, A.currentTime); g.gain.linearRampToValueAtTime(.07, A.currentTime + T / 2); g.gain.linearRampToValueAtTime(0, A.currentTime + T);
     src.connect(f); f.connect(g); g.connect(A.destination); src.start(); src.onended = () => A.close();
   } catch (e) {}
 }
+/* Three swells rise from the bottom (crest edge travelling up), cover the page, the page is swapped
+   while fully covered, then the swells keep rising off the top. Same code runs forward and backward. */
+function swap(n) { const m = $("#main"); m.classList.add("nt"); cur = n; paint(); void m.offsetWidth; m.classList.remove("nt"); }
+function crest(period) {
+  const N = Math.ceil(innerWidth / period) + 2; let d = "M0 66";
+  for (let i = 0; i < N; i++) { const o = i * 600; d += `C${o + 45} 66 ${o + 70} 14 ${o + 150} 14S${o + 255} 66 ${o + 300} 66 ${o + 370} 14 ${o + 450} 14 ${o + 555} 66 ${o + 600} 66`; }
+  return `<svg viewBox="0 0 ${N * 600} 110" preserveAspectRatio="none" style="width:${N * period}px" aria-hidden="true"><path d="${d}V110H0Z"/></svg>`;
+}
 function wave(n) {
   busy = true; if (soundOn) whoosh();
-  const mv = [{transform: "translateY(100vh)"}, {transform: "translateY(-100vh)", offset: .5}, {transform: "translateY(-200vh)"}];
-  const run = (el, delay) => { el.style.display = "block"; return el.animate(mv, {duration: 2400, delay, easing: "ease-in-out", fill: "both"}); };
-  const a = run($("#w2"), 0), b = run($("#w1"), 180);
-  setTimeout(() => { cur = n; paint(); }, 1300);
-  b.onfinish = () => { a.cancel(); b.cancel(); $("#w1").style.display = $("#w2").style.display = "none"; busy = false; };
+  ["#w1", "#w2", "#w3"].forEach(id => { const el = $(id), sz = parseFloat(getComputedStyle(el).getPropertyValue("--sz")); el.querySelector(".cr").innerHTML = el.querySelector(".tr").innerHTML = crest(sz); });
+  const H = innerHeight, CR = 110, BODY = H + 200, TOTAL = BODY + CR * 2;
+  const start = H, mid = -(CR + 100), end = -TOTAL, DUR = 1300;
+  const layers = [["#w3", 0], ["#w2", 80], ["#w1", 160]].map(([id, delay]) => {
+    const el = $(id); el.style.height = TOTAL + "px"; el.querySelector(".bd").style.height = BODY + "px";
+    el.style.transform = `translateY(${start}px)`; el.style.display = "block";
+    return el.animate([{transform: `translateY(${start}px)`}, {transform: `translateY(${mid}px)`, offset: .5}, {transform: `translateY(${end}px)`}], {duration: DUR, delay, easing: "cubic-bezier(.45,.05,.55,.95)", fill: "both"});
+  });
+  const front = layers[2]; let swapped = false;
+  const doSwap = () => { if (!swapped) { swapped = true; swap(n); } };
+  const tick = () => { if (swapped) return; if (front.currentTime >= 160 + DUR * .5) doSwap(); else requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+  front.finished.then(() => {
+    doSwap(); layers.forEach(a => a.cancel());
+    ["#w1", "#w2", "#w3"].forEach(id => { const el = $(id); el.style.display = "none"; el.style.transform = ""; });
+    busy = false;
+  }).catch(() => { busy = false; });
 }
 
 /* ---- themes ---- */
