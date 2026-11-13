@@ -221,14 +221,14 @@ const SITE = {
   personal: [["Name","Vivien"],["Birthday","July 26, 2008"],["Age","18"],["Gender","Female"],["Status","Single"],["Weight","45 kg"],["Height","160 cm"],["Location","Rodriguez, Rizal, Philippines"],["College","University of the Cordilleras"],["Program","BS Computer Science"],["Year Level","First Year"],["Gmail","lalalovienna@gmail.com"]],
   education: [ // one entry per stage, in timeline order
     { stage:"Elementary", school:"Kasiglahan Village Elementary School Unit-1", years:"2014–2020",
-      logo:"images/schools/kasiglahan-elementary.jpg", bg:"images/schools/bg-elementary.jpg", // bg = school photo behind the box
+      logo:"images/schools/kasiglahan-elementary.jpg", bg:"images/schools/bg-elementary.jpg", me:"images/timeline/elementary-grad.jpg", meCap:"Elementary graduation photo", // bg = school photo behind the box
       photos:["images/timeline/elementary.jpg"] },
     { stage:"Junior High School", school:"Kasiglahan Village National High School", years:"2020–2024",
-      logo:"images/schools/kasiglahan-national-high-school.jpg", bg:"images/schools/bg-junior-high.jpg", // bg = school photo behind the box
+      logo:"images/schools/kasiglahan-national-high-school.jpg", bg:"images/schools/bg-junior-high.jpg", me:"images/timeline/junior-high.jpg", meCap:"Junior high school photo in uniform", // bg = school photo behind the box
       honors:[["Grade 8","Achiever"],["Grade 9","With Honors"],["Grade 10","With Honors"]],
       photos:["images/timeline/grade-8.jpg","images/timeline/grade-9.jpg","images/timeline/grade-10.jpg"] },
     { stage:"Senior High School", school:"Sta. Fe National High School", years:"2024–2026", big:true,
-      logo:"images/schools/sta-fe-national-high-school.jpg", bg:"images/schools/bg-senior-high.jpg", // bg = school photo behind the box
+      logo:"images/schools/sta-fe-national-high-school.jpg", bg:"images/schools/bg-senior-high.jpg", me:"images/timeline/senior-high-grad.jpg", meCap:"Senior high graduation: speaking on stage in her toga", // bg = school photo behind the box
       strand:"General Academic Strand (GAS)",
       honors:[["Grade 11","With High Honors"],["Grade 12","With High Honors"]],
       awards:[["AY 2024–2025 Division Schools Press Conference (DSPC)","3rd Place, Collaborative Desktop Publishing (Filipino)"],
@@ -239,7 +239,7 @@ const SITE = {
               ["Leadership Awardee",""]],
       photos:["images/timeline/grade-11.jpg","images/timeline/grade-12.jpg"] },
     { stage:"College", school:"University of the Cordilleras", years:"2026–Present", current:true,
-      logo:"images/schools/university-of-the-cordilleras.jpg", bg:"images/schools/bg-college.jpg", // bg = school photo behind the box
+      logo:"images/schools/university-of-the-cordilleras.jpg", bg:"images/schools/bg-college.jpg", me:"images/timeline/college-id.jpg", meCap:"University of the Cordilleras student ID, BS Computer Science, 1st Sem 2026–2027", // bg = school photo behind the box
       program:"Bachelor of Science in Computer Science", level:"First Year",
       photos:["images/timeline/college.jpg"] }],
   awardPhotos: [ // the moving "Awards & Medals" row at the top of Achievements
@@ -294,13 +294,15 @@ $("#main").innerHTML = `
  <div class="ph3 rv"><span class="tag3">03 · Achievements</span><h2>My Academic Journey</h2><p>Where I studied, what I’ve earned, and what I can do.</p></div>
  <div class="awrow rv" aria-label="Awards and medals"><span class="awlbl">Awards &amp; Medals</span><div class="awwin"><div class="awtrack">${(S.awardPhotos || []).map((src, i) => `<img src="${esc(src)}" alt="Award or medal photo" data-i="${i}" tabindex="0" role="button" loading="eager" onerror="this.remove()">`).join("")}</div></div></div>
  <div class="stages rv">${S.education.map(e => {
+   const meFig = x => `<figure class="stg-me" data-me="${S.education.filter(q => q.me).indexOf(x)}" tabindex="0" role="button" aria-label="Open photo: ${esc(x.meCap || x.stage)}"><img src="${esc(x.me)}" alt="${esc(x.meCap || x.stage + " photo")}" loading="eager"></figure>`;
    const li = (arr, f) => arr && arr.length ? arr.map(f).join("") : "";
    return `<div class="stg${e.big ? " big" : ""}${e.current ? " cur" : ""}"><div class="stc${e.bg ? " has-bg" : ""}"${e.bg ? ` style="--stg-bg:url('${esc(e.bg)}')"` : ""}>
-    <div class="sth"><div class="logo-s">${img(e.logo, e.school + " logo")}</div><div class="edt"><small>${esc(e.stage)}</small><b>${esc(e.school)}</b><span class="yrs">${esc(e.years)}</span>${e.current ? '<span class="stt">In Progress</span>' : ""}</div></div>
+    <div class="sth"><div class="logo-s">${img(e.logo, e.school + " logo")}</div><div class="edt"><small>${esc(e.stage)}</small><b>${esc(e.school)}</b><span class="yrs">${esc(e.years)}</span>${e.current ? '<span class="stt">In Progress</span>' : ""}</div>${e.big && e.me ? meFig(e) : ""}</div>
     ${e.strand ? `<div class="kv"><small>Strand</small><span>${esc(e.strand)}</span></div>` : ""}
     ${e.program ? `<div class="kv"><small>Program</small><span>${esc(e.program)}</span></div><div class="kv"><small>Year Level</small><span>${esc(e.level)}</span></div>` : ""}
     ${e.honors ? `<div><div class="lbl">Year-Level Honors</div><ul class="lst hon">${li(e.honors, h => `<li><span class="g">${esc(h[0])}</span><span>${esc(h[1])}</span></li>`)}</ul></div>` : ""}
     ${e.awards ? `<div><div class="lbl">Additional Awards &amp; Recognitions</div><ul class="lst aw">${li(e.awards, a => `<li><b>${esc(a[0])}</b>${a[1] ? ` <span>— ${esc(a[1])}</span>` : ""}</li>`)}</ul></div>` : ""}
+    ${!e.big && e.me ? meFig(e) : ""}
    </div></div>`; }).join("")}</div>
  <div class="btm rv">
   <div class="pnl"><div class="sh"><span class="t">Chess &amp; Girl Scout Recognitions</span><i></i></div><div class="hl">${(S.highlights || []).map((h, i) => `<figure class="hlc" data-i="${i}" tabindex="0" role="button" aria-label="Open photo: ${esc(h.title)}"><img src="${esc(h.img)}" alt="${esc(h.title)}" loading="eager" onerror="this.style.visibility='hidden'"><figcaption><b>${esc(h.title)}</b><small>${esc(h.sub)}</small></figcaption></figure>`).join("")}</div></div>
@@ -375,14 +377,17 @@ const AWCAP = { "dspc-2024":"DSPC 2024 · 3rd Place, Collaborative Desktop Publi
   "song-and-yell-2025":"Song & Yell Contest 2025 · 1st Place", "leadership-2025":"Leadership Award", "all-medals":"Medals", "all-certificates":"Certificates" };
 S.awardLb = (S.awardPhotos || []).map(src => ({ src, cap: AWCAP[src.split("/").pop().replace(/\.\w+$/, "")] || "Awards & Medals" }));
 S.hlLb = (S.highlights || []).map(h => ({ src: h.img, cap: h.title + (h.sub ? " · " + h.sub : "") }));
+S.meLb = S.education.filter(e => e.me).map(e => ({ src: e.me, cap: e.stage + " · " + (e.meCap || "") }));
 document.addEventListener("click", e => {
   if (window.__awDragged) return; /* a drag on the awards row is not a click */
   const im = e.target.closest(".awtrack img"); if (im) return openLb("awardLb", +im.dataset.i);
-  const hc = e.target.closest(".hlc"); if (hc) openLb("hlLb", +hc.dataset.i);
+  const hc = e.target.closest(".hlc"); if (hc) return openLb("hlLb", +hc.dataset.i);
+  const me = e.target.closest(".stg-me"); if (me) openLb("meLb", +me.dataset.me);
 });
 document.addEventListener("keydown", e => { if (e.key !== "Enter" || !e.target.closest) return;
   const im = e.target.closest(".awtrack img"); if (im) return openLb("awardLb", +im.dataset.i);
-  const hc = e.target.closest(".hlc"); if (hc) openLb("hlLb", +hc.dataset.i); });
+  const hc = e.target.closest(".hlc"); if (hc) return openLb("hlLb", +hc.dataset.i);
+  const me = e.target.closest(".stg-me"); if (me) openLb("meLb", +me.dataset.me); });
 
 /* ---- navigation ---- */
 let cur = 0, busy = false;
@@ -508,16 +513,53 @@ drawStars(); if (document.fonts) document.fonts.ready.then(drawStars);
 .awwin{height:clamp(90px,16vh,160px)}
 @media(min-width:901px){.awwin{height:clamp(64px,11.5vh,135px)!important}}
 @media(max-height:760px) and (min-width:901px){.awwin{height:clamp(54px,9.5vh,80px)!important}}
+/* Vien's own photo in each school box: bottom of Elementary / Junior High, top-right of Senior High (click = bigger) */
+.stg-me{margin:0;cursor:zoom-in;overflow:hidden;border-radius:10px;border:2px solid color-mix(in srgb,var(--hi) 70%,transparent);box-shadow:0 10px 24px #0006;background:#0006;transition:transform .25s,box-shadow .25s}
+.stg-me img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.stg-me:hover,.stg-me:focus-visible{transform:scale(1.04);box-shadow:0 0 0 2px var(--hi),0 14px 30px #0008;outline:none}
+.stg:not(.big) .stc>.stg-me{margin-top:auto;align-self:center;flex:1 1 auto;min-height:clamp(46px,8vh,120px);max-height:clamp(140px,30vh,300px);aspect-ratio:4/5;width:auto;max-width:78%}
+.stg.big .stc{position:relative}
+.stg.big .sth .stg-me{position:absolute;top:clamp(8px,1.4vh,14px);right:clamp(10px,1vw,14px);z-index:2;width:clamp(96px,min(10.5vw,21vh),210px);aspect-ratio:4/5}
+.stg.big .sth,.stg.big .stc>.kv,.stg.big .stc>div:has(.hon){padding-right:calc(clamp(96px,min(10.5vw,21vh),210px) + 14px)}
+.stg.big .sth{align-items:flex-start}
+
+.stg.cur .stc>.stg-me{aspect-ratio:600/881;max-width:82%}
+.stg.cur .stc>.stg-me img{object-fit:contain;background:#0008}
+/* all four photo frames: one shared size (the biggest that fits in every box), set by sizeMe() below */
+#s2 .stg .stc>.stg-me,#s2 .stg.big .sth .stg-me{width:var(--me-w,110px)!important;height:var(--me-h,138px)!important;max-width:none!important;max-height:none!important;min-height:0!important;aspect-ratio:auto!important;flex:none!important}
+#s2 .stg.big .sth,#s2 .stg.big .stc>.kv,#s2 .stg.big .stc>div:has(.hon){padding-right:calc(var(--me-w,110px) + 14px)!important}
+#s2 .stg.cur .stc>.stg-me img{object-fit:cover;object-position:50% 0%}
 </style>
 <script>
 /* timeline cards: if a card's content is taller than its box, shrink its text a little (never below 72%) */
 (function(){
  function fitCards(){if(innerWidth<=900)return;document.querySelectorAll('#s2 .stg .stc').forEach(function(c){c.style.fontSize='';var f=1;
-  while(c.scrollHeight>c.clientHeight+1&&f>0.72){f-=0.03;c.style.fontSize=f+'em'}})}
+  while(c.scrollHeight>c.clientHeight+1&&f>0.64){f-=0.02;c.style.fontSize=f+'em'}})}
  var t;function soon(){clearTimeout(t);t=setTimeout(fitCards,80)}
  addEventListener('load',function(){setTimeout(fitCards,350)});addEventListener('resize',soon);
  document.addEventListener('click',function(){setTimeout(fitCards,700)});document.addEventListener('keydown',function(){setTimeout(fitCards,700)});
  window._fitCards=fitCards;
+ /* one size for all school photos: hide them, let the text settle, measure the free space in every box,
+    take the smallest (so it fits everywhere), then show them all at that size (4:5 frames) */
+ function sizeMe(){var root=document.getElementById('s2');if(!root)return;var figs=[].slice.call(root.querySelectorAll('.stg-me'));if(!figs.length)return;
+  if(innerWidth<=900){root.style.removeProperty('--me-w');root.style.removeProperty('--me-h');return}
+  for(var pass=0;pass<2;pass++){
+   figs.forEach(function(f){f.style.display='none'});fitCards();
+   var H=1e9;
+   root.querySelectorAll('.stg .stc').forEach(function(c){var me=c.querySelector('.stg-me');if(!me)return;var cs=getComputedStyle(c),r=c.getBoundingClientRect(),pt=parseFloat(cs.paddingTop),pb=parseFloat(cs.paddingBottom);
+    if(c.closest('.stg.big')){var aw=c.querySelector('.lst.aw');var lim=aw?aw.parentElement.getBoundingClientRect().top:r.bottom;
+     H=Math.min(H,lim-r.top-pt-10,(c.clientWidth*0.36)*5/4)}
+    else{var last=0;[].forEach.call(c.children,function(k){if(k!==me&&k.offsetParent!==null)last=Math.max(last,k.getBoundingClientRect().bottom)});
+     H=Math.min(H,r.bottom-pb-last-12,(c.clientWidth*0.86)*5/4)}});
+   H=Math.max(56,Math.floor(H));
+   root.style.setProperty('--me-h',H+'px');root.style.setProperty('--me-w',Math.floor(H*0.8)+'px');
+   figs.forEach(function(f){f.style.display=''});
+  }
+  fitCards()}
+ window._sizeMe=sizeMe;
+ var t2;function soon2(){clearTimeout(t2);t2=setTimeout(sizeMe,120)}
+ addEventListener('load',function(){setTimeout(sizeMe,450)});addEventListener('resize',soon2);
+ document.addEventListener('click',function(){setTimeout(sizeMe,750)});document.addEventListener('keydown',function(){setTimeout(sizeMe,750)});
 })();
 /* awards row: an endless, gap-free loop. Waits for every photo to load, measures one full set,
    repeats the set until it covers the window twice, then slides by exactly one set width forever */
