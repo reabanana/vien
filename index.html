@@ -237,7 +237,7 @@ const SITE = {
               ["Girl Scout of the Year","Division-level participant"],
               ["Municipal Academic Excellence Award",""],
               ["Leadership Awardee",""]],
-      photos:["images/timeline/grade-11.jpg","images/timeline/grade-12.jpg"] },
+      photos:["images/timeline/grade-11.jpg","images/timeline/grade-12.jpg","images/awards/dspc-2024.jpg","images/awards/dspc-2025.jpg","images/awards/chess-district-2025.jpg","images/awards/girl-scout-of-the-year.jpg","images/awards/gsp-camp-2025.jpg","images/awards/song-and-yell-2025.jpg","images/awards/leadership-2025.jpg","images/awards/all-medals.jpg","images/awards/all-certificates.jpg"] },
     { stage:"College", school:"University of the Cordilleras", years:"2026–Present", current:true,
       logo:"images/schools/university-of-the-cordilleras.jpg",
       program:"Bachelor of Science in Computer Science", level:"First Year",
@@ -437,6 +437,28 @@ let t0 = "red"; try { t0 = localStorage.getItem("vam-theme") || "red"; } catch (
 theme(THEMES[t0] ? t0 : "red");
 paint();
 drawStars(); if (document.fonts) document.fonts.ready.then(drawStars);
+</script>
+<style>
+/* Senior High photos: a fixed-size strip in the header that slides on its own (keeps the card's original size) */
+.stg.big .sth .pics{flex:0 0 46%;max-width:46%;overflow:hidden;position:relative;display:block;height:clamp(44px,8vh,64px);
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.stg.big .sth .pics .ptrack{display:flex;gap:6px;height:100%;width:max-content;animation:picsSlide var(--pd,30s) linear infinite}
+.stg.big .sth .pics:hover .ptrack{animation-play-state:paused}
+.stg.big .sth .pics img{height:100%;width:auto;max-width:none;flex:none;object-fit:cover;border-radius:5px}
+@keyframes picsSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.stg.big .sth .pics .ptrack{animation:none}}
+@media(max-width:900px){.stg.big .sth .pics{flex-basis:100%;max-width:100%;margin-top:8px}}
+</style>
+<script>
+/* build the sliding strip once the photos have loaded (missing ones remove themselves first) */
+(function(){
+ function build(){document.querySelectorAll('.stg.big .sth .pics').forEach(function(box){
+  if(box.querySelector('.ptrack'))return;var imgs=[].slice.call(box.querySelectorAll('img'));if(!imgs.length)return;
+  var tr=document.createElement('div');tr.className='ptrack';imgs.forEach(function(i){tr.appendChild(i)});
+  imgs.forEach(function(i){var c=i.cloneNode(true);c.alt='';c.setAttribute('aria-hidden','true');tr.appendChild(c)});
+  box.appendChild(tr);var w=tr.scrollWidth/2;tr.style.setProperty('--pd',Math.max(18,w/40)+'s')})}
+ if(document.readyState==='complete')setTimeout(build,300);else addEventListener('load',function(){setTimeout(build,300)});
+})();
 </script>
 </body>
 </html>
