@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ===== THEMES (edit colors here) ===== */
+/* default theme */
 :root,[data-theme="red"]{--bg:#35171F;--card:rgba(247,242,236,.07);--tx:#F7F2EC;--mu:#CDB8B8;--ac:#8C3949;--hi:#E0A0AC;--on:#F7F2EC;--wv:#702632}
 [data-theme="pink"]{--bg:#FBEFF1;--card:rgba(255,255,255,.7);--tx:#3A2429;--mu:#6E4E56;--ac:#A8556A;--hi:#8E3F55;--on:#fff;--wv:#D9A3B0}
 [data-theme="mono"]{--bg:#191719;--card:rgba(255,255,255,.07);--tx:#F2F2F2;--mu:#A8A8A8;--ac:#E8E8E8;--hi:#fff;--on:#191719;--wv:#555}
@@ -60,17 +61,18 @@ main{position:fixed;inset:0;z-index:1}
 #s0 h1{font-size:clamp(2.4rem,8vh + 1.8vw,5.2rem);line-height:1.02;margin:12px 0 18px}
 #s0 .deg{color:var(--mu);margin-bottom:6px}
 #s0 .tag{font:italic 500 clamp(1.2rem,3vh + .4rem,1.9rem) "Cormorant Garamond",serif;color:var(--hi);margin:6px 0 28px}
-.portrait{justify-self:center;height:min(78vh,660px);aspect-ratio:3/4;border-radius:200px 200px 16px 16px;overflow:hidden;border:2px solid var(--hi);box-shadow:0 24px 60px #0005}
-.portrait img,.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait{justify-self:center;height:min(calc(100vh - 150px),760px);max-width:100%;aspect-ratio:2/3;border-radius:18px;overflow:hidden;border:2px solid var(--hi);box-shadow:0 24px 60px #0005;background:color-mix(in srgb,var(--bg) 55%,transparent)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait img{width:100%;height:100%;display:block;object-fit:contain;object-position:center bottom} /* full-body: shown whole, never cropped */
 /* personal information */
-#s1{display:grid;grid-template-columns:minmax(0,30%) minmax(0,1fr);gap:clamp(16px,3vw,48px);padding:64px clamp(14px,6vw,96px) 58px;font-size:clamp(.8rem,1.15vh + .42rem,1rem);line-height:1.5;align-items:stretch}
+#s1{display:grid;grid-template-columns:minmax(0,26%) minmax(0,1fr);gap:clamp(16px,3vw,48px);padding:64px clamp(14px,6vw,96px) 58px;font-size:clamp(.8rem,1.15vh + .42rem,1rem);line-height:1.5;align-items:stretch}
 .ph{border-radius:14px;overflow:hidden;border:1px solid var(--hi);box-shadow:14px 14px 0 -2px color-mix(in srgb,var(--ac) 55%,transparent),0 14px 36px #0005;min-height:0;margin:0 14px 14px 0}
 .ph img{object-position:62% 25%}
 .pi{display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,2.4vh,24px);min-height:0;min-width:0}
 .pi .card{padding:clamp(14px,2.6vh,28px) clamp(18px,2.2vw,32px)}
 .intro h2{font-size:clamp(1.9rem,4.6vh + .5rem,2.8rem);line-height:1.08;margin:0 0 clamp(8px,1.6vh,14px)}
-.intro p{font-size:1.14em;line-height:1.7}
-.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2.2vh,22px) clamp(14px,2vw,28px)}
+.intro p{font-size:1.02em;line-height:1.55}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.5vh,16px) clamp(12px,1.6vw,22px)}.facts .w2{grid-column:span 2}
 .facts div{min-width:0}
 .facts small{display:block;font-size:.72em;letter-spacing:.14em;text-transform:uppercase;color:var(--hi);margin-bottom:2px}
 .facts span{display:block;font-weight:500;font-size:1.04em;line-height:1.35;overflow-wrap:anywhere}
@@ -169,8 +171,9 @@ main.nt .slide{transition:none!important}
 .stars b{position:absolute;display:block;opacity:.5;animation:tw var(--d,4s) ease-in-out var(--l,0s) infinite}
 .stars b.g{filter:drop-shadow(0 0 4px color-mix(in srgb,var(--hi) 80%,transparent))}
 .stars i{display:block;width:100%;height:100%;background:color-mix(in srgb,var(--tx) 82%,var(--hi));clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
-#s0:not(.on) .stars b,#s1:not(.on) .stars b{animation-play-state:paused}
+#s0:not(.on) .stars b,#s1:not(.on) .stars b,#s2:not(.on) .stars b,#s3:not(.on) .stars b{animation-play-state:paused}
 #s1 .stars{z-index:-1;bottom:auto}
+#s3 .stars,#s2 .stars{z-index:-1;bottom:auto}
 #s0>.portrait,#s0>div:not(.stars){position:relative;z-index:1}
 @keyframes tw{0%,100%{opacity:.12;transform:scale(.7) rotate(var(--r,0deg))}50%{opacity:var(--pk,1);transform:scale(1.2) rotate(var(--r,0deg))}}
 @media(max-width:900px){
@@ -189,7 +192,7 @@ main.nt .slide{transition:none!important}
 <body>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
 <nav>
- <div class="logo">VAM</div>
+ <button class="logo" id="mono" aria-label="REI monogram: back to home" title="REI"><svg viewBox="0 0 84 62" aria-hidden="true"><g class="ml"><path d="M8.5 28.5L12 26.5V46M8 46H16M12 37C12 31 16 27.2 21.5 27.2C23.2 27.2 24.6 27.7 25.6 28.5"/><path d="M31 37.5H50.5C50.5 31 46.5 27 40.7 27C34.6 27 30.5 31.6 30.5 37.5C30.5 43.2 34.6 47.2 40.7 47.2C44.8 47.2 47.8 45.2 49.8 42.2"/><path d="M58.5 28.5L62 26.5V46M58 46H66"/></g><path class="msw" d="M6 55.5H78"/><g transform="translate(62 14.5)"><polygon class="ms" points="0,-6.4 1.5,-2 6.1,-2 2.4,.7 3.8,5.2 0,2.5 -3.8,5.2 -2.4,.7 -6.1,-2 -1.5,-2"/></g></svg></button>
  <div class="links" id="links"></div>
  <div class="tools">
   <button class="ib" id="snd" aria-label="Toggle wave sound" title="Wave sound">♪</button>
@@ -215,10 +218,15 @@ const SITE = {
   course: "Bachelor of Science in Computer Science",
   school: "University of the Cordilleras",
   tagline: "Learning, exploring, and creating possibilities.",
-  portrait: "images/me.jpg",      // Home page formal portrait
+  portrait: "images/me.jpg",      // PHOTO SLOT 1: Home page FULL-BODY portrait (vertical 2:3, shown whole)
   aboutPhoto: "images/about.jpg", // Personal Information photo
   intro: "First-year Computer Science student who is curious, determined, and eager to learn. I’m building my foundations in Python and Java. Outside class, I love baking, embroidery, painting, online games, and surfing, swimming, and traveling with my family. I aspire to become an adaptable, well-rounded person who sees challenges as chances to grow.",
-  personal: [["Name","Vivien"],["Birthday","July 26, 2008"],["Age","18"],["Gender","Female"],["Status","Single"],["Weight","45 kg"],["Height","160 cm"],["Location","Rodriguez, Rizal, Philippines"],["College","University of the Cordilleras"],["Program","BS Computer Science"],["Year Level","First Year"],["Gmail","lalalovienna@gmail.com"]],
+  // Page 2 groups. Each item: [label, value, optional 1 = wide item]
+  personal: [
+    {title:"Personal Information", items:[["Full Name","Vivien Andrei D. Maravilla",1],["Nickname","Vien"],["Birthday","July 26, 2008"],["Age","18"],["Zodiac Sign","Leo"],["Gender","Female"],["Status","Single"],["Religion","Christian"],["Nationality","Filipino"],["Blood Type","O"],["Province","Rodriguez, Rizal"],["Place of Birth","Rizal Medical Center, Pasig City",1],["Education","First-Year College Student"],["University","University of the Cordilleras"]]},
+    {title:"Physical Information", items:[["Hair Color","Black"],["Eye Color","Black"],["Height","160 cm"],["Weight","45 kg"],["BMI Classification","Underweight"],["Disabilities","None"]]},
+    {title:"Contact Information", items:[["Permanent Address","Sta. Cruz, General Luna, Surigao del Norte",1],["Current Address","Camp 8, Baguio City, Benguet Province",1],["Contact Number","09951617500","tel"],["Gmail","lalalovienna@gmail.com","mail"],["Student Email","vdm1722@students.uc-bcf.edu.ph","mailw"]]}
+  ],
   education: [ // one entry per stage, in timeline order
     { stage:"Elementary", school:"Kasiglahan Village Elementary School Unit-1", years:"2014–2020",
       logo:"images/schools/kasiglahan-elementary.jpg", bg:"images/schools/bg-elementary.jpg", me:"images/timeline/elementary-grad.jpg", meCap:"Elementary graduation photo", // bg = school photo behind the box
@@ -235,11 +243,11 @@ const SITE = {
               ["AY 2025–2026 Division Schools Press Conference (DSPC)","2nd Place, Collaborative Desktop Publishing (Filipino)"],
               ["2025 District Meet","2nd Place, Chess"],
               ["Girl Scout of the Year","Division-level participant"],
-              ["Municipal Academic Excellence Award",""],
-              ["Leadership Awardee",""]],
+              ["Leadership Awardee",""],
+              ["Municipal Academic Excellence Award",""]],
       photos:["images/timeline/grade-11.jpg","images/timeline/grade-12.jpg"] },
     { stage:"College", school:"University of the Cordilleras", years:"2026–Present", current:true,
-      logo:"images/schools/university-of-the-cordilleras.jpg", bg:"images/schools/bg-college.jpg", me:"images/timeline/college-id.jpg", meCap:"University of the Cordilleras student ID, BS Computer Science, 1st Sem 2026–2027", // bg = school photo behind the box
+      logo:"images/schools/university-of-the-cordilleras.jpg", bg:"images/schools/bg-college.jpg", // bg = school photo behind the box
       program:"Bachelor of Science in Computer Science", level:"First Year",
       photos:["images/timeline/college.jpg"] }],
   awardPhotos: [ // the moving "Awards & Medals" row at the top of Achievements
@@ -261,8 +269,12 @@ const SITE = {
   ],
   recognition: [["Journalist of the Year","2nd Place, Collaborative Desktop Publishing, Division Schools Press Conference"],["Senior Patrol Leader","Student Supreme Learner Government Officer"]],
   skills: { "Personal & Professional":["Problem-Solving","Adaptability","Working Under Pressure","Willingness to Learn"], "Communication & Leadership":["Public Speaking","Communication"], "Technical & Computer":["Beginner: learning programming fundamentals"] },
-  family:  [{src:"images/family1.jpg",cap:"Family photo caption"},{src:"images/family2.jpg",cap:"Family photo caption"},{src:"images/family3.jpg",cap:"Family photo caption"},{src:"images/family4.jpg",cap:"Family photo caption"}],
-  friends: [{src:"images/friends1.jpg",cap:"Friends photo caption"},{src:"images/friends2.jpg",cap:"Friends photo caption"},{src:"images/friends3.jpg",cap:"Friends photo caption"},{src:"images/friends4.jpg",cap:"Friends photo caption"}]
+  /* PHOTO SLOTS (page 4). Replace these file paths with your photos */
+  people: [{src:"images/mother.jpg"},   // PHOTO SLOT 2: mother figure (portrait)
+           {src:"images/father.jpg"},   // PHOTO SLOT 3: father (portrait)
+           {src:"images/siblings.jpg"}], // PHOTO SLOT 4: siblings (landscape group photo)
+  // PHOTO SLOT 5: best friends. These slide by themselves (no clicking). Add or remove entries freely.
+  friends: [{src:"images/friends1.jpg",cap:"My best friends"},{src:"images/friends2.jpg",cap:"My best friends"},{src:"images/friends3.jpg",cap:"My best friends"},{src:"images/friends4.jpg",cap:"My best friends"}]
 };
 const THEMES = { red:["Classic Red","#702632"], pink:["Soft Pink","#D9A3B0"], mono:["Monochrome","#555"], elegance:["Burgundy Elegance","#D5AD6B"], midnight:["Midnight Blue","#2B4C85"], sage:["Sage Green","#7F9A82"] };
 const PAGES = ["Home","Personal Information","Achievements","Family and Friends"];
@@ -286,23 +298,26 @@ $("#main").innerHTML = `
  <div class="stars" id="stars1" aria-hidden="true"></div>
  <div class="ph rv">${img(S.aboutPhoto, "Photo of " + S.name)}</div>
  <div class="pi">
-  <div class="card intro rv"><h2>Personal Information</h2><p>${esc(S.intro)}</p></div>
-  <div class="card facts rv">${S.personal.map(([k, v]) => `<div><small>${esc(k)}</small><span>${k === "Gmail" ? `<a href="mailto:${esc(v)}">${esc(v)}</a>` : esc(v)}</span></div>`).join("")}</div>
+  <div class="card intro rv"><h2>About Me</h2><p>${esc(S.intro)}</p></div>
+  <div class="cats rv">${S.personal.map(c => `<div class="card cat"><h3>${esc(c.title)}</h3><div class="facts">${c.items.map(([k, v, w]) => `<div${w === 1 || w === "mailw" ? ' class="w2"' : ''}><small>${esc(k)}</small><span>${w === "mail" || w === "mailw" ? `<a href="mailto:${esc(v)}">${esc(v)}</a>` : w === "tel" ? `<a href="tel:${esc(v)}">${esc(v)}</a>` : esc(v)}</span></div>`).join("")}</div></div>`).join("")}</div>
  </div>
 </section>
 <section class="slide" id="s2">
+ <div class="stars" id="stars2" aria-hidden="true"></div>
  <div class="ph3 rv"><span class="tag3">03 · Achievements</span><h2>My Academic Journey</h2><p>Where I studied, what I’ve earned, and what I can do.</p></div>
  <div class="awrow rv" aria-label="Awards and medals"><span class="awlbl">Awards &amp; Medals</span><div class="awwin"><div class="awtrack">${(S.awardPhotos || []).map((src, i) => `<img src="${esc(src)}" alt="Award or medal photo" data-i="${i}" tabindex="0" role="button" loading="eager" onerror="this.remove()">`).join("")}</div></div></div>
  <div class="stages rv">${S.education.map(e => {
    const meFig = x => `<figure class="stg-me" data-me="${S.education.filter(q => q.me).indexOf(x)}" tabindex="0" role="button" aria-label="Open photo: ${esc(x.meCap || x.stage)}"><img src="${esc(x.me)}" alt="${esc(x.meCap || x.stage + " photo")}" loading="eager"></figure>`;
    const li = (arr, f) => arr && arr.length ? arr.map(f).join("") : "";
+   const strandH = e.strand ? `<div class="kv"><small>Strand</small><span>${esc(e.strand)}</span></div>` : "";
+   const progH = e.program ? `<div class="kv"><small>Program</small><span>${esc(e.program)}</span></div><div class="kv"><small>Year Level</small><span>${esc(e.level)}</span></div>` : "";
+   const honorsH = e.honors ? `<div><div class="lbl">Year-Level Honors</div><ul class="lst hon">${li(e.honors, h => `<li><span class="g">${esc(h[0])}</span><span>${esc(h[1])}</span></li>`)}</ul></div>` : "";
+   const awardsH = e.awards ? `<div><div class="lbl">Additional Awards &amp; Recognitions</div><ul class="lst aw">${li(e.awards, a => `<li><b>${esc(a[0])}</b>${a[1] ? ` <span>— ${esc(a[1])}</span>` : ""}</li>`)}</ul></div>` : "";
+   /* every card: header on top, details, then the student photo at the bottom-left (same frame size in every card that has one) */
+   const body = e.big ? `<div class="sbody"><div class="scol">${strandH}${honorsH}${e.me ? meFig(e) : ""}</div><div class="scol">${awardsH}</div></div>` : `${progH}${honorsH}${e.me ? meFig(e) : ""}`;
    return `<div class="stg${e.big ? " big" : ""}${e.current ? " cur" : ""}"><div class="stc${e.bg ? " has-bg" : ""}"${e.bg ? ` style="--stg-bg:url('${esc(e.bg)}')"` : ""}>
-    <div class="sth"><div class="logo-s">${img(e.logo, e.school + " logo")}</div><div class="edt"><small>${esc(e.stage)}</small><b>${esc(e.school)}</b><span class="yrs">${esc(e.years)}</span>${e.current ? '<span class="stt">In Progress</span>' : ""}</div>${e.big && e.me ? meFig(e) : ""}</div>
-    ${e.strand ? `<div class="kv"><small>Strand</small><span>${esc(e.strand)}</span></div>` : ""}
-    ${e.program ? `<div class="kv"><small>Program</small><span>${esc(e.program)}</span></div><div class="kv"><small>Year Level</small><span>${esc(e.level)}</span></div>` : ""}
-    ${e.honors ? `<div><div class="lbl">Year-Level Honors</div><ul class="lst hon">${li(e.honors, h => `<li><span class="g">${esc(h[0])}</span><span>${esc(h[1])}</span></li>`)}</ul></div>` : ""}
-    ${e.awards ? `<div><div class="lbl">Additional Awards &amp; Recognitions</div><ul class="lst aw">${li(e.awards, a => `<li><b>${esc(a[0])}</b>${a[1] ? ` <span>— ${esc(a[1])}</span>` : ""}</li>`)}</ul></div>` : ""}
-    ${!e.big && e.me ? meFig(e) : ""}
+    <div class="sth"><div class="logo-s">${img(e.logo, e.school + " logo")}</div><div class="edt"><small>${esc(e.stage)}</small><b>${esc(e.school)}</b><span class="yrs">${esc(e.years)}</span>${e.current ? '<span class="stt">In Progress</span>' : ""}</div></div>
+    ${body}
    </div></div>`; }).join("")}</div>
  <div class="btm rv">
   <div class="pnl"><div class="sh"><span class="t">Chess &amp; Girl Scout Recognitions</span><i></i></div><div class="hl">${(S.highlights || []).map((h, i) => `<figure class="hlc" data-i="${i}" tabindex="0" role="button" aria-label="Open photo: ${esc(h.title)}"><img src="${esc(h.img)}" alt="${esc(h.title)}" loading="eager" onerror="this.style.visibility='hidden'"><figcaption><b>${esc(h.title)}</b><small>${esc(h.sub)}</small></figcaption></figure>`).join("")}</div></div>
@@ -310,8 +325,18 @@ $("#main").innerHTML = `
  </div>
 </section>
 <section class="slide" id="s3">
- <div class="rv"><div class="eyebrow">Beyond the Resume</div><h1>Family and Friends</h1></div>
- <div class="gal rv" id="g-family"></div><div class="gal rv" id="g-friends"></div>
+ <div class="stars" id="stars3" aria-hidden="true"></div>
+ <div class="p4h rv"><div class="eyebrow">Beyond the Resume</div><h1>My Family and Friends</h1></div>
+ <div class="pgrid">
+ <!-- SECTION 1: MY MOTHER FIGURE (photo = S.people[0], images/mother.jpg) -->
+ <article class="card pc m rv"><figure class="pp">${img(S.people[0].src, "Cienel D. Maravilla-Atadero")}</figure><div class="pt"><h3>My Mother Figure</h3><b class="nm">Cienel D. Maravilla-Atadero</b><p>She is my sister, my birthday twin, my bestest friend, and my mother figure. Growing up, I have always looked up to her and seen her as a second mother. She has played a significant role in raising me, especially because she is the one who primarily helps my mother take care of me.</p></div></article>
+ <!-- SECTION 2: MY FATHER (photo = S.people[1], images/father.jpg) -->
+ <article class="card pc f rv"><figure class="pp">${img(S.people[1].src, "My father figure")}</figure><div class="pt"><h3>My Father</h3><p>Although I am far away from my family, Tito has become a father figure to me while I am here in Baguio.</p></div></article>
+ <!-- SECTION 3: MY SIBLINGS (photo = S.people[2], images/siblings.jpg, landscape) -->
+ <article class="card pc m rv"><figure class="pp land">${img(S.people[2].src, "Vien with two of her siblings")}</figure><div class="pt"><h3>My Siblings</h3><b class="nm">Cienel D. Maravilla-Atadero &amp; Carl Andrew D. Maravilla</b><p>My siblings are the people I can always run to whenever I need help. They are among the people I trust most, knowing that they will always have my back no matter what.</p></div></article>
+ <!-- SECTION 4: MY BEST FRIENDS: automatic sliding photos (photos = S.friends, images/friends1.jpg ...). Not clickable -->
+ <article class="card pc f col rv"><div class="fwin" id="fwin"><div class="ftrack" id="ftrack">${S.friends.map(p => img(p.src, p.cap)).join("")}</div></div><div class="pt"><h3>My Best Friends</h3><p>They are the people I share memories, laughter, and experiences with, and I am grateful to have them as my close friends.</p></div></article>
+ </div>
 </section>`;
 document.querySelectorAll(".slide").forEach(s => s.querySelectorAll(".rv").forEach((e, i) => e.style.setProperty("--i", i)));
 
@@ -323,7 +348,7 @@ function starfield(box, W, H, keep) {
   const add = (x, y, z, cls, pk) => {
     if (!free(x, y, z)) return;
     const b = document.createElement("b");
-    b.style.cssText = `left:${x}px;top:${y}px;width:${z}px;height:${z}px;--pk:${pk};--r:${Math.round(Math.random() * 30 - 15)}deg;--d:${(4.2 + Math.random()).toFixed(1)}s;--l:-${(Math.random() * 6).toFixed(1)}s`;
+    b.style.cssText = `left:${x}px;top:${y}px;width:${z}px;height:${z}px;--pk:${pk};--r:${Math.round(Math.random() * 30 - 15)}deg;--d:${(2.4 + Math.random() * .8).toFixed(1)}s;--l:-${(Math.random() * 6).toFixed(1)}s`;
     if (cls) b.className = cls; b.appendChild(document.createElement("i")); box.appendChild(b);
   };
   const cols = 17, rows = 9, top = H * .1, span = H * .8;
@@ -348,20 +373,22 @@ function drawStars() {
   r1.querySelectorAll(".ph,.pi .card").forEach(el => keep1.push([el.offsetLeft - 8, el.offsetTop - 8, el.offsetLeft + el.offsetWidth + 8, el.offsetTop + el.offsetHeight + 8]));
   $("#stars1").style.height = H1 + "px";
   starfield($("#stars1"), r1.clientWidth, H1, keep1);
+  /* Family and Friends: same twinkling stars, kept off the title, photos and caption text */
+  const r3 = $("#s3"), H3 = r3.scrollHeight, keep3 = [];
+  const sr = r3.getBoundingClientRect(), k3 = sr.width / r3.offsetWidth || 1; /* measure against the slide itself so its slide-in transform doesn't skew positions */
+  r3.querySelectorAll(".p4h h1,.p4h .eyebrow,.pp,.fwin,.pt").forEach(el => { const r = el.getBoundingClientRect(), x = (r.left - sr.left) / k3, y = (r.top - sr.top) / k3 + r3.scrollTop;
+    keep3.push([x - 12, y - 12, x + r.width / k3 + 12, y + r.height / k3 + 12]); });
+  $("#stars3").style.height = H3 + "px";
+  starfield($("#stars3"), r3.clientWidth, H3, keep3);
+  /* Achievements: same stars, kept off the heading text, the awards strip and every card */
+  const r2 = $("#s2"), sr2 = r2.getBoundingClientRect(), k2 = sr2.width / r2.offsetWidth || 1, keep2 = [];
+  r2.querySelectorAll(".ph3 > *,.awrow,.stc,.pnl").forEach(el => { const r = el.getBoundingClientRect(), x = (r.left - sr2.left) / k2, y = (r.top - sr2.top) / k2;
+    keep2.push([x - 10, y - 10, x + r.width / k2 + 10, y + r.height / k2 + 10]); });
+  $("#stars2").style.height = r2.clientHeight + "px";
+  starfield($("#stars2"), r2.clientWidth, r2.clientHeight, keep2);
 }
 let stT; addEventListener("resize", () => { clearTimeout(stT); stT = setTimeout(drawStars, 200); });
 
-/* ---- galleries (3 at a time, 2 on small screens) ---- */
-const off = {family: 0, friends: 0}, per = () => innerWidth <= 900 ? 2 : 3;
-function gal(key, title) {
-  const list = S[key], n = per(), o = off[key], el = $("#g-" + key);
-  el.innerHTML = `<div class="gh"><h3>${title}</h3><div><button data-d="-1" aria-label="Previous photos">←</button><button data-d="1" aria-label="Next photos">→</button></div></div>
-  <div class="gr">${list.slice(o, o + n).map((p, i) => `<div class="fig" data-k="${key}" data-i="${o + i}" tabindex="0"><div class="im">${img(p.src, p.cap)}</div><p>${esc(p.cap)}</p></div>`).join("")}</div>`;
-  el.querySelectorAll(".gh button").forEach(b => b.onclick = () => { off[key] = Math.max(0, Math.min(Math.max(0, list.length - n), off[key] + +b.dataset.d)); gal(key, title); });
-  el.querySelectorAll(".fig").forEach(f => { f.onclick = () => openLb(key, +f.dataset.i); f.onkeydown = e => e.key === "Enter" && f.click(); });
-}
-const drawGals = () => { gal("family", "Family"); gal("friends", "Friends"); };
-drawGals(); addEventListener("resize", drawGals);
 
 /* ---- lightbox ---- */
 let lk = "", li = 0;
@@ -462,13 +489,13 @@ sw.innerHTML = Object.entries(THEMES).map(([k, [n, c]]) => `<button data-t="${k}
 function theme(k) {
   document.documentElement.dataset.theme = k;
   sw.querySelectorAll("button").forEach(b => b.classList.toggle("sel", b.dataset.t === k));
-  try { localStorage.setItem("vam-theme", k); } catch (e) {}
+  try { localStorage.setItem("vam-theme-v3", k); } catch (e) {}
 }
 sw.onclick = e => e.target.dataset.t && theme(e.target.dataset.t);
 $("#rs").onclick = () => theme("red");
 $("#gear").onclick = e => { e.stopPropagation(); $("#pan").classList.toggle("open"); };
 document.addEventListener("click", e => { if (!e.target.closest("#pan")) $("#pan").classList.remove("open"); });
-let t0 = "red"; try { t0 = localStorage.getItem("vam-theme") || "red"; } catch (e) {}
+let t0 = "red"; try { t0 = localStorage.getItem("vam-theme-v3") || "red"; } catch (e) {}
 theme(THEMES[t0] ? t0 : "red");
 paint();
 drawStars(); if (document.fonts) document.fonts.ready.then(drawStars);
@@ -531,35 +558,29 @@ drawStars(); if (document.fonts) document.fonts.ready.then(drawStars);
 #s2 .stg.cur .stc>.stg-me img{object-fit:cover;object-position:50% 0%}
 </style>
 <script>
-/* timeline cards: if a card's content is taller than its box, shrink its text a little (never below 72%) */
+/* page 3: one text size and one photo size for all timeline cards. Text shrinks together (never one card alone);
+   then the photo frame is sized to the free space of the tightest card so every photo is identical and sits bottom-left. */
 (function(){
- function fitCards(){if(innerWidth<=900)return;document.querySelectorAll('#s2 .stg .stc').forEach(function(c){c.style.fontSize='';var f=1;
-  while(c.scrollHeight>c.clientHeight+1&&f>0.64){f-=0.02;c.style.fontSize=f+'em'}})}
- var t;function soon(){clearTimeout(t);t=setTimeout(fitCards,80)}
- addEventListener('load',function(){setTimeout(fitCards,350)});addEventListener('resize',soon);
- document.addEventListener('click',function(){setTimeout(fitCards,700)});document.addEventListener('keydown',function(){setTimeout(fitCards,700)});
- window._fitCards=fitCards;
- /* one size for all school photos: hide them, let the text settle, measure the free space in every box,
-    take the smallest (so it fits everywhere), then show them all at that size (4:5 frames) */
- function sizeMe(){var root=document.getElementById('s2');if(!root)return;var figs=[].slice.call(root.querySelectorAll('.stg-me'));if(!figs.length)return;
-  if(innerWidth<=900){root.style.removeProperty('--me-w');root.style.removeProperty('--me-h');return}
-  for(var pass=0;pass<2;pass++){
-   figs.forEach(function(f){f.style.display='none'});fitCards();
-   var H=1e9;
-   root.querySelectorAll('.stg .stc').forEach(function(c){var me=c.querySelector('.stg-me');if(!me)return;var cs=getComputedStyle(c),r=c.getBoundingClientRect(),pt=parseFloat(cs.paddingTop),pb=parseFloat(cs.paddingBottom);
-    if(c.closest('.stg.big')){var aw=c.querySelector('.lst.aw');var lim=aw?aw.parentElement.getBoundingClientRect().top:r.bottom;
-     H=Math.min(H,lim-r.top-pt-10,(c.clientWidth*0.36)*5/4)}
-    else{var last=0;[].forEach.call(c.children,function(k){if(k!==me&&k.offsetParent!==null)last=Math.max(last,k.getBoundingClientRect().bottom)});
-     H=Math.min(H,r.bottom-pb-last-12,(c.clientWidth*0.86)*5/4)}});
-   H=Math.max(56,Math.floor(H));
-   root.style.setProperty('--me-h',H+'px');root.style.setProperty('--me-w',Math.floor(H*0.8)+'px');
-   figs.forEach(function(f){f.style.display=''});
-  }
-  fitCards()}
+ function cards(){return [].slice.call(document.querySelectorAll('#s2 .stg .stc'))}
+ function over(c){return c.scrollHeight>c.clientHeight+1}
+ function scale(f){cards().forEach(function(c){c.style.fontSize=f>=1?'':f+'em'})}
+ function free(fig){var slot=fig.parentElement,sr=slot.getBoundingClientRect(),last=0;
+  [].forEach.call(slot.children,function(k){if(k!==fig&&k.offsetParent!==null)last=Math.max(last,k.getBoundingClientRect().bottom)});
+  var pb=slot.classList.contains('stc')?parseFloat(getComputedStyle(slot).paddingBottom):0;return sr.bottom-pb-last-8}
+ function sizeMe(){var root=document.getElementById('s2');if(!root)return;var figs=[].slice.call(root.querySelectorAll('.stg-me'));
+  if(innerWidth<=900){root.style.removeProperty('--me-w');root.style.removeProperty('--me-h');scale(1);return}
+  figs.forEach(function(f){f.style.display='none'});
+  var f=1,H=140;
+  for(var pass=0;pass<16;pass++){scale(f);var bad=cards().some(over);H=1e9;
+   figs.forEach(function(g){H=Math.min(H,free(g),g.parentElement.clientWidth*.9*1.25)});if(!figs.length)H=140;
+   if(!bad&&H>=92)break;if(f<=.72)break;f=Math.round((f-.03)*100)/100}
+  H=Math.max(60,Math.floor(Math.min(H,175)));
+  root.style.setProperty('--me-h',H+'px');root.style.setProperty('--me-w',Math.floor(H*.8)+'px');
+  figs.forEach(function(g){g.style.display=''})}
  window._sizeMe=sizeMe;
- var t2;function soon2(){clearTimeout(t2);t2=setTimeout(sizeMe,120)}
- addEventListener('load',function(){setTimeout(sizeMe,450)});addEventListener('resize',soon2);
- document.addEventListener('click',function(){setTimeout(sizeMe,750)});document.addEventListener('keydown',function(){setTimeout(sizeMe,750)});
+ var t;function soon(){clearTimeout(t);t=setTimeout(sizeMe,120)}
+ addEventListener('load',function(){setTimeout(sizeMe,450)});addEventListener('resize',soon);
+ if(document.fonts)document.fonts.ready.then(function(){setTimeout(sizeMe,150)});
 })();
 /* awards row: an endless, gap-free loop. Waits for every photo to load, measures one full set,
    repeats the set until it covers the window twice, then slides by exactly one set width forever */
@@ -603,6 +624,136 @@ drawStars(); if (document.fonts) document.fonts.ready.then(drawStars);
   imgs.forEach(function(i){var c=i.cloneNode(true);c.alt='';c.setAttribute('aria-hidden','true');tr.appendChild(c)});
   box.appendChild(tr);var w=tr.scrollWidth/2;tr.style.setProperty('--pd',Math.max(18,w/40)+'s')})}
  if(document.readyState==='complete')setTimeout(build,300);else addEventListener('load',function(){setTimeout(build,300)});
+})();
+</script>
+<style>
+/* ===== PAGE 4: family and friends ===== */
+#s3{display:flex;flex-direction:column;gap:clamp(6px,1.2vh,12px);overflow:auto}
+.p4h{display:flex;align-items:baseline;gap:14px}.p4h h1{font-size:clamp(1.5rem,3.4vh + .4rem,2.3rem)}
+.pgrid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1.1fr;gap:clamp(8px,1.4vh,14px)}
+.pc{display:flex;gap:clamp(10px,1.2vw,18px);min-height:0;min-width:0;padding:clamp(8px,1.4vh,14px)}
+#s3 .pc{backdrop-filter:none;background:color-mix(in srgb,var(--card) 45%,transparent)} /* lets the stars show through the cards */.pc.col{flex-direction:column}
+.pp{flex:none;margin:0;height:100%;aspect-ratio:3/4;border-radius:12px;overflow:hidden;border:1px solid var(--hi);background:color-mix(in srgb,var(--bg) 60%,transparent)}
+.pp.land{aspect-ratio:16/10;height:auto;width:46%;align-self:flex-start}.pp img{width:100%;height:100%;object-fit:cover;display:block}
+.pt{min-width:0;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:4px}
+.pt h3{font-size:1.3em;color:var(--hi)}.pt .nm{font-weight:600}.pt p{font-size:.84em;line-height:1.5;color:var(--mu)}
+.names{list-style:none;padding:0;margin:0;font-size:.84em;font-weight:500}
+/* best friends: same self-moving strip as the certificates; every photo has the same 4:3 size */
+.fwin{flex:1;min-height:110px;overflow:hidden;border-radius:12px;border:1px solid var(--hi);-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.ftrack{display:flex;height:100%;width:max-content;animation:fslide var(--fd,30s) linear infinite}
+.fwin:hover .ftrack{animation-play-state:paused}
+.ftrack img{flex:none;height:100%;width:auto;aspect-ratio:4/3;object-fit:cover;margin-right:10px;border-radius:10px;pointer-events:none}
+@keyframes fslide{to{transform:translateX(-50%)}}
+@media(max-width:900px){.pgrid{grid-template-columns:1fr;grid-template-rows:none}.pc{flex-direction:column}.pp,.pp.land{height:260px;width:auto;aspect-ratio:auto}.fwin{flex:none;height:220px}}
+/* ===== interactive cursor (mouse only: a dot plus a soft ring that follows it) ===== */
+.cc-dot,.cc-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:100;opacity:0;transition:opacity .25s,width .25s,height .25s,margin .25s}
+.cc-dot i,.cc-ring i{display:block;width:100%;height:100%;background:var(--hi);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:ccspin 7s linear infinite}
+.cc-ring i{animation-direction:reverse;animation-duration:10s}
+.cc-dot{width:22px;height:22px;margin:-11px 0 0 -11px;filter:drop-shadow(0 0 5px var(--hi))}
+.cc-ring{width:36px;height:36px;margin:-18px 0 0 -18px}
+.cc-dot.hov{width:34px;height:34px;margin:-17px 0 0 -17px}.cc-dot.dn{width:15px;height:15px;margin:-7.5px 0 0 -7.5px}
+html.cc .cc-dot{opacity:1}html.cc .cc-ring{opacity:.3}
+@keyframes ccspin{to{transform:rotate(360deg)}}
+html.cc,html.cc *{cursor:none!important}
+@media(hover:none),(pointer:coarse){.cc-dot,.cc-ring{display:none}}
+</style>
+<script>
+/* best friends photos: repeat the set so the strip never shows a gap, then slide by exactly one half forever */
+(function(){
+ function build(){var win=document.getElementById("fwin"),tr=document.getElementById("ftrack");if(!win||!tr)return;
+  [].slice.call(tr.querySelectorAll("[data-c]")).forEach(function(c){c.remove()});
+  var orig=[].slice.call(tr.querySelectorAll("img"));if(orig.length<2)return; /* one photo: stays still */
+  var one=orig.reduce(function(w,i){return w+i.offsetWidth+10},0);if(!one){setTimeout(build,200);return}
+  var k=Math.max(1,Math.ceil(win.clientWidth/one)),add=function(){orig.forEach(function(i){var c=i.cloneNode(true);c.alt="";c.setAttribute("aria-hidden","true");c.setAttribute("data-c","1");tr.appendChild(c)})};
+  for(var n=0;n<2*k-1;n++)add();
+  tr.style.setProperty("--fd",Math.max(12,one*k/40)+"s")}
+ var t;addEventListener("resize",function(){clearTimeout(t);t=setTimeout(build,200)});
+ if(document.readyState==="complete")build();else addEventListener("load",build);
+ if(document.fonts)document.fonts.ready.then(function(){setTimeout(build,100)});
+})();
+(function(){
+ if(!matchMedia("(hover: hover) and (pointer: fine)").matches)return;
+ var dot=document.createElement("div"),ring=document.createElement("div");dot.className="cc-dot";ring.className="cc-ring";dot.innerHTML=ring.innerHTML="<i></i>";dot.setAttribute("aria-hidden","true");ring.setAttribute("aria-hidden","true");document.body.append(dot,ring);
+ var x=-100,y=-100,rx=-100,ry=-100,calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+ var HOT="a,button,[role=button],.fig,.hlc,.stg-me,.awtrack img,.awwin,.swatch,input,select,textarea";
+ addEventListener("pointermove",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;document.documentElement.classList.add("cc");x=e.clientX;y=e.clientY;
+  dot.style.transform="translate3d("+x+"px,"+y+"px,0)";dot.classList.toggle("hov",!!(e.target.closest&&e.target.closest(HOT)))});
+ addEventListener("pointerdown",function(){dot.classList.add("dn")});addEventListener("pointerup",function(){dot.classList.remove("dn")});
+ document.documentElement.addEventListener("mouseleave",function(){document.documentElement.classList.remove("cc")});
+ (function loop(){rx+=(x-rx)*(calm?1:.18);ry+=(y-ry)*(calm?1:.18);ring.style.transform="translate3d("+rx+"px,"+ry+"px,0)";requestAnimationFrame(loop)})();
+})();
+</script>
+<style>
+/* ===== PAGE 4: one 12-column composition. Left column (7) mother and siblings, right column (5) father and friends ===== */
+.pgrid{grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:clamp(8px,1.3vh,12px)}
+.pc.m{grid-column:span 7}.pc.f{grid-column:span 5}
+.pc{padding:clamp(8px,1.3vh,12px);gap:clamp(10px,1.1vw,16px);align-items:stretch}
+.pp.land{height:100%;width:auto;max-width:58%;aspect-ratio:16/10;align-self:stretch}
+.pt{justify-content:center;gap:5px}.pc.col .pt{flex:none;justify-content:flex-start}
+.pt h3{font-size:clamp(1.25rem,2vh + .6rem,1.6rem)}
+.pt .nm{font-size:1.02em;line-height:1.3}
+.pt p{font-size:clamp(.82rem,1.3vh + .3rem,1.02rem);line-height:1.55;color:var(--tx);opacity:.88}
+@media(max-width:900px){.pc.m,.pc.f{grid-column:auto}.pgrid{flex:none}.pc{min-height:auto}.pt{flex:none;overflow:visible}.pp.land{max-width:none;height:200px;width:auto;aspect-ratio:auto}}
+</style>
+<style>
+/* ===== MONOGRAM: rei with a star for the dot ===== */
+.logo{display:block;width:auto;height:46px;padding:0 4px;border:0;border-radius:0;background:none;color:var(--hi);font:inherit;letter-spacing:0}
+.logo svg{display:block;height:100%;width:auto;overflow:visible}
+.logo .ml{fill:none;stroke:var(--hi);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.logo .msw{fill:none;stroke:var(--hi);stroke-width:.8;stroke-linecap:butt;opacity:.5}
+.logo .ms{fill:var(--hi);stroke:var(--hi);stroke-width:.9;stroke-linejoin:miter;animation:monoTw 4s ease-in-out infinite}
+@keyframes monoTw{50%{opacity:.65}}
+.logo:hover .msw{opacity:1}
+@media(max-width:900px){.logo{display:none}}
+/* ===== PAGE 2: three grouped cards in one row ===== */
+#s1{grid-template-rows:minmax(0,1fr);font-size:calc(var(--fs,1) * clamp(.8rem,1.15vh + .42rem,1rem))}
+.pi{min-height:0}.pi>.card{flex-shrink:0}
+.pi .intro{padding:clamp(10px,1.8vh,20px) clamp(16px,2vw,28px)}
+.pi .intro h2{font-size:calc(var(--fs,1) * clamp(1.6rem,3.4vh + .4rem,2.2rem));margin-bottom:clamp(4px,.9vh,8px)}
+.intro p{line-height:1.5}
+.cats{flex:1 1 0;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(8px,1.4vh,14px)}
+.cat:first-child{grid-row:span 2}
+.pi .cat{display:flex;flex-direction:column;min-width:0;padding:clamp(8px,1.4vh,16px) clamp(12px,1.3vw,22px)}
+.cat h3{font-size:calc(var(--fs,1) * clamp(1.15rem,2vh + .55rem,1.5rem));color:var(--hi);margin:0 0 clamp(4px,.8vh,10px);padding-bottom:3px;border-bottom:1px solid color-mix(in srgb,var(--hi) 40%,transparent)}
+.cat .facts{flex:1;min-height:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(5px,1vh,12px) clamp(10px,1.2vw,18px);align-content:space-between}
+
+.cat .facts a{overflow-wrap:normal}
+.cat:nth-child(3) .facts div:nth-child(4) span,.cat:nth-child(3) .facts div:nth-child(5) span{font-size:.92em;white-space:nowrap}
+@media(max-width:900px){#s1{grid-template-rows:auto auto}.cats{grid-template-columns:1fr;grid-template-rows:none;flex:none}.cat:first-child{grid-row:auto}.cat .facts{flex:none}}
+/* ===== PAGE 3: four timeline cards share one layout ===== */
+.stages{grid-template-columns:minmax(0,.8fr) minmax(0,.95fr) minmax(0,2.1fr) minmax(0,1.05fr)}
+.stc{justify-content:flex-start}
+.sbody{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:clamp(8px,1vw,14px)}
+.scol{display:flex;flex-direction:column;gap:clamp(5px,1vh,9px);min-width:0;min-height:0}
+#s2 .stg-me{margin-top:auto!important;align-self:flex-start!important;flex:none!important;width:var(--me-w,100px)!important;height:var(--me-h,125px)!important;max-width:none!important;max-height:none!important;min-height:0!important;aspect-ratio:auto!important}
+#s2 .stg.big .sth{padding-right:0!important;align-items:center}
+#s2 .stg-me img{object-fit:cover;object-position:50% 20%;background:none}
+@media(max-width:900px){.sbody{grid-template-columns:1fr}}
+/* ===== PAGE 4: never scrolls on desktop; text scales to fit ===== */
+#s3{overflow:hidden}
+.pt{overflow:hidden;font-size:clamp(.82rem,1.3vh + .3rem,1.02rem)}
+.pt p{font-size:1em}.pt h3{font-size:1.55em}
+@media(max-width:900px){#s3{overflow:auto}.pt{overflow:visible}}
+</style>
+<script>
+/* keep pages 2 and 4 inside the screen: text shrinks a little on short windows instead of the page scrolling */
+(function(){
+ function p2(){var root=document.getElementById('s1'),pi=root&&root.querySelector('.pi');if(!pi)return;
+  if(innerWidth<=900){root.style.removeProperty('--fs');return}
+  var f=1;root.style.setProperty('--fs',1);
+  function bad(){return pi.scrollHeight>pi.clientHeight+1||[].some.call(root.querySelectorAll('.cat,.cat .facts'),function(c){return c.scrollHeight>c.clientHeight+1})}
+  while(bad()&&f>.62){f=Math.round((f-.03)*100)/100;root.style.setProperty('--fs',f)}}
+ function p4(){var root=document.getElementById('s3');if(!root)return;
+  [].forEach.call(root.querySelectorAll('.pt'),function(pt){pt.style.fontSize=''});
+  if(innerWidth<=900)return;
+  [].forEach.call(root.querySelectorAll('.pc'),function(pc){var pt=pc.querySelector('.pt'),base=parseFloat(getComputedStyle(pt).fontSize),f=1;
+   function bad(){return pc.scrollHeight>pc.clientHeight+1||pt.scrollHeight>pt.clientHeight+1}
+   while(bad()&&f>.66){f=Math.round((f-.04)*100)/100;pt.style.fontSize=(base*f)+'px'}})}
+ function all(){p2();p4();if(window.drawStars)setTimeout(drawStars,60)}
+ var t;addEventListener('resize',function(){clearTimeout(t);t=setTimeout(all,150)});
+ addEventListener('load',function(){setTimeout(all,500);setTimeout(function(){if(window.drawStars)drawStars()},1100)});
+ if(document.fonts)document.fonts.ready.then(function(){setTimeout(all,200)});
+ var m=document.getElementById('mono');if(m)m.onclick=function(){go(0)};
 })();
 </script>
 </body>
