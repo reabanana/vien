@@ -160,10 +160,9 @@ main.nt .slide{transition:none!important}
 <body>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
 <nav>
- <button class="logo" id="mono" aria-label="REI monogram: back to home" title="REI"><svg viewBox="0 0 84 62" aria-hidden="true"><g class="ml"><path d="M8.5 28.5L12 26.5V46M8 46H16M12 37C12 31 16 27.2 21.5 27.2C23.2 27.2 24.6 27.7 25.6 28.5"/><path d="M31 37.5H50.5C50.5 31 46.5 27 40.7 27C34.6 27 30.5 31.6 30.5 37.5C30.5 43.2 34.6 47.2 40.7 47.2C44.8 47.2 47.8 45.2 49.8 42.2"/><path d="M58.5 28.5L62 26.5V46M58 46H66"/></g><path class="msw" d="M6 55.5H78"/><g transform="translate(62 14.5)"><polygon class="ms" points="0,-6.4 1.5,-2 6.1,-2 2.4,.7 3.8,5.2 0,2.5 -3.8,5.2 -2.4,.7 -6.1,-2 -1.5,-2"/></g></svg></button>
+ <div class="lft"><button class="logo" id="mono" aria-label="REI monogram: back to home" title="REI"><svg viewBox="0 0 84 62" aria-hidden="true"><g class="ml"><path d="M8.5 28.5L12 26.5V46M8 46H16M12 37C12 31 16 27.2 21.5 27.2C23.2 27.2 24.6 27.7 25.6 28.5"/><path d="M31 37.5H50.5C50.5 31 46.5 27 40.7 27C34.6 27 30.5 31.6 30.5 37.5C30.5 43.2 34.6 47.2 40.7 47.2C44.8 47.2 47.8 45.2 49.8 42.2"/><path d="M58.5 28.5L62 26.5V46M58 46H66"/></g><path class="msw" d="M6 55.5H78"/><g transform="translate(62 14.5)"><polygon class="ms" points="0,-6.4 1.5,-2 6.1,-2 2.4,.7 3.8,5.2 0,2.5 -3.8,5.2 -2.4,.7 -6.1,-2 -1.5,-2"/></g></svg></button><button class="homeb" id="homeBtn" aria-label="Back to the Home page" title="Back to Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.2 12 4l8.5 7.2M6 9.6V20h4.5v-5.5h3V20H18V9.6"/></svg><span>Home</span></button></div>
  <div class="links" id="links"></div>
  <div class="tools">
-  <button class="homeb" id="homeb" aria-label="Back to Home page" title="Back to Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5M5.5 10v9.5h5v-6h3v6h5V10"/></svg><span>Home</span></button>
   <button class="ib" id="snd" aria-label="Toggle wave sound" title="Wave sound">♪</button>
   <button class="ib" id="gear" aria-label="Theme settings" title="Themes">⚙</button>
   <div id="pan"><p>Choose a theme</p><div class="sw" id="sw"></div><button class="rs" id="rs">Reset to Classic Red</button></div>
@@ -191,46 +190,58 @@ const SITE = {
   aboutPhoto: "images/about.jpg", // Personal Information photo
   intro: "First-year Computer Science student who is curious, determined, and eager to learn. I’m building my foundations in Python and Java. Outside class, I love baking, embroidery, painting, online games, and surfing, swimming, and traveling with my family. I aspire to become an adaptable, well-rounded person who sees challenges as chances to grow.",
   // Page 2 groups. Each item: [label, value, optional 1 = wide item]
+  /* PERSONAL INFORMATION SECTIONS. col = which column (1, 2 or 3) the card sits in.
+     items: [label, value, optional 1 = full-width row]. rows:true = label beside value (for long values).
+     cols = number of fact columns (default 2). chips: groups of short tags (shown as pills). */
   personal: [
-    {title:"Personal Details", items:[["Full Name","Vivien Andrei D. Maravilla",1],["Birthday","July 26, 2008"],["Age","18"],["Province","Rodriguez, Rizal"],["Birth Order","3rd"],["Personality (MBTI)","INFP-T"],["Disabilities","None"],["Languages Spoken","Filipino, Siargaonon, English",1]]},
-    {title:"Educational Background", items:[["Institution","University of the Cordilleras",1],["Program","Bachelor of Science in Computer Science",1],["College","College of Information Technology and Computer Science",1],["Year Level","1st Year"],["Expected Graduation","2029"],["Senior High School Strand","General Academic Strand (GAS)",1]]},
-    {title:"Personal Interests & Abilities", items:[["Nickname","Vien"],["Zodiac Sign","Leo"],["Gender","Female"],["Status","Single"],["Religion","Christian"],["Nationality","Filipino"],["Blood Type","O"],["Place of Birth","Rizal Medical Center, Pasig City",1],["Hair Color","Black"],["Eye Color","Black"],["Height","160 cm"],["Weight","45 kg"],["BMI Classification","Underweight"],["Hobbies","Baking, embroidery, painting, online games, surfing, swimming, and traveling with my family",3],["Skills","Problem-Solving · Adaptability · Working Under Pressure · Willingness to Learn · Public Speaking · Communication · Beginner: learning programming fundamentals",3]]},
-    {title:"Contact Information", items:[["Permanent Address","Sta. Cruz, General Luna, Surigao del Norte",1],["Current Address","Camp 8, Baguio City, Benguet Province",1],["Contact Number","09951617500","tel"],["Gmail","lalalovienna@gmail.com","mail"],["Student Email","vdm1722@students.uc-bcf.edu.ph","mailw"]]}
+    {title:"Personal Details", col:1, items:[["Full Name","Vivien Andrei D. Maravilla",1],["Nickname","Vien"],["Birthday","July 26, 2008"],
+      ["Age","18"],["Birth Order","3rd"],["Province","Rodriguez, Rizal"],["Personality (MBTI)","INFP-T"],
+      ["Languages Spoken","Filipino, Siargaonon, English",1],["Disabilities","None"],["Gender","Female"],["Status","Single"],["Religion","Christian"],
+      ["Nationality","Filipino"],["Zodiac Sign","Leo"],["Blood Type","O"],["Place of Birth","Rizal Medical Center, Pasig City",1]]},
+    {title:"Educational Background", col:2, rows:true, items:[["Institution","University of the Cordilleras",1],["Program","Bachelor of Science in Computer Science",1],
+      ["College","College of Information Technology and Computer Science",1],["Year Level","1st Year"],["Expected Graduation","2029"],
+      ["Senior High School Strand","General Academic Strand (GAS)",1]]},
+    {title:"Physical Information", col:3, cols:3, items:[["Hair Color","Black"],["Eye Color","Black"],["Height","160 cm"],["Weight","45 kg"],["BMI Classification","Underweight",1]]},
+    {title:"Personal Interests & Abilities", col:3, chips:{
+      "Hobbies":["Baking","Embroidery","Painting","Online Games","Surfing","Swimming","Traveling with Family"],
+      "Skills":["Problem-Solving","Adaptability","Working Under Pressure","Willingness to Learn","Public Speaking","Communication","Programming Fundamentals (Beginner)"]}},
+    {title:"Contact Information", col:2, rows:true, items:[["Permanent Address","Sta. Cruz, General Luna, Surigao del Norte",1],["Current Address","Camp 8, Baguio City, Benguet Province",1],["Contact Number","09951617500","tel"],["Gmail","lalalovienna@gmail.com","mailw"],["Student Email","vdm1722@students.uc-bcf.edu.ph","mailw"]]}
   ],
-  /* ACHIEVEMENTS TIMELINE (page 2), oldest to newest. row 1 = top line, row 2 = bottom line (it continues from row 1).
-     size = how much width the milestone gets. Each item: t = title, d = detail (optional), img = photo (optional).
-     Items with a photo show as picture tiles; items without one show as a short list. Pictures are NOT clickable. */
+  /* ACHIEVEMENTS TIMELINE, oldest to newest. row 1 = top line, row 2 = bottom line (it continues from row 1).
+     Every item becomes its OWN card on the timeline: t = title, d = detail (optional), img = photo (optional).
+     Items with a photo get a photo card (all photo frames are the same size); items without one get a text card.
+     tw = width of the text-card column (optional). Pictures are NOT clickable. */
   timeline: [
-    { when:"2014–2020", level:"Elementary", school:"Kasiglahan Village Elementary School Unit-1", row:1, size:.78,
+    { when:"2014–2020", level:"Elementary", school:"Kasiglahan Village Elementary School Unit-1", row:1,
       logo:"images/schools/kasiglahan-elementary.jpg", bg:"images/schools/bg-elementary.jpg",
       items:[{t:"Elementary graduation", img:"images/timeline/elementary-grad.jpg"}] },
-    { when:"2020–2024", level:"Junior High School", school:"Kasiglahan Village National High School", row:1, size:.95,
+    { when:"2020–2024", level:"Junior High School", school:"Kasiglahan Village National High School", row:1,
       logo:"images/schools/kasiglahan-national-high-school.jpg", bg:"images/schools/bg-junior-high.jpg",
       items:[{t:"Grade 8", d:"Achiever"},{t:"Grade 9", d:"With Honors"},{t:"Grade 10", d:"With Honors"},
              {t:"In my junior high uniform", img:"images/timeline/junior-high.jpg"}] },
-    { when:"SY 2024–2025", level:"Grade 11 · Senior High", school:"Sta. Fe National High School", sub:"General Academic Strand (GAS)", row:1, size:1.05,
+    { when:"SY 2024–2025", level:"Grade 11 · Senior High", school:"Sta. Fe National High School", sub:"General Academic Strand (GAS)", row:1,
       logo:"images/schools/sta-fe-national-high-school.jpg", bg:"images/schools/bg-senior-high.jpg",
       items:[{t:"With High Honors"},
              {t:"DSPC 2024 · 3rd Place", d:"Collaborative Desktop Publishing (Filipino)", img:"images/awards/dspc-2024.jpg"}] },
-    { when:"SY 2025–2026", level:"Grade 12 · Academics & Press", school:"Sta. Fe National High School", row:1, size:1.5,
+    { when:"SY 2025–2026", level:"Grade 12 · Academics & Press", school:"Sta. Fe National High School", row:1, tw:1.7,
       logo:"images/schools/sta-fe-national-high-school.jpg", bg:"images/schools/bg-senior-high.jpg",
       items:[{t:"With High Honors"},{t:"Municipal Academic Excellence Award"},
              {t:"Journalist of the Year", d:"2nd Place, Collaborative Desktop Publishing, Division Schools Press Conference"},
              {t:"DSPC 2025 · 2nd Place", d:"Collaborative Desktop Publishing (Filipino)", img:"images/awards/dspc-2025.jpg"},
              {t:"2025 District Meet · 2nd Place", d:"Chess", img:"images/awards/chess-district-2025.jpg"}] },
-    { when:"SY 2025–2026", level:"Grade 12 · Scouting & Leadership", school:"Sta. Fe National High School", row:2, size:1.65,
+    { when:"SY 2025–2026", level:"Grade 12 · Scouting & Leadership", school:"Sta. Fe National High School", row:2, tw:1.4,
       logo:"images/schools/sta-fe-national-high-school.jpg", bg:"images/schools/bg-senior-high.jpg",
       items:[{t:"Senior Patrol Leader", d:"Student Supreme Learner Government Officer"},
              {t:"Girl Scout of the Year", d:"Division-level participant", img:"images/awards/girl-scout-of-the-year.jpg"},
              {t:"Siargao Division GSP Camp 2025", d:"Certificate of Participation · Oct 17–19, 2025", img:"images/awards/gsp-camp-2025.jpg"},
              {t:"Song & Yell Contest · 1st Place", d:"Sta. Fe NHS team · GSP Camp 2025", img:"images/awards/song-and-yell-2025.jpg"},
              {t:"Leadership Awardee", img:"images/awards/leadership-2025.jpg"}] },
-    { when:"2026", level:"Senior High Graduation", school:"Sta. Fe National High School", row:2, size:1.2,
+    { when:"2026", level:"Senior High Graduation", school:"Sta. Fe National High School", row:2,
       logo:"images/schools/sta-fe-national-high-school.jpg", bg:"images/schools/bg-senior-high.jpg",
       items:[{t:"Graduation day", d:"Speaking on stage in my toga", img:"images/timeline/senior-high-grad.jpg"},
              {t:"My medals", img:"images/awards/all-medals.jpg"},
              {t:"My certificates", img:"images/awards/all-certificates.jpg"}] },
-    { when:"2026–Present", level:"College", school:"University of the Cordilleras", row:2, size:.9, current:true,
+    { when:"2026–Present", level:"College", school:"University of the Cordilleras", row:2, tw:1.6, current:true,
       logo:"images/schools/university-of-the-cordilleras.jpg", bg:"images/schools/bg-college.jpg",
       items:[{t:"Bachelor of Science in Computer Science"},{t:"First Year"}] }
   ],
@@ -268,7 +279,7 @@ const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---- build slides ---- */
 const S = SITE;
-const facts = items => items.map(([k, v, w]) => `<div${w === 3 ? ' class="wf"' : w === 1 || w === "mailw" ? ' class="w2"' : ''}><small>${esc(k)}</small><span>${w === "mail" || w === "mailw" ? `<a href="mailto:${esc(v)}">${esc(v)}</a>` : w === "tel" ? `<a href="tel:${esc(v)}">${esc(v)}</a>` : esc(v)}</span></div>`).join("");
+const facts = items => items.map(([k, v, w]) => `<div${w === 1 || w === "mailw" ? ' class="w2"' : ''}><small>${esc(k)}</small><span>${w === "mail" || w === "mailw" ? `<a href="mailto:${esc(v)}">${esc(v)}</a>` : w === "tel" ? `<a href="tel:${esc(v)}">${esc(v)}</a>` : esc(v)}</span></div>`).join("");
 $("#main").innerHTML = `
 <!-- PAGE 1 (cover): opens first. Not listed in the menu; "Explore my portfolio" and the → arrow lead into the three menu pages -->
 <section class="slide" id="s0">
@@ -281,8 +292,7 @@ $("#main").innerHTML = `
  <div class="stars" id="stars1" aria-hidden="true"></div>
  <div class="ph rv">${img(S.aboutPhoto, "Photo of " + S.name)}</div>
  <div class="pi">
-  <div class="card intro rv"><h2>About Me</h2><p>${esc(S.intro)}</p>${S.personal.filter(c => c.intro).map(c => `<div class="ipl"><h3>${esc(c.title)}</h3><div class="facts">${facts(c.items)}</div></div>`).join("")}</div>
-  <div class="cats rv">${S.personal.filter(c => !c.intro).map(c => `<div class="card cat"><h3>${esc(c.title)}</h3><div class="facts">${facts(c.items)}</div></div>`).join("")}</div>
+  <div class="cats rv"><div class="card intro"><h2>About Me</h2><p>${esc(S.intro)}</p></div>${[1, 2, 3].map(col => `<div class="ccol">${S.personal.filter(c => c.col === col).map(c => `<div class="card cat${c.chips ? " cat-c" : ""}"><h3>${esc(c.title)}</h3>${c.items ? `<div class="facts${c.rows ? " rows" : ""}"${c.cols ? ` style="--fc:${c.cols}"` : ""}>${facts(c.items)}</div>` : ""}${c.chips ? `<div class="cgs">${Object.entries(c.chips).map(([k, arr]) => `<div class="cg"><h4>${esc(k)}</h4><div class="chips">${arr.map(v => `<span>${esc(v)}</span>`).join("")}</div></div>`).join("")}</div>` : ""}</div>`).join("")}</div>`).join("")}</div>
  </div>
 </section>
 <section class="slide" id="s2">
@@ -290,15 +300,14 @@ $("#main").innerHTML = `
  <div class="ph3 rv"><span class="tag3">02 · Achievements</span><h2>My Academic Journey</h2><p>Where I studied, what I’ve earned, and what I can do.</p></div>
  <div class="tl rv" id="tl"><svg class="tl-line" id="tlLine" aria-hidden="true"><path class="ln"/><path class="tail"/></svg>${[1, 2].map(r => {
    const row = S.timeline.filter(x => x.row === r);
-   const card = x => {
+   const units = x => Math.max(1.5, (x.items.some(i => !i.img) ? (x.tw || 1.1) : 0) + x.items.filter(i => i.img).length);
+   const group = x => {
      const txt = x.items.filter(i => !i.img), pics = x.items.filter(i => i.img);
-     return `<div class="tm${x.current ? " cur" : ""}"><div class="tm-mk"><i class="dot"></i><span class="when">${esc(x.when)}</span></div>
-      <div class="tm-card"${x.bg ? ` style="--tm-bg:url('${esc(x.bg)}')"` : ""}>
-       <div class="tm-h"><div class="logo-s">${img(x.logo, x.school + " logo")}</div><div class="edt"><small>${esc(x.level)}</small><b>${esc(x.school)}</b>${x.sub ? `<span class="sub">${esc(x.sub)}</span>` : ""}${x.current ? '<span class="stt">In Progress</span>' : ""}</div></div>
-       ${txt.length ? `<ul class="tm-txt">${txt.map(i => `<li><b>${esc(i.t)}</b>${i.d ? ` <span>— ${esc(i.d)}</span>` : ""}</li>`).join("")}</ul>` : ""}
-       ${pics.length ? `<div class="tm-ph">${pics.map(i => `<figure class="tm-f"><div class="tm-im">${img(i.img, i.t)}</div><figcaption><b>${esc(i.t)}</b>${i.d ? `<small>${esc(i.d)}</small>` : ""}</figcaption></figure>`).join("")}</div>` : ""}
-      </div></div>`; };
-   return `<div class="tl-row" style="grid-template-columns:${row.map(x => `minmax(0,${x.size || 1}fr)`).join(" ")}">${row.map(card).join("")}</div>`; }).join("")}</div>
+     const cols = (txt.length ? [`minmax(0,${x.tw || 1.1}fr)`] : []).concat(pics.map(() => "minmax(0,1fr)"));
+     return `<div class="tg${x.current ? " cur" : ""}"><div class="tm-mk"><i class="dot"></i><span class="when">${esc(x.when)}</span></div>
+      <div class="tg-ban"${x.bg ? ` style="--tm-bg:url('${esc(x.bg)}')"` : ""}><div class="logo-s">${img(x.logo, x.school + " logo")}</div><div class="edt"><small>${esc(x.level)}</small><b>${esc(x.school)}</b>${x.sub ? `<span class="sub">${esc(x.sub)}</span>` : ""}${x.current ? '<span class="stt">In Progress</span>' : ""}</div></div>
+      <div class="tg-cards" style="grid-template-columns:${cols.join(" ")}">${txt.length ? `<div class="tcol">${txt.map(i => `<div class="ac ac-t"><i class="st" aria-hidden="true">★</i><div><b>${esc(i.t)}</b>${i.d ? `<small>${esc(i.d)}</small>` : ""}</div></div>`).join("")}</div>` : ""}${pics.map(i => `<figure class="ac ac-p"><div class="ac-im">${img(i.img, i.t)}</div><figcaption><b>${esc(i.t)}</b>${i.d ? `<small>${esc(i.d)}</small>` : ""}</figcaption></figure>`).join("")}</div></div>`; };
+   return `<div class="tl-row" style="grid-template-columns:${row.map(x => `minmax(0,${units(x)}fr)`).join(" ")}">${row.map(group).join("")}</div>`; }).join("")}</div>
 </section>
 <section class="slide" id="s3">
  <div class="stars" id="stars3" aria-hidden="true"></div>
@@ -355,7 +364,7 @@ function drawStars() {
     box.style.height = H + "px"; starfield(box, root.clientWidth, H, keep);
   };
   field("s1", ".ph,.pi .card", 10);                         /* Personal Information */
-  field("s2", ".ph3 > *,.tm-card,.tm-mk .when", 10);                   /* Achievements */
+  field("s2", ".ph3 > *,.tg-ban,.ac,.tm-mk .when", 10);                   /* Achievements */
   field("s3", ".p4h h1,.p4h .eyebrow,.pp,.fsolo img,.pt", 12);         /* Family and Friends */
 }
 window.drawStars = drawStars;
@@ -371,7 +380,7 @@ function paint() {
   document.querySelectorAll(".links button").forEach(b => b.classList.toggle("on", +b.dataset.p === cur));
   /* counter covers the three menu pages; on the cover it is hidden and only → shows */
   $("#cnt").textContent = cur === 0 ? "" : String(cur).padStart(2, "0") + " / " + String(PAGES.length).padStart(2, "0");
-  $("#prev").style.visibility = cur === 0 ? "hidden" : ""; $("#cnt").style.visibility = cur === 0 ? "hidden" : "";
+  $("#prev").style.visibility = cur === 0 ? "hidden" : ""; document.documentElement.classList.toggle("at-home", cur === 0); $("#cnt").style.visibility = cur === 0 ? "hidden" : "";
 }
 function go(n) {
   if (busy || n === cur || n < 0 || n > slides.length - 1) return;
@@ -381,6 +390,7 @@ function go(n) {
 document.querySelectorAll(".links button").forEach(b => b.onclick = () => go(+b.dataset.p));
 $("#prev").onclick = () => go(cur - 1); $("#next").onclick = () => go(cur + 1);
 $("#explore").onclick = () => go(1);
+$("#homeBtn").onclick = () => go(0); /* separate Home button: back to page 1 from any menu page */
 addEventListener("keydown", e => {
   if (e.key === "ArrowLeft") go(cur - 1); if (e.key === "ArrowRight") go(cur + 1);
   if (e.key === "Escape") $("#pan").classList.remove("open");
@@ -520,13 +530,11 @@ html.cc,html.cc *{cursor:none!important}
 .pi .intro h2{font-size:calc(var(--fs,1) * clamp(1.6rem,3.4vh + .4rem,2.2rem));margin-bottom:clamp(4px,.9vh,8px)}
 .intro p{line-height:1.5}
 .cats{flex:1 1 0;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(8px,1.4vh,14px)}
-.cat:first-child{grid-row:span 2}
 .pi .cat{display:flex;flex-direction:column;min-width:0;padding:clamp(8px,1.4vh,16px) clamp(12px,1.3vw,22px)}
 .cat h3{font-size:calc(var(--fs,1) * clamp(1.15rem,2vh + .55rem,1.5rem));color:var(--hi);margin:0 0 clamp(4px,.8vh,10px);padding-bottom:3px;border-bottom:1px solid color-mix(in srgb,var(--hi) 40%,transparent)}
 .cat .facts{flex:1;min-height:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(5px,1vh,12px) clamp(10px,1.2vw,18px);align-content:space-between}
 
 .cat .facts a{overflow-wrap:normal}
-.cat:nth-child(4) .facts div:nth-child(4) span,.cat:nth-child(4) .facts div:nth-child(5) span{font-size:.92em;white-space:nowrap}
 @media(max-width:900px){#s1{grid-template-rows:auto auto}.cats{grid-template-columns:1fr;grid-template-rows:none;flex:none}.cat:first-child{grid-row:auto}.cat .facts{flex:none}}
 /* ===== PAGE 4: never scrolls on desktop; text scales to fit ===== */
 #s3{overflow:hidden}
@@ -542,7 +550,7 @@ html.cc,html.cc *{cursor:none!important}
   var f=1;root.style.setProperty('--fs',1);
   /* layout height measured with offsets, so the cards' slide-in animation (a temporary 14px shift) isn't mistaken for overflow */
   function bad(){var k=pi.children,span=k.length?k[k.length-1].offsetTop+k[k.length-1].offsetHeight-k[0].offsetTop:0;
-   return span>pi.clientHeight+1||[].some.call(root.querySelectorAll('.cat,.cat .facts,.intro'),function(c){return c.scrollHeight>c.clientHeight+1})}
+   return span>pi.clientHeight+1||[].some.call(root.querySelectorAll('.cat,.cat .facts,.ccol,.intro'),function(c){return c.scrollHeight>c.clientHeight+1})}
   while(bad()&&f>.62){f=Math.round((f-.03)*100)/100;root.style.setProperty('--fs',f)}}
  function p4(){var root=document.getElementById('s3');if(!root)return;
   [].forEach.call(root.querySelectorAll('.pt'),function(pt){pt.style.fontSize=''});
@@ -561,70 +569,101 @@ html.cc,html.cc *{cursor:none!important}
 </script>
 <style>
 /* ===== PERSONAL INFORMATION ===== */
-/* Personality & Languages: a slim strip along the bottom of the About Me card, same label/value style as the info cards */
-.ipl{display:flex;align-items:center;gap:clamp(14px,2vw,30px);margin-top:clamp(8px,1.4vh,12px);padding-top:clamp(7px,1.2vh,11px);border-top:1px solid color-mix(in srgb,var(--hi) 40%,transparent)}
-.ipl h3{flex:none;font-size:calc(var(--fs,1)*clamp(1.05rem,1.6vh + .5rem,1.3rem));color:var(--hi);margin:0}
-.ipl .facts{flex:1;display:flex;flex-wrap:wrap;gap:4px clamp(18px,2.4vw,40px)}
-@media(max-width:900px){.ipl{flex-direction:column;align-items:flex-start;gap:6px}}
-/* the Personal Information card has many short facts: three columns keep it compact */
-.cat:first-child .facts{grid-template-columns:repeat(3,minmax(0,1fr))}
-@media(max-width:900px){.cat:first-child .facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
-/* ===== ACHIEVEMENTS: two-row timeline. Row 2 continues row 1; one line joins every milestone ===== */
+/* three columns of section cards under About Me; every card in a column stretches so the columns end level */
+@media(min-width:901px){#s1{grid-template-columns:minmax(0,19%) minmax(0,1fr)}}
+.cat .facts[style]{grid-template-columns:repeat(var(--fc),minmax(0,1fr))}
+.cat .facts.rows{grid-template-columns:minmax(0,max-content) minmax(0,1fr);column-gap:clamp(10px,1vw,16px);align-content:space-around}
+.cat .facts.rows>div{display:contents}
+.cat .facts.rows small{margin:0;padding-top:.32em;line-height:1.3;max-width:9.5em}
+.cat .facts.rows span{font-size:.98em}
+@media(max-width:560px){.cat .facts.rows{grid-template-columns:1fr}.cat .facts.rows small{padding-top:0;max-width:none}}
+/* desktop grid: Personal Details runs the full height on the left; About Me sits beside it on top, the other sections below */
+.cats{display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.3fr) minmax(0,0.95fr);grid-template-rows:auto minmax(0,1fr);gap:clamp(8px,1.3vh,14px) clamp(8px,1.1vw,16px)}
+.cats>.intro{grid-column:2/4;grid-row:1}.cats>.ccol:nth-child(2){grid-column:1;grid-row:1/3}.cats>.ccol:nth-child(3){grid-column:2;grid-row:2}.cats>.ccol:nth-child(4){grid-column:3;grid-row:2}
+.pi>.cats{flex:1 1 0}
+.ccol{display:flex;flex-direction:column;gap:clamp(8px,1.3vh,14px);min-width:0;min-height:0}
+.ccol>.cat{flex:1 1 auto;min-height:0}
+.cgs{flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:clamp(6px,1.2vh,12px)}
+.cg h4{font-size:.72em;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--hi);margin:0 0 5px}
+.cat .chips{gap:4px}.cat .chips span{font-size:.8em;padding:1px 8px;line-height:1.45}
+@media(max-width:900px){.cats{grid-template-columns:1fr;grid-template-rows:none}.cats>*{grid-column:auto!important;grid-row:auto!important}.ccol>.cat{flex:none}}
+/* ===== ACHIEVEMENTS: two-row timeline (row 2 continues row 1; one line joins every stop).
+   Each stop = a school banner + its own individual achievement cards. ===== */
 #s2{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);row-gap:clamp(10px,1.8vh,16px);padding:64px clamp(14px,5vw,80px) 58px;font-size:clamp(.8rem,1.1vh + .42rem,1rem);line-height:1.45}
 .tl{position:relative;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1fr);row-gap:clamp(18px,3vh,30px);padding:0 18px;font-size:calc(var(--tfs,1)*1em)}
 .tl-line{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
 .tl-line path{fill:none;stroke:var(--hi);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .tl-line .ln{opacity:.8}.tl-line .tail{stroke-dasharray:2 7;opacity:.6}
-.tl-row{position:relative;z-index:1;display:grid;gap:clamp(8px,.9vw,14px);min-height:0}
-.tm{display:flex;flex-direction:column;min-width:0;min-height:0}
-.tm-mk{flex:none;height:24px;display:flex;align-items:center;gap:7px;margin-bottom:6px}
+/* subgrid: markers, banners and card areas line up across every stop in a row */
+.tl-row{position:relative;z-index:1;display:grid;grid-template-rows:auto auto minmax(0,1fr);column-gap:clamp(12px,1.3vw,20px);row-gap:6px;min-height:0}
+.tg{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:6px;min-width:0;min-height:0}
+.tm-mk{height:24px;display:flex;align-items:center;gap:7px}
 .tm-mk .dot{flex:none;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--hi)}
-.tm.cur .tm-mk .dot{background:var(--hi);box-shadow:0 0 0 4px color-mix(in srgb,var(--hi) 28%,transparent)}
+.tg.cur .tm-mk .dot{background:var(--hi);box-shadow:0 0 0 4px color-mix(in srgb,var(--hi) 28%,transparent)}
 .tm-mk .when{font-size:.74em;font-weight:700;letter-spacing:.1em;color:var(--hi);padding:2px 9px;border-radius:20px;background:var(--bg);border:1px solid color-mix(in srgb,var(--hi) 45%,transparent);white-space:nowrap;font-variant-numeric:tabular-nums}
-.tm-card{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:clamp(5px,.9vh,8px);padding:clamp(8px,1.3vh,12px) clamp(10px,.9vw,13px);border-radius:12px;border:1px solid color-mix(in srgb,var(--mu) 30%,transparent);box-shadow:0 10px 26px #0004;
- background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 50%,transparent),color-mix(in srgb,var(--bg) 80%,transparent) 42%,color-mix(in srgb,var(--bg) 90%,transparent)),var(--tm-bg,none) center 35%/cover no-repeat,var(--card)}
-.tm.cur .tm-card{border-color:var(--hi);box-shadow:0 0 0 1px color-mix(in srgb,var(--hi) 40%,transparent),0 10px 28px #0004}
-.tm-card :is(small,b,span,li,figcaption){text-shadow:0 0 2px var(--bg),0 0 6px var(--bg)}
-.tm-h{flex:none;display:flex;align-items:center;gap:9px}
-.logo-s{flex:none;width:clamp(34px,5.4vh,46px);aspect-ratio:1;border-radius:9px;overflow:hidden;background:#fff;border:1px solid color-mix(in srgb,var(--hi) 55%,transparent)}
+.tg-ban{display:flex;align-items:center;gap:9px;min-width:0;padding:6px 10px;border-radius:10px;border:1px solid color-mix(in srgb,var(--hi) 35%,transparent);
+ background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 55%,transparent),color-mix(in srgb,var(--bg) 86%,transparent)),var(--tm-bg,none) center 35%/cover no-repeat,var(--card)}
+.tg.cur .tg-ban{border-color:var(--hi)}
+.tg-ban :is(small,b,span){text-shadow:0 0 2px var(--bg),0 0 6px var(--bg)}
+.logo-s{flex:none;width:clamp(32px,5vh,42px);aspect-ratio:1;border-radius:8px;overflow:hidden;background:#fff;border:1px solid color-mix(in srgb,var(--hi) 55%,transparent)}
 .logo-s img{width:100%;height:100%;object-fit:contain;display:block}
 .edt{min-width:0}
-.edt small{display:block;font-size:.7em;letter-spacing:.13em;text-transform:uppercase;color:var(--hi);line-height:1.3}
-.edt b{display:block;font-weight:600;font-size:.94em;line-height:1.25}
-.edt .sub{display:block;font-size:.78em;color:var(--mu);line-height:1.3}
-.stt{display:inline-block;margin-top:3px;font-size:.6em;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:1px 7px;border-radius:3px;background:var(--hi);color:var(--on)}
-.tm-txt{flex:none;list-style:none;margin:0;padding:0;display:grid;gap:3px;font-size:.86em;line-height:1.32}
-.tm-txt li{position:relative;padding-left:13px}
-.tm-txt li::before{content:"◆";position:absolute;left:0;top:.25em;font-size:.6em;color:var(--hi)}
-.tm-txt b{font-weight:600}.tm-txt span{color:var(--mu)}
-/* award / certificate photos: shown whole at their own proportions, as large as the card allows. Not clickable */
-.tm-ph{flex:1;min-height:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:clamp(6px,.7vw,10px)}
-.tm-f{margin:0;min-width:0;min-height:0;display:flex;flex-direction:column;gap:4px}
-.tm-im{flex:1 1 0;min-height:0;display:flex;align-items:flex-end;justify-content:center}
-.tm-im img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;border-radius:7px;border:1px solid color-mix(in srgb,var(--hi) 45%,transparent);box-shadow:0 6px 16px #0006}
-.tm-f figcaption{flex:none;text-align:center;line-height:1.25}
-.tm-f b{display:block;font-size:.76em;font-weight:600}
-.tm-f small{display:block;font-size:.66em;color:var(--mu)}
-/* last resort on unusually small windows: let page 2 scroll rather than squash text */
-#s2.tight{overflow-y:auto}#s2.tight .tl{grid-template-rows:auto auto}#s2.tight .tm-card{flex:none;overflow:visible}
-#s2.tight .tm-ph{flex:none;grid-template-rows:none}#s2.tight .tm-im{flex:none;height:110px}
+.edt small{display:block;font-size:.68em;letter-spacing:.13em;text-transform:uppercase;color:var(--hi);line-height:1.3}
+.edt b{display:block;font-weight:600;font-size:.88em;line-height:1.22}
+.edt .sub{display:block;font-size:.74em;color:var(--mu);line-height:1.3}
+.stt{display:inline-block;margin-top:2px;font-size:.58em;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:1px 7px;border-radius:3px;background:var(--hi);color:var(--on)}
+/* individual achievement cards */
+.tg-cards{display:grid;grid-template-rows:minmax(0,1fr);gap:clamp(6px,.6vw,10px);min-width:0;min-height:0}
+.tcol{display:flex;flex-direction:column;gap:clamp(6px,.8vh,8px);min-width:0;min-height:0}
+.ac{margin:0;min-width:0;min-height:0;border-radius:10px;border:1px solid color-mix(in srgb,var(--mu) 30%,transparent);background:linear-gradient(var(--card),var(--card)),color-mix(in srgb,var(--bg) 55%,transparent);box-shadow:0 8px 20px #0004}
+.ac-t{flex:1 1 auto;display:flex;align-items:center;gap:8px;padding:6px 10px}
+.ac-t .st{flex:none;font-style:normal;color:var(--hi);font-size:.9em;line-height:1}
+.ac-t div{min-width:0}
+.ac-t b{display:block;font-size:.84em;font-weight:600;line-height:1.25}
+.ac-t small{display:block;font-size:.72em;color:var(--mu);line-height:1.3;margin-top:1px}
+.ac-p{display:flex;flex-direction:column;gap:6px;padding:6px}
+/* every photo frame is the same size (set by the fit script); the photo sits whole and centred inside it */
+.ac-im{flex:none;height:var(--imh,110px);display:flex;align-items:center;justify-content:center;padding:4px;border-radius:7px;overflow:hidden;background:color-mix(in srgb,var(--bg) 70%,#000);border:1px solid color-mix(in srgb,var(--hi) 25%,transparent)}
+.ac-im img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;border-radius:4px}
+#s2.measure .ac-im{flex:1 1 0;height:auto;min-height:0}
+.ac-p figcaption{text-align:center;line-height:1.25;padding:0 2px}
+.ac-p figcaption b{display:block;font-size:.78em;font-weight:600}
+.ac-p figcaption small{display:block;font-size:.68em;color:var(--mu);margin-top:1px}
+/* last resort on unusually small windows: let the page scroll rather than squash text */
+#s2.tight{overflow-y:auto}#s2.tight .tl{grid-template-rows:auto auto}#s2.tight .tg-cards{grid-template-rows:auto}#s2.tight .ac-im{height:110px}
 @media(max-width:900px){
- .tl{display:flex;flex-direction:column;gap:14px;padding:0 0 0 26px}
+ .tl{display:flex;flex-direction:column;gap:18px;padding:0 0 0 26px}
  .tl::before{content:"";position:absolute;left:8px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--hi),color-mix(in srgb,var(--hi) 35%,transparent))}
- .tl-line{display:none}.tl-row{display:flex;flex-direction:column;gap:14px}
- .tl,.tl-row,.tm{flex:none;min-height:auto}.tm-mk{margin-left:-25px}.tm-card{flex:none;overflow:visible}
- .tm-ph{flex:none;grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none}.tm-im{flex:none;height:150px}}
+ .tl-line{display:none}.tl-row{display:flex;flex-direction:column;gap:18px}
+ .tg{display:flex;flex-direction:column;gap:6px}.tm-mk{margin-left:-25px}
+ .tg-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:none}.tcol{grid-column:1/-1}
+ .ac-im{height:140px}
+ .tl,.tl-row,.tg,.tg-cards,.tcol,.ac,.ac-t{flex:none;min-height:auto}}
+/* phones: Personal Information sections simply stack and the page scrolls */
+@media(max-width:900px){.pi>.cats{flex:none}.cats>*,.ccol,.ccol>.cat,.cat .facts,.cgs{flex:none;min-height:auto}}
 /* ===== FAMILY: father & siblings messages as warm, short dedications ===== */
 .pt p.msg{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:1.4em;line-height:1.35;color:var(--tx);opacity:.95;margin-top:2px}
 /* ===== pictures are static: no dragging, no click affordance ===== */
 img{-webkit-user-drag:none;user-select:none}
+/* ===== HOME BUTTON: separate from the three menu items, shown on the three content pages ===== */
+nav{display:grid;grid-template-columns:1fr auto 1fr}
+.lft{display:flex;align-items:center;gap:clamp(6px,1vw,14px);justify-self:start;min-width:0}.tools{justify-self:end}
+.homeb{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 15px 0 11px;border-radius:40px;border:1px solid var(--hi);color:var(--hi);font-size:.8rem;font-weight:500;letter-spacing:.06em;transition:background .25s,color .25s,transform .25s,opacity .35s,visibility .35s}
+.homeb svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.homeb:hover{background:var(--ac);color:var(--on);border-color:var(--ac);transform:translateY(-2px)}
+html.at-home .homeb{opacity:0;visibility:hidden;pointer-events:none} /* already home */
+@media(max-width:900px){.homeb{width:34px;padding:0;justify-content:center;flex:none}.homeb span{display:none}
+ nav{grid-template-columns:auto minmax(0,1fr) auto;column-gap:6px}.links{justify-content:center;min-width:0}
+ .links button{line-height:1.15;text-align:center}}
 </style>
 <script>
-/* Achievements: fit the whole timeline on one screen (text shrinks together a little if needed), then draw the line */
+/* Achievements: fit the whole timeline on one screen (text shrinks together a little if needed),
+   give every photo frame one shared size, then draw the line that joins the stops */
 (function(){
- function cards(){return [].slice.call(document.querySelectorAll('#s2 .tm-card'))}
- function over(){return cards().some(function(c){return c.scrollHeight>c.clientHeight+1})}
- function tiny(){return [].some.call(document.querySelectorAll('#s2 .tm-im'),function(m){return m.clientHeight<64})}
+ function q(s){return [].slice.call(document.querySelectorAll(s))}
+ function over(){return q('#s2 .ac,#s2 .tcol,#s2 .tg-cards').some(function(c){return c.scrollHeight>c.clientHeight+1})}
+ function room(root){root.classList.add('measure');var ims=q('#s2 .ac-im'),h=ims.length?Math.min.apply(null,ims.map(function(m){return m.clientHeight})):110;
+  var o=over();root.classList.remove('measure');return {h:h,o:o}}
  function line(){var tl=document.getElementById('tl'),svg=document.getElementById('tlLine');if(!tl||!svg||innerWidth<=900)return;
   var tr=tl.getBoundingClientRect(),k=tr.width/tl.offsetWidth||1,rowsEl=tl.querySelectorAll('.tl-row');if(rowsEl.length<2)return;
   var pt=function(e){var b=e.getBoundingClientRect();return {x:(b.left+b.width/2-tr.left)/k,y:(b.top+b.height/2-tr.top)/k}};
@@ -633,12 +672,12 @@ img{-webkit-user-drag:none;user-select:none}
   var gy=((rowsEl[0].getBoundingClientRect().bottom+rowsEl[1].getBoundingClientRect().top)/2-tr.top)/k;
   svg.setAttribute('viewBox','0 0 '+W+' '+H);
   svg.querySelector('.ln').setAttribute('d','M'+a[0].x+' '+y1+'H'+(R-r)+'Q'+R+' '+y1+' '+R+' '+(y1+r)+'V'+(gy-r)+'Q'+R+' '+gy+' '+(R-r)+' '+gy+'H'+(L+r)+'Q'+L+' '+gy+' '+L+' '+(gy+r)+'V'+(y2-r)+'Q'+L+' '+y2+' '+(L+r)+' '+y2+'H'+end);
-  svg.querySelector('.tail').setAttribute('d','M'+end+' '+y2+'H'+(W-10)); /* dotted: the journey continues */
- }
+  svg.querySelector('.tail').setAttribute('d','M'+end+' '+y2+'H'+(W-10));}
  function p3(){var root=document.getElementById('s2');if(!root)return;root.classList.remove('tight');
-  if(innerWidth<=900){root.style.removeProperty('--tfs');return}
-  var f=1;root.style.setProperty('--tfs',1);
-  while((over()||tiny())&&f>.76){f=Math.round((f-.03)*100)/100;root.style.setProperty('--tfs',f)}
+  if(innerWidth<=900){root.style.removeProperty('--tfs');root.style.removeProperty('--imh');return}
+  var f=1,m;root.style.setProperty('--tfs',1);
+  for(;;){m=room(root);if((!m.o&&m.h>=92)||f<=.76)break;f=Math.round((f-.03)*100)/100;root.style.setProperty('--tfs',f)}
+  root.style.setProperty('--imh',Math.max(60,Math.floor(m.h)-1)+'px');
   if(over())root.classList.add('tight');
   line();if(window.drawStars)setTimeout(window.drawStars,60)}
  window.p3=p3;
@@ -659,7 +698,7 @@ img{-webkit-user-drag:none;user-select:none}
   padding:max(var(--pt),calc((100vh - var(--mh))/2)) max(var(--px),calc((100vw - var(--mw))/2)) max(var(--pb),calc((100vh - var(--mh))/2))!important}
 #s0{--mw:1280px;--mh:860px}
  .portrait{height:min(calc(100vh - 150px),700px)}
- #s1{--mw:1240px;--mh:840px;--px:clamp(14px,6vw,96px)}
+ #s1{--mw:1280px;--mh:940px;--px:clamp(14px,6vw,96px)}
  #s2{--mw:1360px;--mh:860px;--px:clamp(14px,5vw,80px)}
  #s3{--mw:1240px;--mh:780px}
  nav{padding:0 max(clamp(12px,3vw,40px),calc((100vw - 1440px)/2))}
@@ -668,54 +707,5 @@ img{-webkit-user-drag:none;user-select:none}
 /* phones/tablets: Page 4 cards stack in one column (the 12-column desktop rule was squeezing them into thin strips) */
 @media(max-width:900px){.pgrid{grid-template-columns:minmax(0,1fr);grid-template-rows:none}}
 </style>
-<style>
-/* ===== HOME BUTTON: separate from the three menu pages, shown on pages 2-4 only ===== */
-.homeb{display:flex;align-items:center;gap:7px;height:34px;padding:0 15px 0 11px;margin-right:8px;border-radius:40px;background:var(--ac);color:var(--on);border:1px solid var(--hi);font-weight:500;font-size:.85rem;letter-spacing:.04em;transition:.25s}
-.homeb svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.homeb:hover{transform:translateY(-2px);box-shadow:0 8px 18px #0004}.homeb:active{transform:scale(.97)}
-@media(max-width:900px){.homeb{padding:0 10px 0 8px;margin-right:4px}}
-@media(max-width:560px){.homeb span{display:none}.homeb{padding:0;width:34px;justify-content:center}}
-
-/* ===== PERSONAL INFORMATION: 2 x 2 grouped cards (7 / 5 columns) ===== */
-.cats .cat:first-child .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
-.facts .wf{grid-column:1/-1}
-.cat h3{font-size:calc(var(--fs,1) * clamp(1.1rem,1.8vh + .5rem,1.4rem))}
-.cat .facts{align-content:start}
-@media(min-width:901px){
- .cats{grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:minmax(0,.95fr) minmax(0,1.05fr)}
- .cat:first-child{grid-row:auto}
- .cat:nth-child(1),.cat:nth-child(3){grid-column:span 7}
- .cat:nth-child(2),.cat:nth-child(4){grid-column:span 5}
- .cat:nth-child(3) .facts{grid-template-columns:repeat(4,minmax(0,1fr))}
- .cat .facts{align-content:space-between}
-}
-
-/* ===== ACHIEVEMENTS: every achievement is its own card, all hanging from the same timeline ===== */
-.tm-card{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;overflow:visible!important;gap:clamp(5px,.9vh,8px)}
-/* the school / level header is its own card (keeps the school background picture) */
-.tm-h{padding:clamp(6px,1vh,10px) clamp(8px,.8vw,12px);border-radius:12px;border:1px solid color-mix(in srgb,var(--mu) 30%,transparent);box-shadow:0 8px 20px #0004;
- background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 50%,transparent),color-mix(in srgb,var(--bg) 85%,transparent)),var(--tm-bg,none) center 35%/cover no-repeat,var(--card)}
-.tm.cur .tm-h{border-color:var(--hi);box-shadow:0 0 0 1px color-mix(in srgb,var(--hi) 40%,transparent),0 8px 20px #0004}
-/* short achievements: one small card each */
-.tm-txt{gap:clamp(3px,.6vh,6px)}
-.tm-txt li{padding:clamp(4px,.7vh,7px) 9px clamp(4px,.7vh,7px) 24px;border-radius:9px;border:1px solid color-mix(in srgb,var(--hi) 32%,transparent);background:color-mix(in srgb,var(--bg) 82%,var(--card));box-shadow:0 4px 10px #0003}
-.tm-txt li::before{left:10px;top:.95em}
-/* photo achievements: one card each, with a uniform picture frame; photo is centred and never cropped or stretched */
-.tm-f{padding:6px;border-radius:10px;border:1px solid color-mix(in srgb,var(--hi) 32%,transparent);background:color-mix(in srgb,var(--bg) 82%,var(--card));box-shadow:0 4px 12px #0003}
-.tm-im{align-items:center;justify-content:center;overflow:hidden;border-radius:7px;background:color-mix(in srgb,#000 22%,transparent)}
-.tm-im img{width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;object-position:center;border:0;border-radius:0;box-shadow:none}
-/* short stem joining each milestone dot to its cards, so the cards read as hanging from the timeline */
-.tm-mk .dot{position:relative}
-.tm-mk .dot::after{content:"";position:absolute;left:4px;top:100%;height:14px;border-left:2px solid var(--hi);opacity:.8}
-</style>
-<script>
-/* Home button: hidden on the cover, visible on the three content pages, uses the normal wave transition */
-(function(){
- var h=document.getElementById('homeb');if(!h)return;
- h.onclick=function(){go(0)};
- var _p=paint;paint=function(){_p();h.style.display=(cur===0?'none':'')};
- paint();
-})();
-</script>
 </body>
 </html>
