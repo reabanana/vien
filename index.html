@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +47,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:20;height:56px;display:flex;alig
 .rs{margin-top:10px;width:100%;padding:6px;border:1px solid var(--mu);border-radius:8px}
 /* slides */
 main{position:fixed;inset:0;z-index:1}
-.slide{position:absolute;inset:0;padding:64px clamp(14px,4vw,64px) 58px;opacity:0;visibility:hidden;transform:translateX(40px) scale(.985);transition:opacity .7s,transform .7s,visibility .7s}
+.slide{position:absolute;inset:0;padding:64px clamp(14px,4vw,64px) 70px;opacity:0;visibility:hidden;transform:translateX(40px) scale(.985);transition:opacity .7s,transform .7s,visibility .7s}
 .slide.on{opacity:1;visibility:visible;transform:none}
 .slide.before{transform:translateX(-40px) scale(.985)}
 .on .rv{animation:up .7s both;animation-delay:calc(var(--i)*70ms + 150ms)}
@@ -85,7 +86,7 @@ main{position:fixed;inset:0;z-index:1}
 @media(prefers-reduced-motion:reduce){#s0 .portrait,#s0 .pf,.plat::after{animation:none!important;opacity:1;transform:none}}
 .ph img{width:100%;height:100%;object-fit:cover;display:block}
 /* personal information */
-#s1{display:grid;grid-template-columns:minmax(0,26%) minmax(0,1fr);gap:clamp(16px,3vw,48px);padding:64px clamp(14px,6vw,96px) 58px;font-size:clamp(.8rem,1.15vh + .42rem,1rem);line-height:1.5;align-items:stretch}
+#s1{display:grid;grid-template-columns:minmax(0,26%) minmax(0,1fr);gap:clamp(16px,3vw,48px);padding:64px clamp(14px,6vw,96px) 70px;font-size:clamp(.8rem,1.15vh + .42rem,1rem);line-height:1.5;align-items:stretch}
 .ph{border-radius:14px;overflow:hidden;border:1px solid var(--hi);box-shadow:14px 14px 0 -2px color-mix(in srgb,var(--ac) 55%,transparent),0 14px 36px #0005;min-height:0;margin:0 14px 14px 0}
 .ph img{object-position:62% 25%}
 .pi{display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,2.4vh,24px);min-height:0;min-width:0}
@@ -118,9 +119,26 @@ main{position:fixed;inset:0;z-index:1}
 .fig .im img{width:100%;height:100%;object-fit:cover;transition:.4s}
 .fig p{font-size:.8em;color:var(--mu);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* footer nav */
-.foot{position:fixed;bottom:0;left:0;right:0;z-index:20;height:50px;display:flex;align-items:center;justify-content:center;gap:16px}
-.foot .ib:hover{transform:scale(1.1)}
-.cnt{font:600 1rem "Cormorant Garamond",serif;letter-spacing:.2em;min-width:60px;text-align:center}
+/* footer navigation: "Back to" pill | page dots | "Next" pill, under a thin divider line */
+.foot{position:fixed;bottom:0;left:0;right:0;z-index:20;height:62px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:0 max(clamp(12px,3vw,40px),calc((100vw - 1440px)/2))}
+.foot::before{content:"";position:absolute;top:0;left:max(clamp(12px,3vw,40px),calc((100vw - 1440px)/2));right:max(clamp(12px,3vw,40px),calc((100vw - 1440px)/2));height:1px;background:color-mix(in srgb,var(--mu) 22%,transparent)}
+.fnav{justify-self:start;display:inline-flex;align-items:center;gap:9px;height:40px;padding:0 18px 0 13px;border-radius:40px;border:1px solid color-mix(in srgb,var(--hi) 70%,transparent);
+ background:color-mix(in srgb,var(--ac) 22%,transparent);color:var(--tx);white-space:nowrap;max-width:100%;transition:background .25s,transform .25s,box-shadow .25s,opacity .35s,visibility .35s}
+.fnav.nx{justify-self:end;padding:0 13px 0 18px}
+.fnav svg{flex:none;width:20px;height:20px;fill:none;stroke:var(--hi);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.fnav .fl{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--hi)}
+.fnav .fn{font-size:.98rem;font-weight:500;overflow:hidden;text-overflow:ellipsis}
+.fnav:hover{background:color-mix(in srgb,var(--ac) 45%,transparent);box-shadow:0 8px 22px #0005;transform:translateY(-2px)}
+.fnav:hover svg{transform:translateX(-3px)}.fnav.nx:hover svg{transform:translateX(3px)}
+.fnav.off,.dots.off{opacity:0;visibility:hidden;pointer-events:none}
+.dots{display:flex;align-items:center;gap:9px;transition:opacity .35s,visibility .35s}
+.dots button{width:11px;height:11px;border-radius:20px;background:color-mix(in srgb,var(--mu) 45%,transparent);transition:width .35s,background .35s}
+.dots button:hover{background:color-mix(in srgb,var(--hi) 70%,transparent)}
+.dots button.on{width:34px;background:var(--hi)}
+@media(max-width:700px){.foot{gap:5px;padding:0 10px}.foot::before{left:10px;right:10px}.fnav{height:34px;padding:0 10px 0 6px;gap:3px}.fnav.nx{padding:0 6px 0 10px}
+ .fnav svg{width:17px;height:17px}.fnav .fl{display:none}.fnav .fn{font-size:.74rem}.dots{gap:5px}.dots button{width:8px;height:8px}.dots button.on{width:20px}}
+/* phones: pages scroll, so the top bar and footer get a solid backdrop and content never shows through them */
+@media(max-width:900px){nav,.foot{background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}}
 /* wave: 3 layered ocean swells, each a wavy leading crest + body + wavy trailing edge (inline SVG, no masks) */
 main.nt .slide{transition:none!important}
 .w{position:fixed;left:0;right:0;top:0;z-index:50;pointer-events:none;display:none;will-change:transform;--c:var(--wv)}
@@ -147,8 +165,8 @@ main.nt .slide{transition:none!important}
 @keyframes tw{0%,100%{opacity:.12;transform:scale(.7) rotate(var(--r,0deg))}50%{opacity:var(--pk,1);transform:scale(1.2) rotate(var(--r,0deg))}}
 @media(max-width:900px){
  #s0{grid-template-columns:1fr;justify-items:center;text-align:center;gap:1vh}.portrait{height:36vh;order:-1}
- #s1{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:start;padding:64px 16px 58px}.pi{justify-content:flex-start}.pi .card,#s2 .card{flex-shrink:0}.ph{height:34vh;margin:0 0 12px}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}
- #s2{display:flex;flex-direction:column;gap:14px;padding:64px 16px 58px}.ph3{flex-wrap:wrap;flex:none}.ph3 p{display:none}
+ #s1{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:start;padding:64px 16px 74px}.pi{justify-content:flex-start}.pi .card,#s2 .card{flex-shrink:0}.ph{height:34vh;margin:0 0 12px}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #s2{display:flex;flex-direction:column;gap:14px;padding:64px 16px 74px}.ph3{flex-wrap:wrap;flex:none}.ph3 p{display:none}
  .gr{grid-template-columns:repeat(2,1fr)}.links button{padding:6px 5px;font-size:.78em}.logo{display:none}
  .slide{overflow:auto}}
 @media(max-width:560px){.links button{font-size:.7em;padding:6px 3px}}
@@ -170,9 +188,9 @@ main.nt .slide{transition:none!important}
 </nav>
 <main id="main"></main>
 <div class="foot">
- <button class="ib" id="prev" aria-label="Previous page">←</button>
- <div class="cnt" id="cnt"></div>
- <button class="ib" id="next" aria-label="Next page">→</button>
+ <button class="fnav" id="prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg><span class="fl">Back to</span><span class="fn" id="prevName"></span></button>
+ <div class="dots" id="dots" aria-label="Pages"></div>
+ <button class="fnav nx" id="next"><span class="fl">Next</span><span class="fn" id="nextName"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button>
 </div>
 <div class="w" id="w3"><div class="cr"></div><div class="bd"></div><div class="tr"></div></div>
 <div class="w" id="w2"><div class="cr"></div><div class="bd"></div><div class="tr"></div></div>
@@ -209,8 +227,9 @@ const SITE = {
   ],
   /* ACHIEVEMENTS TIMELINE, oldest to newest. row 1 = top line, row 2 = bottom line (it continues from row 1).
      Every item is its OWN card: t = title, cat = category tag, d = short description (optional),
-     img = photo or certificate (optional; cards without one show a medal icon in the same-size frame,
-     so to add a photo later just add img:"images/…"). Pictures are NOT clickable. */
+     img = photo or certificate (optional). Photo cards get a large frame (all frames are the same size);
+     items without a photo become slim text cards stacked beside them. tw = width of that text column.
+     Pictures are NOT clickable. */
   timeline: [
     { when:"2014–2020", level:"Elementary", school:"Kasiglahan Village Elementary School Unit-1", row:1,
       logo:"images/schools/kasiglahan-elementary.jpg", bg:"images/schools/bg-elementary.jpg",
@@ -224,7 +243,7 @@ const SITE = {
       logo:"images/schools/sta-fe-national-high-school.jpg", bg:"images/schools/bg-senior-high.jpg",
       items:[{t:"With High Honors", cat:"Academics", d:"Grade 11"},
              {t:"DSPC 2024 · 3rd Place", cat:"Competitions", d:"Collaborative Desktop Publishing (Filipino)", img:"images/awards/dspc-2024.jpg"}] },
-    { when:"SY 2025–2026", level:"Grade 12 · Academics & Press", school:"Sta. Fe National High School", row:1,
+    { when:"SY 2025–2026", level:"Grade 12 · Academics & Press", school:"Sta. Fe National High School", row:1, tw:1.5,
       logo:"images/schools/sta-fe-national-high-school.jpg", bg:"images/schools/bg-senior-high.jpg",
       items:[{t:"With High Honors", cat:"Academics", d:"Grade 12"},
              {t:"Municipal Academic Excellence Award", cat:"Academics"},
@@ -243,7 +262,7 @@ const SITE = {
       items:[{t:"Graduation day", cat:"Milestone", d:"Speaking on stage in my toga", img:"images/timeline/senior-high-grad.jpg"},
              {t:"My medals", cat:"Awards", img:"images/awards/all-medals.jpg"},
              {t:"My certificates", cat:"Awards", img:"images/awards/all-certificates.jpg"}] },
-    { when:"2026–Present", level:"College", school:"University of the Cordilleras", row:2, current:true,
+    { when:"2026–Present", level:"College", school:"University of the Cordilleras", row:2, tw:1.6, current:true,
       logo:"images/schools/university-of-the-cordilleras.jpg", bg:"images/schools/bg-college.jpg",
       items:[{t:"Bachelor of Science in Computer Science", cat:"Academics", d:"College of Information Technology and Computer Science"},
              {t:"First Year", cat:"Milestone", d:"In progress · expected graduation 2029"}] }
@@ -255,7 +274,7 @@ const SITE = {
            {src:"images/ohana.JPG"}], // PHOTO SLOT 4: siblings (landscape group photo)
   // PHOTO SLOT 5: friends. ONE static photo (not clickable, no slideshow). To use a different photo, change the file name below,
   // e.g. "images/senhighfriends.JPG", "images/collegefriends.JPEG" or "images/faye.JPG"
-  friend: {src:"images/walo.JPEG", cap:"Vien with her friends"}
+  friend: {src:"images/collegefriends.JPEG", cap:"Vien with her friends"}
 };
 const THEMES = { red:["Classic Red","#702632"], pink:["Soft Pink","#D9A3B0"], mono:["Monochrome","#555"], elegance:["Burgundy Elegance","#D5AD6B"], midnight:["Midnight Blue","#2B4C85"], sage:["Sage Green","#7F9A82"] };
 const PAGES = ["Personal Information","Achievements","Family and Friends"]; // menu items. Page 1 (the cover) opens first and is reached with the logo or the ← arrow
@@ -312,25 +331,30 @@ $("#main").innerHTML = `
  <div class="ph3 rv"><span class="tag3">02 · Achievements</span><h2>My Academic Journey</h2><p>Where I studied, what I’ve earned, and what I can do.</p></div>
  <div class="tl rv" id="tl"><svg class="tl-line" id="tlLine" aria-hidden="true"><path class="ln"/><path class="tail"/></svg>${[1, 2].map(r => {
    const row = S.timeline.filter(x => x.row === r);
-   const ncols = x => Math.ceil(x.items.length / 2); /* cards sit in two rows; an odd last card spans both rows */
-   const card = (i, last, odd) => `<article class="ac${last && odd ? " span" : ""}">${i.cat ? `<span class="ac-cat">${esc(i.cat)}</span>` : ""}<div class="ac-im${i.img ? "" : " ic"}">${i.img ? img(i.img, i.t) : ICON.medal}</div><div class="ac-tx"><b>${esc(i.t)}</b>${i.d ? `<small>${esc(i.d)}</small>` : ""}</div></article>`;
-   const group = x => `<div class="tg${x.current ? " cur" : ""}"><div class="tm-mk"><i class="dot"></i><span class="when">${esc(x.when)}</span></div>
+   const tw = x => x.tw || 1.3;                                   /* width of the text-card column */
+   const units = x => Math.max(1.2, (x.items.some(i => !i.img) ? tw(x) : 0) + x.items.filter(i => i.img).length);
+   const cat = i => i.cat ? `<span class="ac-cat">${esc(i.cat)}</span>` : "";
+   const tcard = i => `<article class="ac ac-t">${cat(i)}<b>${esc(i.t)}</b>${i.d ? `<small>${esc(i.d)}</small>` : ""}</article>`;
+   const pcard = i => `<article class="ac ac-p">${cat(i)}<div class="ac-im">${img(i.img, i.t)}</div><div class="ac-tx"><b>${esc(i.t)}</b>${i.d ? `<small>${esc(i.d)}</small>` : ""}</div></article>`;
+   const group = x => { const txt = x.items.filter(i => !i.img), pics = x.items.filter(i => i.img);
+     const cols = (txt.length ? [`minmax(0,${tw(x)}fr)`] : []).concat(pics.map(() => "minmax(0,1fr)"));
+     return `<div class="tg${x.current ? " cur" : ""}"><div class="tm-mk"><i class="dot"></i><span class="when">${esc(x.when)}</span></div>
       <div class="tg-ban"${x.bg ? ` style="--tm-bg:url('${esc(x.bg)}')"` : ""}><div class="logo-s">${img(x.logo, x.school + " logo")}</div><div class="edt"><small>${esc(x.level)}</small><b>${esc(x.school)}</b>${x.sub ? `<span class="sub">${esc(x.sub)}</span>` : ""}${x.current ? '<span class="stt">In Progress</span>' : ""}</div></div>
-      <div class="tg-cards" style="grid-template-columns:repeat(${ncols(x)},minmax(0,1fr))">${x.items.map((i, n) => card(i, n === x.items.length - 1, x.items.length % 2 === 1)).join("")}</div></div>`;
-   return `<div class="tl-row" style="grid-template-columns:${row.map(x => `minmax(0,${Math.max(1.35, ncols(x))}fr)`).join(" ")}">${row.map(group).join("")}</div>`; }).join("")}</div>
+      <div class="tg-cards" style="grid-template-columns:${cols.join(" ")}">${txt.length ? `<div class="tcol">${txt.map(tcard).join("")}</div>` : ""}${pics.map(pcard).join("")}</div></div>`; };
+   return `<div class="tl-row" style="grid-template-columns:${row.map(x => `minmax(0,${units(x)}fr)`).join(" ")}">${row.map(group).join("")}</div>`; }).join("")}</div>
 </section>
 <section class="slide" id="s3">
  <div class="stars" id="stars3" aria-hidden="true"></div>
  <div class="p4h rv"><div class="eyebrow">Beyond the Resume</div><h1>My Family and Friends</h1></div>
  <div class="pgrid">
  <!-- SECTION 1: MY MOTHER FIGURE (photo = S.people[0], images/atecien.jpg) -->
- <article class="card pc m rv"><figure class="pp">${img(S.people[0].src, "Cienel D. Maravilla-Atadero")}</figure><div class="pt"><h3>My Mother Figure</h3><b class="nm">Cienel D. Maravilla-Atadero</b><p>She is my sister, my birthday twin, my bestest friend, and my mother figure. Growing up, I have always looked up to her and have seen her as a second mother.</p></div></article>
+ <article class="card pc m rv"><figure class="pp">${img(S.people[0].src, "Cienel D. Maravilla-Atadero")}</figure><div class="pt"><h3>My Sister and Mother in One</h3><b class="nm">Cienel D. Maravilla-Atadero</b><p class="msg">My sister, my birthday twin, my bestest friend, and my mother figure. Growing up, I have always looked up to her and have seen her as a second mother.</p></div></article>
  <!-- SECTION 2: MY FATHER (photo = S.people[1], images/father.jpg) -->
- <article class="card pc f rv"><figure class="pp">${img(S.people[1].src, "Arnel K. Maravilla")}</figure><div class="pt"><h3>My Father</h3><b class="nm">Arnel K. Maravilla</b><p class="msg">“My responsible, dependable, and trustworthy Papa.”</p></div></article>
- <!-- SECTION 3: MY SIBLINGS (photo = S.people[2], images/ohana.jpg, landscape) -->
- <article class="card pc m rv"><figure class="pp land">${img(S.people[2].src, "Vien with her siblings")}</figure><div class="pt"><h3>My Siblings</h3><ul class="names"><li>Cienel D. Maravilla-Atadero</li><li>Carl Andrew D. Maravilla</li><li>Daniel John D. Maravilla</li></ul><p class="msg">“My shoulders to lean on, my safe place to run to, and the people who are always there for me.”</p></div></article>
+ <article class="card pc f rv"><figure class="pp">${img(S.people[1].src, "Arnel K. Maravilla")}</figure><div class="pt"><h3>My Mentor, My Guide</h3><b class="nm">Arnel K. Maravilla</b><p class="msg">The person who taught me to be strong and stand on my own, yet never hesitated to hold my hand and guide me whenever I needed it. Thank you for helping me become who I am today</p></div></article>
+ <!-- SECTION 3: MY SIBLINGS, titled "My Constants" (photo = S.people[2], images/ohana.jpg, landscape) -->
+ <article class="card pc m rv"><figure class="pp land">${img(S.people[2].src, "Vien with her siblings")}</figure><div class="pt"><h3>My Constants</h3><ul class="names"><li>Cienel D. Maravilla-Atadero</li><li>Carl Andrew D. Maravilla</li><li>Daniel John D. Maravilla</li></ul><p class="msg">My shoulders to lean on, my safe place to run to, and my constant reminder that I will never have to go through life alone</p></div></article>
  <!-- SECTION 4: MY FRIENDS: one static photo (photo = S.friend). Not clickable -->
- <article class="card pc f col rv"><figure class="fsolo">${img(S.friend.src, S.friend.cap)}</figure><div class="pt"><h3>My Friends</h3><p>They are the people I share memories, laughter, and experiences with, and I am grateful to have them as my close friends.</p></div></article>
+ <article class="card pc f col rv"><figure class="fsolo">${img(S.friend.src, S.friend.cap)}</figure><div class="pt"><h3>My College Pips</h3><p class="msg">The people who make even the most exhausting school days worth showing up for. The ones who leave my stomach aching and my eyes teary from laughing too hard.</p></div></article>
  </div>
 </section>`;
 document.querySelectorAll(".slide").forEach(s => s.querySelectorAll(".rv").forEach((e, i) => e.style.setProperty("--i", i)));
@@ -389,8 +413,14 @@ function paint() {
   slides.forEach((s, i) => { s.classList.toggle("on", i === cur); s.classList.toggle("before", i < cur); });
   document.querySelectorAll(".links button").forEach(b => b.classList.toggle("on", +b.dataset.p === cur));
   /* counter covers the three menu pages; on the cover it is hidden and only → shows */
-  $("#cnt").textContent = cur === 0 ? "" : String(cur).padStart(2, "0") + " / " + String(PAGES.length).padStart(2, "0");
-  $("#prev").style.visibility = cur === 0 ? "hidden" : ""; document.documentElement.classList.toggle("at-home", cur === 0); $("#cnt").style.visibility = cur === 0 ? "hidden" : "";
+  /* footer: "Back to <previous page>" and "Next <next page>" pills, plus one dot per menu page */
+  const NAMES = ["Home"].concat(PAGES), last = slides.length - 1;
+  $("#prevName").textContent = cur > 0 ? NAMES[cur - 1] : ""; $("#nextName").textContent = cur < last ? NAMES[cur + 1] : "";
+  $("#prev").setAttribute("aria-label", cur > 0 ? "Back to " + NAMES[cur - 1] : ""); $("#next").setAttribute("aria-label", cur < last ? "Next: " + NAMES[cur + 1] : "");
+  $("#prev").classList.toggle("off", cur === 0); $("#next").classList.toggle("off", cur === last);
+  document.querySelectorAll("#dots button").forEach(b => { const on = +b.dataset.p === cur; b.classList.toggle("on", on); b.setAttribute("aria-current", on ? "page" : "false"); });
+  $("#dots").classList.toggle("off", cur === 0);
+  document.documentElement.classList.toggle("at-home", cur === 0);
 }
 function go(n) {
   if (busy || n === cur || n < 0 || n > slides.length - 1) return;
@@ -398,6 +428,8 @@ function go(n) {
   wave(n); // every page change (forward, backward, nav bar, arrows, keyboard) uses the wave
 }
 document.querySelectorAll(".links button").forEach(b => b.onclick = () => go(+b.dataset.p));
+$("#dots").innerHTML = PAGES.map((p, i) => `<button data-p="${i + 1}" aria-label="${p}" title="${p}"></button>`).join("");
+document.querySelectorAll("#dots button").forEach(b => b.onclick = () => go(+b.dataset.p));
 $("#prev").onclick = () => go(cur - 1); $("#next").onclick = () => go(cur + 1);
 $("#explore").onclick = () => go(1);
 $("#homeBtn").onclick = () => go(0); /* separate Home button: back to page 1 from any menu page */
@@ -606,7 +638,7 @@ html.cc,html.cc *{cursor:none!important}
 @media(max-width:420px){.dc .facts.rows{grid-template-columns:1fr;row-gap:2px}.dc .facts.rows small{padding-top:6px;max-width:none}}
 /* ===== ACHIEVEMENTS: two-row timeline (row 2 continues row 1; one line joins every stop).
    Each stop = a school banner + its own individual achievement cards. ===== */
-#s2{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);row-gap:clamp(10px,1.8vh,16px);padding:64px clamp(14px,5vw,80px) 58px;font-size:clamp(.8rem,1.1vh + .42rem,1rem);line-height:1.45}
+#s2{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);row-gap:clamp(10px,1.8vh,16px);padding:64px clamp(14px,5vw,80px) 70px;font-size:clamp(.8rem,1.1vh + .42rem,1rem);line-height:1.45}
 .tl{position:relative;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1fr);row-gap:clamp(16px,2.6vh,28px);padding:0 18px;font-size:calc(var(--tfs,1)*1em)}
 .tl-line{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
 .tl-line path{fill:none;stroke:var(--hi);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -629,38 +661,38 @@ html.cc,html.cc *{cursor:none!important}
 .edt b{display:block;font-weight:600;font-size:.8em;line-height:1.2}
 .edt .sub{display:block;font-size:.68em;color:var(--mu);line-height:1.3}
 .stt{display:inline-block;margin-top:2px;font-size:.58em;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:1px 7px;border-radius:3px;background:var(--hi);color:var(--on)}
-/* individual achievement cards: same-size image frame on the left, category, title and description on the right.
-   Cards sit in two rows under their stop; a group's odd last card spans both rows (frame on top, text below). */
-.tg-cards{display:grid;grid-template-rows:repeat(2,minmax(0,1fr));grid-auto-flow:row;gap:clamp(6px,.6vw,9px);min-width:0;min-height:0}
-.ac{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);align-items:safe center;column-gap:clamp(7px,.7vw,10px);row-gap:4px;min-width:0;min-height:0;margin:0;padding:5px 6px 6px;border-radius:10px;
- border:1px solid color-mix(in srgb,var(--mu) 28%,transparent);background:linear-gradient(160deg,color-mix(in srgb,var(--hi) 7%,transparent),transparent 50%),var(--card),color-mix(in srgb,var(--bg) 55%,transparent);box-shadow:0 8px 20px #0004}
-.ac.span{grid-column:-2/-1;grid-row:1/3;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto;align-content:safe center;justify-items:center;text-align:center;row-gap:6px}
-.ac-im{grid-column:1;width:var(--iw,64px);height:var(--ih,86px);display:flex;align-items:center;justify-content:center;padding:3px;border-radius:7px;overflow:hidden;
+/* individual achievement cards.
+   Photo cards fill the group's full height: category, one shared-size photo frame, then title and description.
+   Achievements without a photo are slim text cards stacked in a column (no empty frames). */
+.tg-cards{display:grid;grid-template-rows:minmax(0,1fr);gap:clamp(6px,.6vw,9px);min-width:0;min-height:0}
+.tcol{display:flex;flex-direction:column;justify-content:center;gap:clamp(5px,.7vh,8px);min-width:0;min-height:0}
+.ac{min-width:0;min-height:0;margin:0;border-radius:10px;border:1px solid color-mix(in srgb,var(--mu) 28%,transparent);
+ background:linear-gradient(160deg,color-mix(in srgb,var(--hi) 7%,transparent),transparent 50%),var(--card),color-mix(in srgb,var(--bg) 55%,transparent);box-shadow:0 8px 20px #0004}
+.ac-t{flex:0 1 auto;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;padding:6px 10px 7px;border-left:3px solid color-mix(in srgb,var(--hi) 70%,transparent);hyphens:auto;-webkit-hyphens:auto}
+.ac-p{display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 6px 7px;text-align:center}
+.ac-im{flex:none;width:var(--iw,100%);height:var(--ih,120px);max-width:100%;display:flex;align-items:center;justify-content:center;padding:3px;border-radius:7px;overflow:hidden;
  background:color-mix(in srgb,var(--bg) 70%,#000);border:1px solid color-mix(in srgb,var(--hi) 25%,transparent)}
 .ac-im img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;border-radius:4px}
-.ac-im.ic{background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--ac) 40%,transparent),transparent 70%),color-mix(in srgb,var(--bg) 70%,#000)}
-.ac-im.ic svg{width:min(46%,46px);height:auto;fill:none;stroke:var(--hi);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
-.ac-tx{grid-column:2;min-width:0;display:flex;flex-direction:column;gap:2px;hyphens:auto;-webkit-hyphens:auto}
-.ac.span .ac-im,.ac.span .ac-tx{grid-column:1}.ac.span .ac-tx{align-items:center}
-.ac-cat{grid-column:1/-1;justify-self:start;max-width:100%;font-size:.56em;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--hi);padding:0 7px;border-radius:20px;border:1px solid color-mix(in srgb,var(--hi) 45%,transparent);background:color-mix(in srgb,var(--ac) 22%,transparent);line-height:1.65}
-.ac.span .ac-cat{justify-self:center}
-.ac-tx b{display:block;font-size:.8em;font-weight:600;line-height:1.22}
-.ac-tx small{display:block;font-size:.68em;color:var(--mu);line-height:1.28}
+#s2.measure .ac-im{flex:1 1 0;width:100%;height:auto;min-height:0}
+.ac-tx{min-width:0;display:flex;flex-direction:column;gap:1px;hyphens:auto;-webkit-hyphens:auto}
+.ac-cat{flex:none;max-width:100%;font-size:.56em;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--hi);padding:0 7px;border-radius:20px;border:1px solid color-mix(in srgb,var(--hi) 45%,transparent);background:color-mix(in srgb,var(--ac) 22%,transparent);line-height:1.65}
+.ac b{display:block;font-size:.8em;font-weight:600;line-height:1.22}
+.ac small{display:block;font-size:.68em;color:var(--mu);line-height:1.28}
 /* last resort on unusually small windows: let the page scroll rather than squash text */
-#s2.tight{overflow-y:auto}#s2.tight .tl{grid-template-rows:auto auto}#s2.tight .tg-cards{grid-template-rows:none;grid-auto-rows:auto}
+#s2.tight{overflow-y:auto}#s2.tight .tl{grid-template-rows:auto auto}#s2.tight .ac-im{height:120px}
 @media(max-width:900px){
  .tl{display:flex;flex-direction:column;gap:18px;padding:0 0 0 26px}
  .tl::before{content:"";position:absolute;left:8px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--hi),color-mix(in srgb,var(--hi) 35%,transparent))}
  .tl-line{display:none}.tl-row{display:flex;flex-direction:column;gap:18px}
  .tg{display:flex;flex-direction:column;gap:6px}.tm-mk{margin-left:-25px}
- .tg-cards{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none;grid-auto-flow:row}
- .ac.span{grid-row:auto;grid-column:auto;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);justify-items:stretch;text-align:left}
- .ac.span .ac-tx{grid-column:2;align-items:flex-start}.ac.span .ac-cat{justify-self:start}
- .ac-im{width:104px;height:92px}
- .tl,.tl-row,.tg,.tg-cards,.ac{flex:none;min-height:auto}}
+ .tg-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:none}.tcol{grid-column:1/-1}
+ .ac-im{width:100%;height:150px}
+ .tl,.tl-row,.tg,.tg-cards,.tcol,.ac{flex:none;min-height:auto}}
 /* phones: Personal Information sections simply stack and the page scrolls */
 /* ===== FAMILY: father & siblings messages as warm, short dedications ===== */
 .pt p.msg{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:1.4em;line-height:1.35;color:var(--tx);opacity:.95;margin-top:2px}
+/* card titles: clean sans-serif, so the title and the message clearly use different fonts */
+#s3 .pt h3{font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:1em;letter-spacing:.14em;text-transform:uppercase;color:var(--hi);line-height:1.3}
 /* ===== pictures are static: no dragging, no click affordance ===== */
 img{-webkit-user-drag:none;user-select:none}
 /* ===== HOME BUTTON: separate from the three menu items, shown on the three content pages ===== */
@@ -679,13 +711,12 @@ html.at-home .homeb{opacity:0;visibility:hidden;pointer-events:none} /* already 
    image frame gets one shared size (the largest that fits in every card), then the connecting line is drawn */
 (function(){
  function q(s){return [].slice.call(document.querySelectorAll(s))}
- function over(){return q('#s2 .ac,#s2 .tg-cards').some(function(c){return c.scrollHeight>c.clientHeight+1||c.scrollWidth>c.clientWidth+1})}
- function frames(root){ /* biggest frame that leaves readable text room in the smallest side-by-side card */
-  var cs=q('#s2 .ac:not(.span)');if(!cs.length)return;var H=1e9,W=1e9;
-  cs.forEach(function(c){var st=getComputedStyle(c),ph=parseFloat(st.paddingTop)+parseFloat(st.paddingBottom),pw=parseFloat(st.paddingLeft)+parseFloat(st.paddingRight),
-   tag=c.querySelector('.ac-cat'),th=tag?tag.offsetHeight+parseFloat(st.rowGap||0):0;
-   H=Math.min(H,c.clientHeight-ph-th);W=Math.min(W,(c.clientWidth-pw)*.48)});
-  root.style.setProperty('--ih',Math.max(44,Math.floor(H))+'px');root.style.setProperty('--iw',Math.max(40,Math.floor(Math.min(W,H*1.25)))+'px')}
+ function over(){return q('#s2 .ac,#s2 .tcol,#s2 .tg-cards').some(function(c){return c.scrollHeight>c.clientHeight+1||c.scrollWidth>c.clientWidth+1})}
+ function frames(root){ /* one shared frame size: the largest that fits in every photo card */
+  root.classList.add('measure');var ims=q('#s2 .ac-im');
+  var H=ims.length?Math.min.apply(null,ims.map(function(m){return m.clientHeight})):120,W=ims.length?Math.min.apply(null,ims.map(function(m){return m.clientWidth})):120;
+  root.classList.remove('measure');
+  root.style.setProperty('--ih',Math.max(50,Math.floor(H))+'px');root.style.setProperty('--iw',Math.max(50,Math.floor(W))+'px');return H}
  function line(){var tl=document.getElementById('tl'),svg=document.getElementById('tlLine');if(!tl||!svg||innerWidth<=900)return;
   var tr=tl.getBoundingClientRect(),k=tr.width/tl.offsetWidth||1,rowsEl=tl.querySelectorAll('.tl-row');if(rowsEl.length<2)return;
   var pt=function(e){var b=e.getBoundingClientRect();return {x:(b.left+b.width/2-tr.left)/k,y:(b.top+b.height/2-tr.top)/k}};
@@ -698,7 +729,7 @@ html.at-home .homeb{opacity:0;visibility:hidden;pointer-events:none} /* already 
  function p3(){var root=document.getElementById('s2');if(!root)return;root.classList.remove('tight');
   if(innerWidth<=900){['--tfs','--iw','--ih'].forEach(function(v){root.style.removeProperty(v)});return}
   var f=1;root.style.setProperty('--tfs',1);
-  for(;;){root.style.setProperty('--iw','40px');root.style.setProperty('--ih','40px');frames(root);if(!over()||f<=.7)break;
+  for(;;){var h=frames(root);if((!over()&&h>=96)||f<=.7)break;
    f=Math.round((f-.02)*100)/100;root.style.setProperty('--tfs',f)}
   if(over())root.classList.add('tight');
   line();if(window.drawStars)setTimeout(window.drawStars,60)}
@@ -716,7 +747,7 @@ html.at-home .homeb{opacity:0;visibility:hidden;pointer-events:none} /* already 
    maximum width (--mw) and height (--mh) and sits centred. Extra screen space becomes calm margin
    (the stars and background still fill the whole screen). Laptops (about 1440 wide or less) are unchanged. */
 @media(min-width:901px){
- .slide{--mw:1320px;--mh:100vh;--pt:64px;--pb:58px;--px:clamp(14px,4vw,64px);
+ .slide{--mw:1320px;--mh:100vh;--pt:64px;--pb:70px;--px:clamp(14px,4vw,64px);
   padding:max(var(--pt),calc((100vh - var(--mh))/2)) max(var(--px),calc((100vw - var(--mw))/2)) max(var(--pb),calc((100vh - var(--mh))/2))!important}
 #s0{--mw:1280px;--mh:860px}
  .portrait{height:min(calc(100vh - 150px),700px)}
@@ -725,7 +756,7 @@ html.at-home .homeb{opacity:0;visibility:hidden;pointer-events:none} /* already 
  #s3{--mw:1240px;--mh:780px}
  nav{padding:0 max(clamp(12px,3vw,40px),calc((100vw - 1440px)/2))}
 }
-@media(min-width:901px) and (max-height:760px){#s1,#s2{--pt:56px;--pb:50px}}
+@media(min-width:901px) and (max-height:760px){#s1,#s2{--pt:56px;--pb:68px}}
 /* phones/tablets: Page 4 cards stack in one column (the 12-column desktop rule was squeezing them into thin strips) */
 @media(max-width:900px){.pgrid{grid-template-columns:minmax(0,1fr);grid-template-rows:none}}
 </style>
