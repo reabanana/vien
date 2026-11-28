@@ -205,6 +205,7 @@ const SITE = {
   portrait: "images/me-2.png",      // PHOTO SLOT 1: Home page FULL-BODY portrait. Use a transparent-background PNG cutout (head to feet), any proportions
   portraitFallback: "images/me-2.jpg", // used automatically if me.png is missing
   aboutPhoto: "images/about.jpg", // Personal Information photo
+  /* intro: the short paragraph shown at the top of Personal Information (no heading) */
   intro: "First-year Computer Science student who is curious, determined, and eager to learn. I’m building my foundations in Python and Java. Outside class, I love baking, embroidery, painting, online games, and surfing, swimming, and traveling with my family. I aspire to become an adaptable, well-rounded person who sees challenges as chances to grow.",
   // Page 2 groups. Each item: [label, value, optional 1 = wide item]
   /* PERSONAL INFORMATION DASHBOARD: one card per category, filled left to right, top to bottom (3 per row; the 3rd column is a little wider).
@@ -219,10 +220,10 @@ const SITE = {
       ["College","College of Information Technology and Computer Science"],["Year Level","1st Year"],["Expected Graduation","2029"],
       ["SHS Strand","General Academic Strand (GAS)"]]},
     {title:"Physical Details", icon:"body", items:[["Height","160 cm"],["Weight","45 kg"],["BMI Classification","Underweight"],["Hair Color","Black"],["Eye Color","Black"],["Blood Type","O"]]},
-    {title:"Contact Information", icon:"mail", items:[["Permanent Address","Sta. Cruz, General Luna, Surigao del Norte"],["Current Address","Camp 8, Baguio City, Benguet Province"],["Contact Number","09951617500","tel"],["Gmail","lalalovienna@gmail.com","mail"],["Student Email","vdm1722@students.uc-bcf.edu.ph","mail"]]},
     {title:"Skills & Interests", icon:"star", chips:{
       "Hobbies":["Baking","Embroidery","Painting","Online Games","Surfing","Swimming","Traveling with Family"],
-      "Skills":["Problem-Solving","Adaptability","Working Under Pressure","Willingness to Learn","Public Speaking","Communication","Programming Fundamentals (Beginner)"]}}
+      "Skills":["Problem-Solving","Adaptability","Working Under Pressure","Willingness to Learn","Public Speaking","Communication","Programming Fundamentals (Beginner)"]}},
+    {title:"Contact Information", icon:"mail", items:[["Permanent Address","Sta. Cruz, General Luna, Surigao del Norte"],["Current Address","Camp 8, Baguio City, Benguet Province"],["Contact Number","09951617500","tel"],["Gmail","lalalovienna@gmail.com","mail"],["Student Email","vdm1722@students.uc-bcf.edu.ph","mail"]]}
   ],
   /* ACHIEVEMENTS TIMELINE, oldest to newest. row 1 = top line, row 2 = bottom line (it continues from row 1).
      Every item is its OWN card: t = title, cat = category tag, d = short description (optional),
@@ -273,7 +274,7 @@ const SITE = {
            {src:"images/ohana.JPG"}], // PHOTO SLOT 4: siblings (landscape group photo)
   // PHOTO SLOT 5: friends. ONE static photo (not clickable, no slideshow). To use a different photo, change the file name below,
   // e.g. "images/senhighfriends.JPG", "images/collegefriends.JPEG" or "images/faye.JPG"
-  friend: {src:"images/collegefriend.JPEG", cap:"Vien with her friends"}
+  friend: {src:"images/collegefriends.JPEG", cap:"Vien with her friends"}
 };
 const THEMES = { red:["Classic Red","#702632"], pink:["Soft Pink","#D9A3B0"], mono:["Monochrome","#555"], elegance:["Burgundy Elegance","#D5AD6B"], midnight:["Midnight Blue","#2B4C85"], sage:["Sage Green","#7F9A82"] };
 const PAGES = ["Personal Information","Achievements","Family and Friends"]; // menu items. Page 1 (the cover) opens first and is reached with the logo or the ← arrow
@@ -308,7 +309,7 @@ const ICON = (() => { const sv = d => `<svg viewBox="0 0 24 24">${d}</svg>`; ret
   body: sv('<circle cx="12" cy="4.8" r="2.2"/><path d="M7 9.5h10M12 9.5v6M9.3 21l2.7-5.5 2.7 5.5"/>'),
   mail: sv('<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>'),
   medal: sv('<circle cx="12" cy="14.5" r="5"/><path d="M8.5 10.2 6 3.5h4l2 4 2-4h4l-2.5 6.7"/><path d="m12 12.3.8 1.5 1.6.3-1.2 1.1.3 1.7-1.5-.8-1.5.8.3-1.7-1.2-1.1 1.6-.3z"/>') }; })();
-const facts = items => items.map(([k, v, w]) => `<div${w === 1 || w === "mailw" ? ' class="w2"' : ''}><small>${esc(k)}</small><span>${w === "mail" || w === "mailw" ? `<a href="mailto:${esc(v)}">${esc(v)}</a>` : w === "tel" ? `<a href="tel:${esc(v)}">${esc(v)}</a>` : esc(v)}</span></div>`).join("");
+const facts = items => items.map(([k, v, w]) => `<div${w === 1 || w === "mailw" ? ' class="w2"' : ''}><small>${esc(k)}</small><span>${w === "mail" || w === "mailw" ? `<a href="mailto:${esc(v)}">${esc(v).replace("@", "@<wbr>")}</a>` : w === "tel" ? `<a href="tel:${esc(v)}">${esc(v)}</a>` : esc(v)}</span></div>`).join("");
 $("#main").innerHTML = `
 <!-- PAGE 1 (cover): opens first. Not listed in the menu; "Explore my portfolio" and the → arrow lead into the three menu pages -->
 <section class="slide" id="s0">
@@ -321,7 +322,7 @@ $("#main").innerHTML = `
  <div class="stars" id="stars1" aria-hidden="true"></div>
  <div class="ph rv">${img(S.aboutPhoto, "Photo of " + S.name)}</div>
  <div class="pi">
-  <div class="card intro rv"><h2>About Me</h2><p>${esc(S.intro)}</p></div>
+  <div class="card intro rv" aria-label="About me"><p>${esc(S.intro)}</p></div>
   <div class="dash rv">${S.personal.map(c => `<section class="card dc"><h3><i class="dci" aria-hidden="true">${ICON[c.icon] || ""}</i><span>${esc(c.title)}</span></h3>${c.items ? `<div class="facts rows">${facts(c.items)}</div>` : ""}${c.chips ? `<div class="cgs">${Object.entries(c.chips).map(([k, arr]) => `<div class="cg"><h4>${esc(k)}</h4><div class="chips">${arr.map(v => `<span>${esc(v)}</span>`).join("")}</div></div>`).join("")}</div>` : ""}</section>`).join("")}</div>
  </div>
 </section>
@@ -613,10 +614,10 @@ html.cc,html.cc *{cursor:none!important}
    large photo on the far left; About Me as a slim strip; six equal cards in a 3 x 2 grid */
 @media(min-width:901px){#s1{grid-template-columns:minmax(0,25%) minmax(0,1fr)}}
 .pi{justify-content:flex-start}
-.pi .intro{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:clamp(16px,2vw,30px);padding:clamp(10px,1.6vh,16px) clamp(16px,1.8vw,26px)}
+.pi .intro{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;column-gap:clamp(16px,2vw,30px);padding:clamp(10px,1.6vh,16px) clamp(16px,1.8vw,26px)}
 .pi .intro h2{margin:0;white-space:nowrap;padding-right:clamp(16px,2vw,30px);border-right:1px solid color-mix(in srgb,var(--hi) 40%,transparent)}
 .pi .intro p{margin:0;font-size:.96em;line-height:1.5}
-.dash{flex:1 1 0;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.18fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(8px,1.4vh,14px) clamp(8px,1vw,14px)}
+.dash{flex:1 1 0;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr) minmax(0,1.06fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(8px,1.4vh,14px) clamp(8px,1vw,14px)}
 .pi .dc{display:flex;flex-direction:column;min-width:0;min-height:0;padding:clamp(8px,1.5vh,14px) clamp(12px,1.2vw,18px);
  background:linear-gradient(160deg,color-mix(in srgb,var(--hi) 7%,transparent),transparent 45%),var(--card);border:1px solid color-mix(in srgb,var(--mu) 28%,transparent);box-shadow:0 10px 26px #0003}
 .dc h3{display:flex;align-items:center;gap:9px;font-size:calc(var(--fs,1)*clamp(1.05rem,1.8vh + .5rem,1.35rem));color:var(--hi);margin:0 0 clamp(6px,1vh,10px);padding-bottom:clamp(5px,.8vh,8px);border-bottom:1px solid color-mix(in srgb,var(--hi) 35%,transparent);line-height:1.15}
@@ -627,7 +628,7 @@ html.cc,html.cc *{cursor:none!important}
 .dc .facts.rows>div{display:contents}
 .dc .facts.rows small{margin:0;padding-top:.36em;font-size:.68em;line-height:1.25;max-width:9em}
 .dc .facts.rows span{font-size:.94em;line-height:1.35}
-.dc .facts a{overflow-wrap:anywhere}
+.dc .facts a{overflow-wrap:normal;word-break:normal}
 .dc .cgs{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-evenly;gap:clamp(6px,1vh,10px)}
 .dc .cg h4{font-size:.68em;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin:0 0 5px}
 .dc .chips{gap:4px}.dc .chips span{font-size:.8em;padding:1px 9px;line-height:1.5;border-color:color-mix(in srgb,var(--hi) 60%,transparent);background:color-mix(in srgb,var(--ac) 18%,transparent)}
